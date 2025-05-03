@@ -1,0 +1,21 @@
+Modelo Conceptual del objeto: Ventilador
+Clase: Ventilador
+
+Atributos:
+encendido (boolean)
+
+velocidad (string): "apagado", "baja", "media", "alta"
+
+oscilando (boolean)
+
+Métodos:
+encender()
+
+apagar()
+
+cambiarVelocidad()
+
+alternarOscilacion()
+
+mostrarEstado()
+

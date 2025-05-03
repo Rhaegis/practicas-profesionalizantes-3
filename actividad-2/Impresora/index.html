@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Impresora Láser Monocromática</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <div class="impresora">
+        <h1>Impresora Láser Monocromática</h1>
+        <div class="estado" id="estado">Estado: Apagada</div>
+        <div class="indicadores">
+            <p>Tóner: <span id="toner">100%</span></p>
+            <p>Papel: <span id="papel">10 hojas</span></p>
+        </div>
+        <div class="botones">
+            <button onclick="impresora.encender()">Encender</button>
+            <button onclick="impresora.apagar()">Apagar</button>
+            <button onclick="impresora.imprimirPagina()">Imprimir Página</button>
+            <button onclick="impresora.recargarPapel(10)">Recargar Papel</button>
+            <button onclick="impresora.recargarToner()">Recargar Tóner</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

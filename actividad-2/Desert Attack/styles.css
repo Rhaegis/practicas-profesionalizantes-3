@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #d1e0e0;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+.helicoptero {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    text-align: center;
+}
+
+.helicoptero h1 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.estado {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.info p {
+    margin: 5px 0;
+}
+
+.botones button {
+    margin: 5px;
+    padding: 8px 12px;
+    border: none;
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.botones button:hover {
+    background-color: #c0392b;
+}

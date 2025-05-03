@@ -1,0 +1,24 @@
+Modelo Conceptual del Objeto: Impresora
+Clase: ImpresoraLaser
+
+Atributos:
+encendida (boolean)
+
+estado (string) → "lista", "imprimiendo", "sin papel", "sin toner"
+
+nivelToner (número del 0 al 100)
+
+hojasDisponibles (número entero)
+
+Métodos:
+encender()
+
+apagar()
+
+imprimirPagina()
+
+recargarPapel(cantidad)
+
+recargarToner()
+
+mostrarEstado()

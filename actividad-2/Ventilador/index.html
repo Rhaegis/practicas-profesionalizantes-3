@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ventilador</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <div class="ventilador">
+        <h1>Ventilador</h1>
+        <div class="estado" id="estado">Estado: Apagado</div>
+        <div class="info">
+            <p>Velocidad: <span id="velocidad">Apagado</span></p>
+            <p>Oscilando: <span id="oscilacion">No</span></p>
+        </div>
+        <div class="botones">
+            <button onclick="ventilador.encender()">Encender</button>
+            <button onclick="ventilador.apagar()">Apagar</button>
+            <button onclick="ventilador.cambiarVelocidad()">Cambiar Velocidad</button>
+            <button onclick="ventilador.alternarOscilacion()">Oscilar</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

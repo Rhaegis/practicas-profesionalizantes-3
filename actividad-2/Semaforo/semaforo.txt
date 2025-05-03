@@ -1,0 +1,20 @@
+Modelo Conceptual del Objeto: Semáforo
+Clase: Semaforo
+Atributos:
+estadoActual (string) — puede ser "rojo", "amarillo" o "verde".
+
+tiempos (objeto) — define cuánto dura cada color. Ej: {rojo: 5000, amarillo: 2000, verde: 4000}.
+
+intervalo (número) — referencia al temporizador (setInterval).
+
+activo (booleano) — si el semáforo está encendido o no.
+
+Métodos:
+encender() — inicia el ciclo de luces.
+
+apagar() — detiene el ciclo.
+
+cambiarEstado() — cambia al siguiente color según el estado actual.
+
+dibujar() — actualiza la interfaz visual.
+

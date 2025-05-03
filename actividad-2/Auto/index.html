@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Interactivo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="auto">
+        <h1>Auto</h1>
+        <div id="estado" class="estado">Estado: Apagado</div>
+        <div class="info">
+            <p>Velocidad: <span id="velocidad">0</span> km/h</p>
+            <p>Marcha: <span id="marcha">P</span></p>
+        </div>
+        <div class="botones">
+            <button onclick="auto.encender()">Encender</button>
+            <button onclick="auto.apagar()">Apagar</button>
+            <button onclick="auto.acelerar()">Acelerar</button>
+            <button onclick="auto.frenar()">Frenar</button>
+            <button onclick="auto.cambiarMarcha()">Cambiar Marcha</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

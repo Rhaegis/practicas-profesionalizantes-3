@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semáforo Interactivo</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <div class="contenedor-semaforo">
+        <div class="luz rojo" id="luz-roja"></div>
+        <div class="luz amarillo" id="luz-amarilla"></div>
+        <div class="luz verde" id="luz-verde"></div>
+    </div>
+
+    <div class="botones">
+        <button onclick="semaforo.encender()">Encender</button>
+        <button onclick="semaforo.apagar()">Apagar</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

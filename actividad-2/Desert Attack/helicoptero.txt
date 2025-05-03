@@ -1,0 +1,24 @@
+Modelo conceptual del objeto: Helicoptero
+Clase: Helicoptero
+
+Atributos:
+salud (número): Representa la salud del helicóptero (100 es el máximo)
+
+combustible (número): Cantidad de combustible disponible
+
+enVuelo (boolean): Indica si el helicóptero está en vuelo
+
+misilesDisponibles (número): Cuenta los misiles disponibles para lanzar
+
+Métodos:
+iniciarVuelo()
+
+detenerVuelo()
+
+atacar()
+
+recargarCombustible()
+
+recargarMisiles()
+
+actualizarEstado()

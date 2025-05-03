@@ -1,0 +1,24 @@
+Modelo Conceptual del Objeto: Auto
+Clase: Auto
+
+Atributos:
+encendido (boolean)
+
+velocidad (número, en km/h)
+
+marchas (array): ["P", "R", "N", "D"]
+
+marchaActual (string)
+
+Métodos:
+encender()
+
+apagar()
+
+acelerar()
+
+frenar()
+
+cambiarMarcha()
+
+mostrarEstado()

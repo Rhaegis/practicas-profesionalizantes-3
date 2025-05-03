@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helicóptero Desert Strike</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="helicoptero">
+        <h1>Helicóptero Desert Strike</h1>
+        <div id="estado" class="estado">Estado: Apagado</div>
+        <div class="info">
+            <p>Salud: <span id="salud">100%</span></p>
+            <p>Combustible: <span id="combustible">100%</span></p>
+            <p>Misiles: <span id="misiles">5</span></p>
+        </div>
+        <div class="botones">
+            <button onclick="helicoptero.iniciarVuelo()">Iniciar Vuelo</button>
+            <button onclick="helicoptero.detenerVuelo()">Detener Vuelo</button>
+            <button onclick="helicoptero.atacar()">Atacar</button>
+            <button onclick="helicoptero.recargarCombustible()">Recargar Combustible</button>
+            <button onclick="helicoptero.recargarMisiles()">Recargar Misiles</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
