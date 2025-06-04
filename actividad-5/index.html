@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Figuras</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="controls">
+            <button id="addRectangle">Agregar Rectángulo</button><br>
+            <button id="addCircle">Agregar Círculo</button><br>
+            <button id="addTriangle">Agregar Triángulo</button><br>
+            <div class="color-picker-container">
+                <label for="colorPicker">Color:</label>
+                <input type="color" id="colorPicker" value="#00ff00"><br>
+            </div>
+            <div class="selected-figure-box">
+                <p>Figura seleccionada:</p>
+                <span id="selectedFigure">Ninguna</span>
+            </div>
+        </div>
+        <canvas id="canvas" width="1366" height="800"></canvas>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="2">Figuras Creadas</th>
+                    </tr>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>ID</th>
+                    </tr>
+                </thead>
+                <tbody id="figureTable">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
