@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración - Trabajapp</title>
+    <link rel="stylesheet" href="/fp/frontend/src/assets/css/styles.css">
+</head>
+
+<body>
+    <div class="settings-container">
+        <aside class="settings-sidebar">
+            <div class="sidebar-header">
+                <div class="user-info">
+                    <img alt="Foto de perfil" class="user-avatar" src="images/user-avatar.jpg">
+                    <div class="user-details">
+                        <h2>Olivia</h2>
+                        <p>Cliente</p>
+                    </div>
+                </div>
+            </div>
+            <nav class="settings-nav">
+                <a class="nav-item" href="dashboard-client.html">
+                    <span class="nav-icon">🏠</span>
+                    <span>Inicio</span>
+                </a>
+                <a class="nav-item" href="client-request.html">
+                    <span class="nav-icon">📋</span>
+                    <span>Mis solicitudes</span>
+                </a>
+                <a class="nav-item" href="#">
+                    <span class="nav-icon">💬</span>
+                    <span>Mensajes</span>
+                </a>
+                <a class="nav-item" href="#">
+                    <span class="nav-icon">⭐</span>
+                    <span>Favoritos</span>
+                </a>
+                <a class="nav-item active" href="settings.html">
+                    <span class="nav-icon">⚙️</span>
+                    <span>Configuración</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="settings-main">
+            <div class="settings-content">
+                <header class="settings-header">
+                    <h1>Configuración</h1>
+                </header>
+
+                <div class="settings-sections">
+                    <!-- Sección Perfil -->
+                    <section class="settings-section">
+                        <h3>Perfil</h3>
+                        <div class="section-content">
+                            <div class="form-group">
+                                <label for="name">Nombre</label>
+                                <input type="text" id="name" value="Olivia">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Correo electrónico</label>
+                                <input type="email" id="email" value="olivia@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Contraseña</label>
+                                <input type="password" id="password" value="••••••••">
+                            </div>
+                            <div class="section-actions">
+                                <button class="btn btn-primary update-profile-btn">
+                                    Actualizar perfil
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Sección Notificaciones -->
+                    <section class="settings-section">
+                        <h3>Notificaciones</h3>
+                        <div class="section-content">
+                            <label class="checkbox-item">
+                                <input type="checkbox" checked>
+                                <span class="checkmark"></span>
+                                <span class="checkbox-label">Notificaciones por correo electrónico</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                                <span class="checkbox-label">Notificaciones por SMS</span>
+                            </label>
+                            <div class="section-actions">
+                                <button class="btn btn-primary save-preferences-btn">
+                                    Guardar preferencias
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Sección Métodos de Pago -->
+                    <section class="settings-section">
+                        <h3>Métodos de pago</h3>
+                        <div class="section-content">
+                            <div class="payment-method">
+                                <div class="payment-info">
+                                    <div class="payment-icon">💳</div>
+                                    <div class="payment-details">
+                                        <p class="payment-type">Tarjeta de crédito</p>
+                                        <p class="payment-number">Termina en 4242</p>
+                                    </div>
+                                </div>
+                                <button class="edit-payment-btn">
+                                    <span class="nav-icon">✏️</span>
+                                </button>
+                            </div>
+                            <div class="section-actions">
+                                <button class="btn btn-secondary add-payment-btn">
+                                    Añadir método de pago
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Sección Privacidad -->
+                    <section class="settings-section">
+                        <h3>Privacidad</h3>
+                        <div class="section-content">
+                            <a class="danger-link" href="#" id="deleteAccountBtn">
+                                <div class="danger-icon">🗑️</div>
+                                <span>Eliminar cuenta</span>
+                                <span class="link-arrow">›</span>
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/fp/frontend/src/assets/js/authService.js"></script>
+    <script src="/fp/frontend/src/assets/js/dashboard.js"></script>
+</body>
+
+</html>

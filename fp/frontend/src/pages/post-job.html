@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicar un trabajo - Trabajapp</title>
+    <link rel="stylesheet" href="/fp/frontend/src/assets/css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <div class="logo-icon">🔧</div>
+                        <h1>Trabajapp</h1>
+                    </div>
+                    <nav class="nav">
+                        <a class="nav-link" href="dashboard-client.html">Inicio</a>
+                        <a class="nav-link" href="#">Buscar</a>
+                        <a class="nav-link" href="#">Mensajes</a>
+                        <a class="nav-link" href="#">Notificaciones</a>
+                    </nav>
+                    <div class="header-actions">
+                        <button class="help-btn">
+                            <span class="nav-icon">❓</span>
+                        </button>
+                        <img alt="Foto de perfil" class="user-avatar" src="images/user-avatar.jpg">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="container">
+                <div class="post-job-container">
+                    <div class="post-job-card">
+                        <div class="card-header">
+                            <h2>Publicar un trabajo</h2>
+                            <p>Conecta con los mejores profesionales para tu proyecto.</p>
+                        </div>
+                        
+                        <form class="post-job-form" id="postJobForm">
+                            <div class="form-group">
+                                <label for="oficio">Oficio Requerido</label>
+                                <select class="form-select" id="oficio" required>
+                                    <option value="">Selecciona un oficio</option>
+                                    <option value="plomeria">Plomería</option>
+                                    <option value="electricidad">Electricidad</option>
+                                    <option value="carpinteria">Carpintería</option>
+                                    <option value="pintura">Pintura</option>
+                                    <option value="jardineria">Jardinería</option>
+                                    <option value="albanileria">Albañilería</option>
+                                    <option value="herreria">Herrería</option>
+                                    <option value="climatizacion">Climatización</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="descripcion">Descripción del Trabajo</label>
+                                <textarea class="form-textarea" id="descripcion" placeholder="Describe el trabajo en detalle. Incluye medidas, materiales necesarios, etc." rows="5" required></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="direccion">Dirección</label>
+                                <input class="form-input" id="direccion" placeholder="Calle, número, colonia, ciudad" type="text" required>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fecha">
+                                        Fecha Preferida 
+                                        <span class="optional">(Opcional)</span>
+                                    </label>
+                                    <input class="form-input" id="fecha" type="date">
+                                </div>
+                                <div class="form-group">
+                                    <label for="hora">
+                                        Hora Preferida 
+                                        <span class="optional">(Opcional)</span>
+                                    </label>
+                                    <input class="form-input" id="hora" type="time">
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-secondary cancel-btn" type="button">
+                                    Cancelar
+                                </button>
+                                <button class="btn btn-primary submit-btn" type="submit">
+                                    Publicar Trabajo
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/fp/frontend/src/assets/js/authService.js"></script>
+    <script src="/fp/frontend/src/assets/js/dashboard.js"></script>
+</body>
+</html>

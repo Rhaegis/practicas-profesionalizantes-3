@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda - Trabajapp</title>
+  <link rel="stylesheet" href="/fp/frontend/src/assets/css/styles.css">
+</head>
+
+<body>
+  <div class="worker-agenda-container">
+    <aside class="worker-sidebar">
+      <div class="sidebar-header">
+        <div class="user-info">
+          <img alt="Foto de perfil" class="user-avatar" src="images/user-avatar.jpg">
+          <div class="user-details">
+            <h2>Olivia</h2>
+            <p>Profesional</p>
+          </div>
+        </div>
+      </div>
+      <nav class="worker-nav">
+        <a class="worker-nav-item" href="dashboard-worker.html">
+          <span class="nav-icon">🏠</span>
+          <span>Inicio</span>
+        </a>
+        <a class="worker-nav-item" href="avaible-worker-requests.html">
+          <span class="nav-icon">🔧</span>
+          <span>Trabajos</span>
+        </a>
+        <a class="worker-nav-item active" href="worker-agenda.html">
+          <span class="nav-icon">📅</span>
+          <span>Agenda</span>
+        </a>
+        <a class="worker-nav-item" href="#">
+          <span class="nav-icon">💬</span>
+          <span>Mensajes</span>
+        </a>
+        <a class="worker-nav-item" href="#">
+          <span class="nav-icon">👤</span>
+          <span>Perfil</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="worker-main">
+      <div class="agenda-content">
+        <div class="agenda-header">
+          <h1>Agenda</h1>
+          <div class="calendar-sync">
+            <div class="sync-icon">📅</div>
+            <div class="sync-info">
+              <p class="sync-title">Sincroniza tu calendario</p>
+              <p class="sync-description">Conecta tu Google Calendar para ver tus eventos aquí.</p>
+            </div>
+            <button class="btn btn-primary sync-btn">
+              Conectar
+            </button>
+          </div>
+        </div>
+
+        <div class="calendar-container">
+          <div class="calendar-header">
+            <div class="calendar-nav">
+              <button class="nav-btn prev-btn">‹</button>
+              <h2>Julio 2024</h2>
+              <button class="nav-btn next-btn">›</button>
+            </div>
+            <div class="calendar-actions">
+              <button class="btn btn-secondary today-btn">Hoy</button>
+              <button class="btn btn-primary add-event-btn">Añadir evento</button>
+            </div>
+          </div>
+
+          <div class="calendar-grid">
+            <div class="calendar-day header">Dom</div>
+            <div class="calendar-day header">Lun</div>
+            <div class="calendar-day header">Mar</div>
+            <div class="calendar-day header">Mié</div>
+            <div class="calendar-day header">Jue</div>
+            <div class="calendar-day header">Vie</div>
+            <div class="calendar-day header">Sáb</div>
+
+            <!-- Días del calendario -->
+            <div class="calendar-day inactive">30</div>
+            <div class="calendar-day">1</div>
+            <div class="calendar-day">2</div>
+            <div class="calendar-day">3</div>
+            <div class="calendar-day">4</div>
+            <div class="calendar-day has-event work-event">
+              5
+              <div class="event-badge work">Trabajo</div>
+            </div>
+            <div class="calendar-day">6</div>
+            <div class="calendar-day">7</div>
+            <div class="calendar-day">8</div>
+            <div class="calendar-day">9</div>
+            <div class="calendar-day">10</div>
+            <div class="calendar-day has-event personal-event">
+              11
+              <div class="event-badge personal">Personal</div>
+            </div>
+            <div class="calendar-day">12</div>
+            <div class="calendar-day">13</div>
+            <div class="calendar-day">14</div>
+            <div class="calendar-day">15</div>
+            <div class="calendar-day">16</div>
+            <div class="calendar-day">17</div>
+            <div class="calendar-day current-day has-event work-event">
+              18
+              <div class="event-badge work">Trabajo</div>
+            </div>
+            <div class="calendar-day">19</div>
+            <div class="calendar-day">20</div>
+            <div class="calendar-day">21</div>
+            <div class="calendar-day">22</div>
+            <div class="calendar-day">23</div>
+            <div class="calendar-day">24</div>
+            <div class="calendar-day">25</div>
+            <div class="calendar-day">26</div>
+            <div class="calendar-day">27</div>
+            <div class="calendar-day">28</div>
+            <div class="calendar-day">29</div>
+            <div class="calendar-day">30</div>
+            <div class="calendar-day">31</div>
+            <div class="calendar-day inactive">1</div>
+            <div class="calendar-day inactive">2</div>
+            <div class="calendar-day inactive">3</div>
+          </div>
+        </div>
+
+        <div class="upcoming-events">
+          <h2>Próximos trabajos y eventos</h2>
+          <div class="events-list">
+            <div class="event-item">
+              <div class="event-icon work">📅</div>
+              <div class="event-details">
+                <p class="event-title">Instalación de estanterías</p>
+                <p class="event-time">Hoy, 10:00 AM - 11:00 AM</p>
+              </div>
+            </div>
+            <div class="event-item">
+              <div class="event-icon personal">⏰</div>
+              <div class="event-details">
+                <p class="event-title">Cita Médica</p>
+                <p class="event-time">Jueves 11 Jul, 3:00 PM</p>
+                <p class="event-source">
+                  <span class="source-icon">📅</span>
+                  Sincronizado desde Google Calendar
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/fp/frontend/src/assets/js/authService.js"></script>
+  <script src="/fp/frontend/src/assets/js/dashboard.js"></script>
+</body>
+
+</html>

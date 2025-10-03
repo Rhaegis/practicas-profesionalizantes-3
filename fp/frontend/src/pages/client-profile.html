@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajapp - Perfil</title>
+    <link rel="stylesheet" href="/fp/frontend/src/assets/css/styles.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <div class="logo-icon">🔧</div>
+                        <h1>Trabajapp</h1>
+                    </div>
+                    <nav class="nav">
+                        <a class="nav-link" href="dashboard-client.html">Inicio</a>
+                        <a class="nav-link" href="#">Buscar</a>
+                        <a class="nav-link active" href="client-request.html">Mis Solicitudes</a>
+                    </nav>
+                    <div class="header-actions">
+                        <img alt="Foto de perfil" class="user-avatar" src="images/user-avatar.jpg">
+                        <button class="mobile-menu-btn">
+                            <span class="nav-icon">☰</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="container">
+                <div class="profile-container">
+                    <h2>Mi Perfil</h2>
+
+                    <div class="profile-card">
+                        <!-- Sección de información personal -->
+                        <div class="profile-header">
+                            <div class="avatar-section">
+                                <div class="avatar-container">
+                                    <img alt="Foto de perfil" class="profile-avatar" src="images/profile-avatar.jpg">
+                                    <button class="edit-avatar-btn">
+                                        <span class="edit-icon">✏️</span>
+                                    </button>
+                                </div>
+                                <div class="profile-info">
+                                    <h3>Sofia Ramirez</h3>
+                                    <p>Cliente</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Formulario de datos personales -->
+                        <div class="profile-form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="fullName">Nombre Completo</label>
+                                    <input type="text" id="fullName" value="Sofia Ramirez">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" value="sofia.ramirez@email.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">
+                                        Número de Teléfono
+                                        <span class="optional">(Opcional)</span>
+                                    </label>
+                                    <input type="tel" id="phone" placeholder="Añadir número">
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Dirección</label>
+                                    <input type="text" id="address" value="Calle Falsa 123, Springfield">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Historial de trabajos -->
+                        <div class="work-history">
+                            <h4>Historial de Trabajos</h4>
+                            <div class="history-list">
+                                <div class="history-item">
+                                    <div class="history-icon">🚰</div>
+                                    <div class="history-details">
+                                        <p class="history-title">Fontanería - Reparación de grifo</p>
+                                        <p class="history-status">Completado</p>
+                                    </div>
+                                    <span class="history-action">Ver detalles</span>
+                                </div>
+
+                                <div class="history-item">
+                                    <div class="history-icon">💡</div>
+                                    <div class="history-details">
+                                        <p class="history-title">Electricidad - Instalación de lámpara</p>
+                                        <p class="history-status">Completado</p>
+                                    </div>
+                                    <span class="history-action">Ver detalles</span>
+                                </div>
+
+                                <div class="history-item">
+                                    <div class="history-icon">🌿</div>
+                                    <div class="history-details">
+                                        <p class="history-title">Jardinería - Mantenimiento de jardín</p>
+                                        <p class="history-status">Solicitado</p>
+                                    </div>
+                                    <span class="history-action pending">Ver solicitud</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botón de guardar -->
+                        <div class="profile-actions">
+                            <button class="btn btn-primary save-btn">
+                                Guardar Cambios
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <p>© 2025 Trabajapp. Todos los derechos reservados.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/fp/frontend/src/assets/js/authService.js"></script>
+    <script src="/fp/frontend/src/assets/js/dashboard.js"></script>
+</body>
+
+</html>

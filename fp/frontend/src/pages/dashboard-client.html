@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajapp - Dashboard Cliente</title>
+    <link rel="stylesheet" href="/fp/frontend/src/assets/css/styles.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-content">
+                <h1 class="sidebar-logo">Trabajapp</h1>
+                <nav class="sidebar-nav">
+                    <a class="nav-item active" href="#">
+                        <span class="nav-icon">📋</span>
+                        <span>Mis solicitudes</span>
+                    </a>
+                    <a class="nav-item" href="#">
+                        <span class="nav-icon">➕</span>
+                        <span>Nueva solicitud</span>
+                    </a>
+                    <a class="nav-item" href="#">
+                        <span class="nav-icon">📚</span>
+                        <span>Historial</span>
+                    </a>
+                    <a class="nav-item" href="#">
+                        <span class="nav-icon">⚙️</span>
+                        <span>Configuración</span>
+                    </a>
+                </nav>
+            </div>
+            <button class="logout-btn" id="logoutBtn">
+                <span class="nav-icon">🚪</span>
+                <span>Cerrar sesión</span>
+            </button>
+        </aside>
+
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-info">
+                    <h2>Dashboard del Cliente</h2>
+                    <p>Bienvenido, Juan Pérez</p>
+                </div>
+                <button class="btn btn-primary new-request-btn">
+                    <span class="btn-icon">➕</span>
+                    Nueva solicitud de servicio
+                </button>
+            </header>
+
+            <section class="dashboard-section">
+                <h3>Solicitudes Activas</h3>
+                <div class="requests-grid">
+                    <div class="request-card">
+                        <div class="card-header">
+                            <h4>Reparación de Plomería</h4>
+                            <span class="status-badge status-pending">Pendiente</span>
+                        </div>
+                        <p class="card-description">Fuga en el lavabo de la cocina.</p>
+                        <div class="card-details">
+                            <p>Fecha: 25 de Octubre, 2025</p>
+                        </div>
+                    </div>
+
+                    <div class="request-card">
+                        <div class="card-header">
+                            <h4>Instalación Eléctrica</h4>
+                            <span class="status-badge status-accepted">Aceptada</span>
+                        </div>
+                        <p class="card-description">Instalar nuevo punto de luz en la sala.</p>
+                        <div class="card-details">
+                            <p>Fecha: 24 de Octubre, 2025</p>
+                            <p>Trabajador: Carlos Gómez</p>
+                        </div>
+                    </div>
+
+                    <div class="request-card">
+                        <div class="card-header">
+                            <h4>Servicio de Pintura</h4>
+                            <span class="status-badge status-in-progress">En Curso</span>
+                        </div>
+                        <p class="card-description">Pintar pared de la habitación principal.</p>
+                        <div class="card-details">
+                            <p>Fecha: 22 de Octubre, 2025</p>
+                            <p>Trabajador: Ana Torres</p>
+                        </div>
+                    </div>
+
+                    <div class="request-card">
+                        <div class="card-header">
+                            <h4>Ensamblaje de Muebles</h4>
+                            <span class="status-badge status-completed">Finalizada</span>
+                        </div>
+                        <p class="card-description">Montaje de estantería modelo 'Kallax'.</p>
+                        <div class="card-details">
+                            <p>Fecha: 20 de Octubre, 2025</p>
+                            <p>Trabajador: Luis Fernandez</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/fp/frontend/src/assets/js/authService.js"></script>
+    <script src="/fp/frontend/src/assets/js/dashboard.js"></script>
+</body>
+
+</html>

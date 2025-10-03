@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajapp - Registro</title>
+    <link rel="stylesheet" href="/fp/frontend/src/assets/css/styles.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <svg class="logo-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M14.243 2.343L5.657 10.929c-.39.39-.39 1.023 0 1.414l8.586 8.586c.39.39 1.023.39 1.414 0l8.586-8.586c.39-.39.39-1.023 0-1.414L15.657 2.343c-.39-.39-1.023-.39-1.414 0zM12 12.07l-3.535 3.536-1.414-1.414L12 9.243l4.95 4.95-1.415 1.414L12 12.07zM3.515 8.828l7.07-7.071c.78-.781 2.048-.781 2.828 0l7.071 7.071c.781.781.781 2.047 0 2.828l-7.07 7.071c-.782.781-2.048.781-2.829 0l-7.07-7.07c-.782-.782-.782-2.048 0-2.829z">
+                            </path>
+                        </svg>
+                        <h1>Trabajapp</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="container">
+                <div class="register-container">
+                    <div class="register-header text-center">
+                        <h1 class="register-title">Trabajapp</h1>
+                        <p class="register-subtitle">Crea tu cuenta para empezar</p>
+                    </div>
+
+                    <div class="register-card">
+                        <form id="registration-form" class="register-form">
+                            <div class="form-fields">
+                                <div class="input-container">
+                                    <input class="form-input" id="full-name" placeholder="Nombre completo" type="text"
+                                        required>
+                                </div>
+                                <div class="input-container">
+                                    <input class="form-input" id="email" placeholder="Email" type="email" required>
+                                </div>
+                                <div class="input-container">
+                                    <input class="form-input" id="password" placeholder="Contraseña" type="password"
+                                        required>
+                                </div>
+                                <div class="input-container">
+                                    <select class="form-select" id="role" required>
+                                        <option value="" disabled selected>Selecciona tu rol</option>
+                                        <option value="cliente">Cliente</option>
+                                        <option value="trabajador">Trabajador</option>
+                                    </select>
+                                </div>
+
+                                <div class="worker-fields hidden" id="worker-fields">
+                                    <div class="input-container">
+                                        <input class="form-input" id="trade" placeholder="Oficio principal" type="text">
+                                    </div>
+                                    <div class="input-container">
+                                        <input class="form-input" id="registration-number"
+                                            placeholder="Número de matrícula (opcional)" type="text">
+                                    </div>
+                                    <div class="input-container">
+                                        <input class="form-input" id="work-area" placeholder="Zona de trabajo"
+                                            type="text">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-primary register-button" type="submit">
+                                    Crear cuenta
+                                </button>
+                            </div>
+                        </form>
+
+                        <div class="register-footer">
+                            <a class="footer-link" href="login.html">¿Ya tenés cuenta? Iniciar sesión</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/fp/frontend/src/assets/js/authService.js"></script>
+</body>
+
+</html>

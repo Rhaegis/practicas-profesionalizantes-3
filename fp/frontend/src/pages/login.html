@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trabajapp - Iniciar Sesión</title>
+  <link rel="stylesheet" href="/fp/frontend/src/assets/css/styles.css">
+</head>
+
+<body>
+  <div class="app-container">
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <svg class="logo-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M14.243 2.343L5.657 10.929c-.39.39-.39 1.023 0 1.414l8.586 8.586c.39.39 1.023.39 1.414 0l8.586-8.586c.39-.39.39-1.023 0-1.414L15.657 2.343c-.39-.39-1.023-.39-1.414 0zM12 12.07l-3.535 3.536-1.414-1.414L12 9.243l4.95 4.95-1.415 1.414L12 12.07zM3.515 8.828l7.07-7.071c.78-.781 2.048-.781 2.828 0l7.071 7.071c.781.781.781 2.047 0 2.828l-7.07 7.071c-.782.781-2.048.781-2.829 0l-7.07-7.07c-.782-.782-.782-2.048 0-2.829z">
+              </path>
+            </svg>
+            <h1>Trabajapp</h1>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="container">
+        <div class="login-container">
+          <div class="login-card">
+            <div class="login-header">
+              <h2 class="login-title">Iniciar sesión</h2>
+              <p class="login-subtitle">Bienvenido de nuevo a Trabajapp</p>
+            </div>
+
+            <form class="login-form" action="#" method="POST">
+              <input name="remember" type="hidden" value="true">
+
+              <div class="form-group">
+                <div class="input-container">
+                  <input class="form-input" id="email-address" name="email" type="email" autocomplete="email" required
+                    placeholder="Correo electrónico">
+                </div>
+                <div class="input-container">
+                  <input class="form-input" id="password" name="password" type="password"
+                    autocomplete="current-password" required placeholder="Contraseña">
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button class="btn btn-primary login-button" type="submit">
+                  Iniciar sesión
+                </button>
+              </div>
+            </form>
+
+            <div class="login-footer">
+              <p class="footer-text">
+                ¿No tenés cuenta?
+                <a class="footer-link" href="/fp/frontend/src/pages/register.html">Registrate</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/fp/frontend/src/assets/js/authService.js"></script>
+</body>
+
+</html>

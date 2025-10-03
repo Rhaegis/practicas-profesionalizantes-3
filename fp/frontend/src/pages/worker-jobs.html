@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trabajapp - Mis Trabajos</title>
+  <link rel="stylesheet" href="/fp/frontend/src/assets/css/styles.css">
+</head>
+
+<body>
+  <div class="app-container">
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <div class="logo-icon">🔧</div>
+            <h1>Trabajapp</h1>
+          </div>
+          <nav class="nav">
+            <a class="nav-link" href="dashboard-worker.html">Inicio</a>
+            <a class="nav-link" href="available-worker-request.html">Buscar</a>
+            <a class="nav-link active" href="worker-jobs.html">Mis trabajos</a>
+            <a class="nav-link" href="#">Mensajes</a>
+          </nav>
+          <div class="header-actions">
+            <button class="notification-btn">
+              <span class="nav-icon">🔔</span>
+            </button>
+            <img alt="User avatar" class="user-avatar" src="images/user-avatar.jpg">
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="container">
+        <div class="worker-jobs-container">
+          <h2>Mis trabajos</h2>
+
+          <div class="jobs-tabs">
+            <div class="tabs-header">
+              <button class="tab-button active" data-tab="en-curso">En curso</button>
+              <button class="tab-button" data-tab="finalizados">Finalizados</button>
+            </div>
+
+            <div class="tab-content active" id="en-curso">
+              <!-- Trabajo 1 - Fontanería -->
+              <div class="job-card">
+                <div class="job-icon">🚰</div>
+                <div class="job-details">
+                  <div class="job-header">
+                    <div class="job-info">
+                      <h3>Fontanería</h3>
+                      <p>Instalación de un nuevo lavavajillas</p>
+                    </div>
+                    <span class="status-badge status-accepted">Aceptado</span>
+                  </div>
+                  <div class="job-divider"></div>
+                  <div class="job-meta">
+                    <div class="meta-item">
+                      <span class="meta-icon">👤</span>
+                      <span>Cliente: Sofia Rodriguez</span>
+                    </div>
+                    <div class="meta-item">
+                      <span class="meta-icon">📍</span>
+                      <span>Dirección: Calle Mayor, 123, Madrid</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="job-actions">
+                  <button class="btn btn-primary view-details-btn">
+                    Ver detalles
+                    <span class="btn-arrow">→</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Trabajo 2 - Electricidad -->
+              <div class="job-card">
+                <div class="job-icon">⚡</div>
+                <div class="job-details">
+                  <div class="job-header">
+                    <div class="job-info">
+                      <h3>Electricidad</h3>
+                      <p>Reparación de un enchufe</p>
+                    </div>
+                    <span class="status-badge status-in-progress">En curso</span>
+                  </div>
+                  <div class="job-divider"></div>
+                  <div class="job-meta">
+                    <div class="meta-item">
+                      <span class="meta-icon">👤</span>
+                      <span>Cliente: Carlos Perez</span>
+                    </div>
+                    <div class="meta-item">
+                      <span class="meta-icon">📍</span>
+                      <span>Avenida de la Paz, 456, Barcelona</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="job-actions">
+                  <button class="btn btn-primary view-details-btn">
+                    Ver detalles
+                    <span class="btn-arrow">→</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Trabajo 3 - Pintura -->
+              <div class="job-card">
+                <div class="job-icon">🎨</div>
+                <div class="job-details">
+                  <div class="job-header">
+                    <div class="job-info">
+                      <h3>Pintura</h3>
+                      <p>Pintura de una habitación</p>
+                    </div>
+                    <span class="status-badge status-pending-payment">Pendiente de pago</span>
+                  </div>
+                  <div class="job-divider"></div>
+                  <div class="job-meta">
+                    <div class="meta-item">
+                      <span class="meta-icon">👤</span>
+                      <span>Cliente: Laura Martinez</span>
+                    </div>
+                    <div class="meta-item">
+                      <span class="meta-icon">📍</span>
+                      <span>Plaza del Sol, 789, Valencia</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="job-actions">
+                  <button class="btn btn-primary view-details-btn">
+                    Ver detalles
+                    <span class="btn-arrow">→</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-content" id="finalizados">
+              <div class="empty-state">
+                <div class="empty-icon">📋</div>
+                <h3>No hay trabajos finalizados</h3>
+                <p>Los trabajos que completes aparecerán aquí</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/fp/frontend/src/assets/js/authService.js"></script>
+  <script src="/fp/frontend/src/assets/js/dashboard.js"></script>
+</body>
+
+</html>

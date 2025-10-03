@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trabajapp - Solicitudes Disponibles</title>
+  <link rel="stylesheet" href="/fp/frontend/src/assets/css/styles.css">
+</head>
+
+<body>
+  <div class="dashboard-worker-container">
+    <aside class="worker-sidebar">
+      <div class="sidebar-header">
+        <div class="logo-container">
+          <div class="logo-icon">🔧</div>
+          <h1>Trabajapp</h1>
+        </div>
+      </div>
+      <nav class="worker-nav">
+        <a class="worker-nav-item" href="index.html">
+          <span class="nav-icon">🏠</span>
+          <span>Inicio</span>
+        </a>
+        <a class="worker-nav-item active" href="available-worker-request.html">
+          <span class="nav-icon">📋</span>
+          <span>Solicitudes</span>
+        </a>
+        <a class="worker-nav-item" href="#">
+          <span class="nav-icon">👤</span>
+          <span>Perfil</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="logout-btn" id="logoutBtn">
+          <span class="nav-icon">🚪</span>
+          <span>Cerrar sesión</span>
+        </button>
+      </div>
+    </aside>
+
+    <div class="worker-main">
+      <header class="worker-header">
+        <div class="header-info">
+          <h2>Solicitudes Disponibles</h2>
+          <p>Encuentra y acepta nuevos trabajos en tu área.</p>
+        </div>
+        <div class="header-actions">
+          <button class="notification-btn">
+            <span class="nav-icon">🔔</span>
+            <span class="notification-dot"></span>
+          </button>
+          <img alt="Foto de perfil del trabajador" class="user-avatar" src="images/user-avatar.jpg">
+        </div>
+      </header>
+
+      <main class="worker-content">
+        <div class="requests-grid">
+          <!-- Solicitud 1 -->
+          <div class="request-card">
+            <div class="card-header">
+              <h3>Plomería</h3>
+              <span class="request-time">Publicado: hace 2h</span>
+            </div>
+            <p class="request-description">Reparación de fuga en tubería principal.</p>
+            <div class="request-details">
+              <div class="detail-item">
+                <span class="detail-icon">📍</span>
+                <span>Barrio Santa Rita, Mar del Plata</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-icon">📅</span>
+                <span>Fecha preferida: 25 de Mayo, 10:00 AM</span>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-primary accept-btn">Ver Detalles y Aceptar</button>
+            </div>
+          </div>
+
+          <!-- Solicitud 2 -->
+          <div class="request-card">
+            <div class="card-header">
+              <h3>Jardinería</h3>
+              <span class="request-time">Publicado: hace 5h</span>
+            </div>
+            <p class="request-description">Instalación de sistema de riego automático.</p>
+            <div class="request-details">
+              <div class="detail-item">
+                <span class="detail-icon">📍</span>
+                <span>Barrio San Juan, Ciudad de Mar del Plata</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-icon">📅</span>
+                <span>Fecha preferida: Flexible</span>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-primary accept-btn">Ver Detalles y Aceptar</button>
+            </div>
+          </div>
+
+          <!-- Solicitud 3 -->
+          <div class="request-card">
+            <div class="card-header">
+              <h3>Climatización</h3>
+              <span class="request-time">Publicado: hace 1d</span>
+            </div>
+            <p class="request-description">Mantenimiento preventivo de aire acondicionado.</p>
+            <div class="request-details">
+              <div class="detail-item">
+                <span class="detail-icon">📍</span>
+                <span>Barrio La Perla, Ciudad de Mar del Plata</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-icon">📅</span>
+                <span>Fecha preferida: 28 de Mayo, por la tarde</span>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-primary accept-btn">Ver Detalles y Aceptar</button>
+            </div>
+          </div>
+
+          <!-- Solicitud 4 -->
+          <div class="request-card">
+            <div class="card-header">
+              <h3>Electricidad</h3>
+              <span class="request-time">Publicado: hace 2d</span>
+            </div>
+            <p class="request-description">Reparación de cortocircuito en instalación eléctrica.</p>
+            <div class="request-details">
+              <div class="detail-item">
+                <span class="detail-icon">📍</span>
+                <span>Barrio San Jose, Ciudad de Mar del Plata</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-icon">📅</span>
+                <span>Fecha preferida: Urgente</span>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-primary accept-btn">Ver Detalles y Aceptar</button>
+            </div>
+          </div>
+
+          <!-- Solicitud 5 -->
+          <div class="request-card">
+            <div class="card-header">
+              <h3>Pintura</h3>
+              <span class="request-time">Publicado: hace 3d</span>
+            </div>
+            <p class="request-description">Pintura de fachada exterior de casa de dos pisos.</p>
+            <div class="request-details">
+              <div class="detail-item">
+                <span class="detail-icon">📍</span>
+                <span>Barrio Punta Mogotes, Ciudad de Mar del Plata</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-icon">📅</span>
+                <span>Fecha preferida: A convenir</span>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-primary accept-btn">Ver Detalles y Aceptar</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="/fp/frontend/src/assets/js/authService.js"></script>
+  <script src="/fp/frontend/src/assets/js/dashboard.js"></script>
+</body>
+
+</html>

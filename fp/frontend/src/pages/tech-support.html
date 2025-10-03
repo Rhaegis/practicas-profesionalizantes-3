@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajapp - Soporte</title>
+    <link rel="stylesheet" href="/fp/frontend/src/assets/css/styles.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="support-header">
+            <div class="container">
+                <nav class="support-nav">
+                    <div class="nav-brand">
+                        <div class="logo-icon">🔧</div>
+                        <a class="brand-name" href="index.html">Trabajapp</a>
+                    </div>
+                    <div class="nav-links">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                        <a class="nav-link" href="#">Servicios</a>
+                        <a class="nav-link" href="#">Cómo funciona</a>
+                    </div>
+                    <div class="nav-actions">
+                        <a class="btn btn-secondary" href="post-job.html">Publicar un trabajo</a>
+                        <a class="btn btn-primary" href="login.html">Iniciar sesión</a>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <main class="support-main">
+            <div class="container">
+                <section class="support-hero">
+                    <h1>Centro de Ayuda</h1>
+                    <p>Encuentra respuestas a tus preguntas y contáctanos si necesitas más ayuda. Estamos aquí para
+                        asistirte.</p>
+                </section>
+
+                <div class="support-content">
+                    <div class="support-main-content">
+                        <!-- Sección FAQ -->
+                        <section class="faq-section">
+                            <h2>Preguntas Frecuentes (FAQ)</h2>
+                            <div class="faq-list">
+                                <details class="faq-item" open>
+                                    <summary class="faq-question">
+                                        ¿Cómo puedo publicar un trabajo?
+                                        <span class="faq-icon">▼</span>
+                                    </summary>
+                                    <div class="faq-answer">
+                                        <p>Para publicar un trabajo, primero debes registrarte o iniciar sesión. Luego,
+                                            haz clic en 'Publicar un trabajo' y completa el formulario con los detalles
+                                            del proyecto, incluyendo descripción, presupuesto y ubicación. Los
+                                            profesionales interesados te contactarán.</p>
+                                    </div>
+                                </details>
+
+                                <details class="faq-item">
+                                    <summary class="faq-question">
+                                        ¿Cómo encuentro al profesional adecuado?
+                                        <span class="faq-icon">▼</span>
+                                    </summary>
+                                    <div class="faq-answer">
+                                        <p>Revisa los perfiles de los profesionales que apliquen a tu oferta. Puedes ver
+                                            sus trabajos anteriores, calificaciones y comentarios de otros clientes para
+                                            tomar una decisión informada.</p>
+                                    </div>
+                                </details>
+
+                                <details class="faq-item">
+                                    <summary class="faq-question">
+                                        ¿Cómo funciona el sistema de pagos?
+                                        <span class="faq-icon">▼</span>
+                                    </summary>
+                                    <div class="faq-answer">
+                                        <p>Los pagos se realizan de forma segura a través de nuestra plataforma. Liberas
+                                            el pago al profesional una vez que el trabajo ha sido completado a tu
+                                            satisfacción, garantizando seguridad para ambas partes.</p>
+                                    </div>
+                                </details>
+
+                                <details class="faq-item">
+                                    <summary class="faq-question">
+                                        ¿Puedo cancelar un trabajo después de publicarlo?
+                                        <span class="faq-icon">▼</span>
+                                    </summary>
+                                    <div class="faq-answer">
+                                        <p>Sí, puedes cancelar un trabajo en cualquier momento antes de que un
+                                            profesional sea contratado. Si ya has contratado a alguien, contacta con
+                                            nuestro equipo de soporte para asistencia.</p>
+                                    </div>
+                                </details>
+
+                                <details class="faq-item">
+                                    <summary class="faq-question">
+                                        ¿Qué hago si no estoy satisfecho con el trabajo realizado?
+                                        <span class="faq-icon">▼</span>
+                                    </summary>
+                                    <div class="faq-answer">
+                                        <p>Si no estás satisfecho con el trabajo, primero intenta resolverlo
+                                            directamente con el profesional. Si no llegas a un acuerdo, contacta con
+                                            nuestro equipo de soporte para mediar en la situación.</p>
+                                    </div>
+                                </details>
+                            </div>
+                        </section>
+
+                        <!-- Formulario de Contacto -->
+                        <section class="contact-form-section">
+                            <h2>Envíanos un Mensaje</h2>
+                            <form class="contact-form" id="supportForm">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="name">Nombre Completo</label>
+                                        <input type="text" id="name" name="name" placeholder="Tu Nombre" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Correo Electrónico</label>
+                                        <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject">Asunto</label>
+                                    <input type="text" id="subject" name="subject"
+                                        placeholder="¿En qué podemos ayudarte?" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Mensaje</label>
+                                    <textarea id="message" name="message" placeholder="Escribe tu consulta aquí..."
+                                        rows="5" required></textarea>
+                                </div>
+                                <div class="form-actions">
+                                    <button class="btn btn-primary submit-btn" type="submit">
+                                        Enviar Mensaje
+                                    </button>
+                                </div>
+                            </form>
+                        </section>
+                    </div>
+
+                    <aside class="support-sidebar">
+                        <!-- Contacto Rápido -->
+                        <section class="contact-details">
+                            <h3>Contacto Rápido</h3>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <span class="contact-icon">📞</span>
+                                    <span>+54 9 (0223) 123-4567</span>
+                                </div>
+                                <div class="contact-item">
+                                    <span class="contact-icon">💬</span>
+                                    <a class="contact-link" href="#">Iniciar Chat en Vivo</a>
+                                </div>
+                                <div class="contact-item">
+                                    <span class="contact-icon">📧</span>
+                                    <a class="contact-link"
+                                        href="mailto:soporte@trabajapp.com">soporte@trabajapp.com</a>
+                                </div>
+                                <div class="contact-item">
+                                    <span class="contact-icon">🕒</span>
+                                    <span>Lun-Vie: 9:00-18:00</span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Recursos Adicionales -->
+                        <section class="resources-section">
+                            <h3>Recursos Adicionales</h3>
+                            <div class="resources-list">
+                                <a class="resource-link" href="#">
+                                    <span>Tutoriales en Video</span>
+                                    <span class="resource-arrow">›</span>
+                                </a>
+                                <a class="resource-link" href="#">
+                                    <span>Guías de Uso</span>
+                                    <span class="resource-arrow">›</span>
+                                </a>
+                                <a class="resource-link" href="#">
+                                    <span>Términos de Servicio</span>
+                                    <span class="resource-arrow">›</span>
+                                </a>
+                                <a class="resource-link" href="#">
+                                    <span>Política de Privacidad</span>
+                                    <span class="resource-arrow">›</span>
+                                </a>
+                                <a class="resource-link" href="#">
+                                    <span>Centro de Seguridad</span>
+                                    <span class="resource-arrow">›</span>
+                                </a>
+                            </div>
+                        </section>
+                    </aside>
+                </div>
+            </div>
+        </main>
+
+        <footer class="support-footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="social-links">
+                        <a class="social-link" href="#">Facebook</a>
+                        <a class="social-link" href="#">Twitter</a>
+                        <a class="social-link" href="#">Instagram</a>
+                        <a class="social-link" href="#">LinkedIn</a>
+                    </div>
+                    <p>© 2025 Trabajapp. Todos los derechos reservados.</p>
+                    <div class="footer-links">
+                        <a class="footer-link" href="#">Política de Privacidad</a>
+                        <span>·</span>
+                        <a class="footer-link" href="#">Términos de Uso</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/fp/frontend/src/assets/js/authService.js"></script>
+    <script src="/fp/frontend/src/assets/js/dashboard.js"></script>
+</body>
+
+</html>

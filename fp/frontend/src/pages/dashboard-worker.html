@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajapp - Dashboard Trabajador</title>
+    <link rel="stylesheet" href="/fp/frontend/src/assets/css/styles.css">
+</head>
+
+<body>
+    <div class="dashboard-worker-container">
+        <aside class="worker-sidebar">
+            <div class="sidebar-header">
+                <h1>Trabajapp</h1>
+            </div>
+            <nav class="worker-nav">
+                <a class="worker-nav-item active" href="#">
+                    <span class="nav-icon">🔧</span>
+                    <span>Solicitudes disponibles</span>
+                </a>
+                <a class="worker-nav-item" href="worker-jobs.html">
+                    <span class="nav-icon">🏗️</span>
+                    <span>Mis trabajos</span>
+                </a>
+                <a class="worker-nav-item" href="worker-agenda.html">
+                    <span class="nav-icon">📅</span>
+                    <span>Agenda</span>
+                </a>
+                <a class="worker-nav-item" href="#">
+                    <span class="nav-icon">👤</span>
+                    <span>Perfil</span>
+                </a>
+            </nav>
+        </aside>
+
+        <div class="worker-main">
+            <header class="worker-header">
+                <div class="header-left">
+                    <span class="header-title">Dashboard</span>
+                </div>
+                <div class="header-right">
+                    <span class="user-name">Juan Pérez</span>
+                    <img alt="User avatar" class="user-avatar" src="images/user-avatar.jpg">
+                    <button class="logout-btn" id="logoutBtn">
+                        <span class="nav-icon">🚪</span>
+                        <span>Cerrar sesión</span>
+                    </button>
+                </div>
+            </header>
+
+            <main class="worker-content">
+                <section class="worker-section">
+                    <h2>Solicitudes de clientes en tu zona</h2>
+                    <div class="jobs-grid">
+                        <div class="job-card">
+                            <div class="job-info">
+                                <h3>Reparación de Plomería</h3>
+                                <p>Arreglar un grifo que gotea en la cocina. Se necesita con urgencia.</p>
+                            </div>
+                            <div class="job-actions">
+                                <button class="btn btn-success">Aceptar</button>
+                            </div>
+                        </div>
+
+                        <div class="job-card">
+                            <div class="job-info">
+                                <h3>Cableado Eléctrico</h3>
+                                <p>Recablear una habitación en una casa. Horario flexible.</p>
+                            </div>
+                            <div class="job-actions">
+                                <button class="btn btn-success">Aceptar</button>
+                            </div>
+                        </div>
+
+                        <div class="job-card">
+                            <div class="job-info">
+                                <h3>Servicio de Pintura</h3>
+                                <p>Pintar un dormitorio. Necesita estar listo para la próxima semana.</p>
+                            </div>
+                            <div class="job-actions">
+                                <button class="btn btn-success">Aceptar</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="worker-section">
+                    <h2>Mis trabajos en curso</h2>
+                    <div class="current-job">
+                        <div class="job-details">
+                            <h3>Renovación de Cocina</h3>
+                            <p>Renovación completa de la cocina. En progreso.</p>
+                            <div class="progress-container">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 60%;"></div>
+                                </div>
+                                <p class="progress-text">60% completado</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="worker-section">
+                    <h2>Mi disponibilidad</h2>
+                    <div class="calendar">
+                        <div class="calendar-header">
+                            <button class="calendar-nav">◀</button>
+                            <h3>Julio 2024</h3>
+                            <button class="calendar-nav">▶</button>
+                        </div>
+                        <div class="calendar-grid">
+                            <div class="calendar-day header">Do</div>
+                            <div class="calendar-day header">Lu</div>
+                            <div class="calendar-day header">Ma</div>
+                            <div class="calendar-day header">Mi</div>
+                            <div class="calendar-day header">Ju</div>
+                            <div class="calendar-day header">Vi</div>
+                            <div class="calendar-day header">Sá</div>
+
+                            <div class="calendar-day inactive">30</div>
+                            <div class="calendar-day">1</div>
+                            <div class="calendar-day">2</div>
+                            <div class="calendar-day">3</div>
+                            <div class="calendar-day available">4</div>
+                            <div class="calendar-day">5</div>
+                            <div class="calendar-day">6</div>
+                            <div class="calendar-day">7</div>
+                            <div class="calendar-day">8</div>
+                            <div class="calendar-day busy">9</div>
+                            <div class="calendar-day">10</div>
+                            <div class="calendar-day">11</div>
+                            <div class="calendar-day">12</div>
+                            <div class="calendar-day">13</div>
+                            <div class="calendar-day">14</div>
+                            <div class="calendar-day">15</div>
+                            <div class="calendar-day">16</div>
+                            <div class="calendar-day">17</div>
+                            <div class="calendar-day busy">18</div>
+                            <div class="calendar-day">19</div>
+                            <div class="calendar-day">20</div>
+                            <div class="calendar-day">21</div>
+                            <div class="calendar-day available">22</div>
+                            <div class="calendar-day">23</div>
+                            <div class="calendar-day">24</div>
+                            <div class="calendar-day">25</div>
+                            <div class="calendar-day">26</div>
+                            <div class="calendar-day">27</div>
+                            <div class="calendar-day">28</div>
+                            <div class="calendar-day">29</div>
+                            <div class="calendar-day">30</div>
+                            <div class="calendar-day">31</div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="/fp/frontend/src/assets/js/authService.js"></script>
+    <script src="/fp/frontend/src/assets/js/dashboard.js"></script>
+</body>
+
+</html>
