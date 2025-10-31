@@ -34,6 +34,10 @@ const ratingRoutes = require('./routes/ratingRoutes');
 app.use('/api/ratings', ratingRoutes);
 console.log('✅ Rutas de ratings cargadas: /api/ratings');
 
+const disputeRoutes = require('./routes/disputeRoutes');
+app.use('/api/disputes', disputeRoutes);
+console.log('✅ Rutas de disputes cargadas: /api/disputes');
+
 // Sincronizar BD
 sequelize.sync()
     .then(() => console.log("✅ Base de datos sincronizada"))
