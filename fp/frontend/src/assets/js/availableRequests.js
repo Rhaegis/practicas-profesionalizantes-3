@@ -1,7 +1,9 @@
 // frontend/src/assets/js/availableRequests.js
-// Solicitudes disponibles para TRABAJADORES
+// Cargar solicitudes disponibles para el trabajador
 
-// Cargar todas las solicitudes disponibles
+let allRequests = [];
+
+// Cargar solicitudes disponibles
 async function loadAvailableRequests() {
     try {
         const token = localStorage.getItem('authToken');
@@ -11,7 +13,11 @@ async function loadAvailableRequests() {
             return;
         }
 
-        const response = await fetch('http://localhost:3000/api/services/my-jobs', {
+        // Obtener el ID del trabajador actual
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        const workerId = user.id;
+
+        const response = await fetch('http://localhost:3000/api/services/all', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -22,93 +28,106 @@ async function loadAvailableRequests() {
         }
 
         const data = await response.json();
-        console.log('📋 Solicitudes disponibles:', data);
+        console.log('📋 Todas las solicitudes:', data);
 
-        // Filtrar solo las pendientes
-        const pendingServices = data.services.filter(s => s.status === 'pending');
-        displayAvailableRequests(pendingServices);
+        // Filtrar solo solicitudes PENDING que están asignadas a este trabajador pero aún no aceptadas
+        allRequests = data.services.filter(service =>
+            service.status === 'pending' && service.worker_id === workerId
+        );
+
+        console.log('📋 Solicitudes disponibles para aceptar:', allRequests);
+
+        displayRequests();
 
     } catch (error) {
         console.error('❌ Error:', error);
-        showNotification('Error al cargar solicitudes', 'error');
+        showNotification('Error al cargar solicitudes disponibles', 'error');
+
+        // Mostrar mensaje de error en el contenedor
+        const container = document.getElementById('availableRequestsContainer');
+        if (container) {
+            container.innerHTML = `
+                <div class="col-12">
+                    <div class="alert alert-danger" role="alert">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        Error al cargar solicitudes. Por favor, intenta nuevamente.
+                    </div>
+                </div>
+            `;
+        }
     }
 }
 
-// Mostrar solicitudes en el DOM
-function displayAvailableRequests(services) {
-    const container = document.getElementById('requestsContainer');
-
+// Mostrar solicitudes
+function displayRequests() {
+    const container = document.getElementById('availableRequestsContainer');
     if (!container) return;
 
-    if (services.length === 0) {
+    if (allRequests.length === 0) {
         container.innerHTML = `
             <div class="col-12">
                 <div class="text-center py-5">
-                    <div class="fs-1 mb-3">📭</div>
-                    <h5 class="mb-2">No hay solicitudes disponibles</h5>
-                    <p class="text-muted">Las nuevas solicitudes aparecerán aquí</p>
+                    <i class="bi bi-inbox" style="font-size: 4rem; color: #ddd;"></i>
+                    <h5 class="mt-3 text-muted">No hay solicitudes disponibles</h5>
+                    <p class="text-muted">Los clientes asignan trabajos específicamente a vos. Cuando recibas una nueva solicitud, aparecerá aquí.</p>
                 </div>
             </div>
         `;
         return;
     }
 
-    container.innerHTML = services.map(service => `
-        <div class="col">
-            <div class="card h-100 shadow-sm">
+    container.innerHTML = allRequests.map(request => createRequestCard(request)).join('');
+}
+
+// Crear tarjeta de solicitud
+function createRequestCard(request) {
+    const timeAgo = getTimeAgo(request.createdAt);
+
+    return `
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm" style="transition: transform 0.2s;">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <h5 class="card-title text-primary mb-0">${service.title}</h5>
-                        <small class="text-muted">${getTimeAgo(service.createdAt)}</small>
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title mb-0 text-primary">${request.title}</h5>
+                        <span class="badge bg-primary">${timeAgo}</span>
                     </div>
-                    <p class="card-text">${service.description}</p>
+                    <p class="card-text text-muted small mb-3">${request.description}</p>
                     
                     <div class="mb-3">
-                        <div class="d-flex align-items-center gap-2 mb-2 text-muted small">
-                            <span>📍</span>
-                            <span>${service.service_address || 'Ubicación no especificada'}</span>
-                        </div>
-                        <div class="d-flex align-items-center gap-2 text-muted small">
-                            <span>📅</span>
-                            <span>${service.scheduled_date ? formatDate(service.scheduled_date) : 'Fecha flexible'}</span>
-                        </div>
+                        <small class="text-muted d-block mb-1">
+                            <i class="bi bi-person me-1"></i>
+                            <strong>Cliente:</strong> ${request.client?.full_name || 'No especificado'}
+                        </small>
+                        <small class="text-muted d-block mb-1">
+                            <i class="bi bi-geo-alt me-1"></i>
+                            <strong>Dirección:</strong> ${request.service_address || 'No especificada'}
+                        </small>
+                        ${request.scheduled_date ? `
+                            <small class="text-muted d-block">
+                                <i class="bi bi-calendar3 me-1"></i>
+                                <strong>Fecha:</strong> ${formatDate(request.scheduled_date)}
+                            </small>
+                        ` : `
+                            <small class="text-muted d-block">
+                                <i class="bi bi-clock me-1"></i>
+                                <strong>Urgencia:</strong> Lo antes posible
+                            </small>
+                        `}
                     </div>
                 </div>
-                <div class="card-footer bg-white border-top">
-                    <button class="btn btn-primary w-100" onclick="acceptRequest(${service.id})">
-                        Ver Detalles y Aceptar
+                <div class="card-footer bg-white border-top d-grid gap-2">
+                    <button class="btn btn-success" onclick="acceptRequest(${request.id})">
+                        <i class="bi bi-check-circle me-2"></i>
+                        Aceptar Trabajo
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm" onclick="rejectRequest(${request.id})">
+                        <i class="bi bi-x-circle me-2"></i>
+                        Rechazar
                     </button>
                 </div>
             </div>
         </div>
-    `).join('');
-}
-
-// Aceptar solicitud
-async function acceptRequest(serviceId) {
-    if (!confirm('¿Deseas aceptar esta solicitud?')) return;
-
-    try {
-        const token = localStorage.getItem('authToken');
-
-        const response = await fetch(`http://localhost:3000/api/services/${serviceId}/status`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({ status: 'accepted' })
-        });
-
-        if (!response.ok) throw new Error('Error al aceptar');
-
-        showNotification('✅ Solicitud aceptada correctamente', 'success');
-        setTimeout(() => location.reload(), 1500);
-
-    } catch (error) {
-        console.error('❌ Error:', error);
-        showNotification('Error al aceptar la solicitud', 'error');
-    }
+    `;
 }
 
 // Calcular tiempo transcurrido
@@ -116,12 +135,79 @@ function getTimeAgo(dateString) {
     const date = new Date(dateString);
     const now = new Date();
     const diffMs = now - date;
-    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-    const diffDays = Math.floor(diffHours / 24);
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
 
-    if (diffDays > 0) return `hace ${diffDays}d`;
-    if (diffHours > 0) return `hace ${diffHours}h`;
-    return 'hace unos minutos';
+    if (diffMins < 60) return `hace ${diffMins}m`;
+    if (diffHours < 24) return `hace ${diffHours}h`;
+    return `hace ${diffDays}d`;
+}
+
+// Aceptar solicitud
+async function acceptRequest(requestId) {
+    if (!confirm('¿Estás seguro de que quieres aceptar este trabajo?')) return;
+
+    try {
+        const token = localStorage.getItem('authToken');
+
+        const response = await fetch(`http://localhost:3000/api/services/${requestId}/accept`, {
+            method: 'PATCH',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message || 'Error al aceptar el trabajo');
+        }
+
+        showNotification('✅ Trabajo aceptado exitosamente', 'success');
+
+        // Recargar lista después de 1 segundo
+        setTimeout(() => {
+            loadAvailableRequests();
+        }, 1000);
+
+    } catch (error) {
+        console.error('❌ Error:', error);
+        showNotification(error.message || 'Error al aceptar el trabajo', 'error');
+    }
+}
+
+// Rechazar solicitud (opcional - para futuras mejoras)
+async function rejectRequest(requestId) {
+    if (!confirm('¿Estás seguro de que quieres rechazar este trabajo?')) return;
+
+    try {
+        const token = localStorage.getItem('authToken');
+
+        // Por ahora solo rechazamos cambiando el estado
+        const response = await fetch(`http://localhost:3000/api/services/${requestId}/status`, {
+            method: 'PATCH',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ status: 'cancelled' })
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al rechazar');
+        }
+
+        showNotification('Trabajo rechazado', 'info');
+
+        setTimeout(() => {
+            loadAvailableRequests();
+        }, 1000);
+
+    } catch (error) {
+        console.error('❌ Error:', error);
+        showNotification('Error al rechazar el trabajo', 'error');
+    }
 }
 
 // Formatear fecha
@@ -130,14 +216,16 @@ function formatDate(dateString) {
     return date.toLocaleDateString('es-AR', {
         year: 'numeric',
         month: 'long',
-        day: 'numeric'
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
     });
 }
 
 // Mostrar notificación
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
-    notification.className = `alert alert-${type === 'error' ? 'danger' : 'success'} alert-dismissible fade show position-fixed`;
+    notification.className = `alert alert-${type === 'error' ? 'danger' : type === 'success' ? 'success' : 'info'} alert-dismissible fade show position-fixed`;
     notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
     notification.innerHTML = `
         ${message}
@@ -148,8 +236,10 @@ function showNotification(message, type = 'info') {
     setTimeout(() => notification.remove(), 5000);
 }
 
-// Hacer función global
+// Hacer funciones globales
 window.acceptRequest = acceptRequest;
+window.rejectRequest = rejectRequest;
+window.loadAvailableRequests = loadAvailableRequests;
 
 // Inicializar
 document.addEventListener('DOMContentLoaded', () => {

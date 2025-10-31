@@ -4,10 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trabajapp - Solicitudes Disponibles</title>
+  <title>Solicitudes Disponibles - Trabajapp</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- CSS Custom (colores de marca) -->
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <!-- CSS Custom -->
   <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 
@@ -30,7 +32,7 @@
           <span>Inicio</span>
         </a>
         <a href="available-worker-requests.html"
-          class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+          class="worker-nav-item active d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
           <i class="bi bi-list-task"></i>
           <span>Solicitudes Disponibles</span>
         </a>
@@ -66,185 +68,68 @@
     </aside>
 
     <!-- Main Content -->
-    <div class="flex-grow-1 d-flex flex-column">
+    <main class="flex-grow-1 overflow-auto">
+      <div class="container-fluid p-4">
 
-      <!-- Header -->
-      <header class="bg-white border-bottom shadow-sm p-3">
-        <div class="container-fluid">
-          <div class="row align-items-center">
-            <div class="col">
-              <h2 class="h4 mb-1">Solicitudes Disponibles</h2>
-              <p class="text-muted small mb-0">Encuentra y acepta nuevos trabajos en tu área</p>
-            </div>
-            <div class="col-auto d-flex align-items-center gap-3">
-              <button class="btn btn-link position-relative p-2">
-                <span class="fs-5">🔔</span>
-                <span
-                  class="position-absolute top-0 start-100 translate-middle p-1 bg-primary border border-light rounded-circle">
-                  <span class="visually-hidden">Nuevas notificaciones</span>
-                </span>
-              </button>
-              <img src="../assets/img/user-avatar.jpg" alt="Avatar" class="rounded-circle" width="40" height="40">
+        <!-- Header -->
+        <div class="mb-4">
+          <h1 class="h3 mb-2">📋 Solicitudes Disponibles</h1>
+          <p class="text-muted">Encuentra y acepta nuevos trabajos en tu área</p>
+        </div>
+
+        <!-- Filtros (opcional - para futuras mejoras) -->
+        <div class="card shadow-sm mb-4">
+          <div class="card-body">
+            <div class="row g-3 align-items-end">
+              <div class="col-md-4">
+                <label for="filterTrade" class="form-label small">Filtrar por oficio</label>
+                <select class="form-select" id="filterTrade">
+                  <option value="">Todos los oficios</option>
+                  <option value="electricista">Electricista</option>
+                  <option value="plomero">Plomero</option>
+                  <option value="carpintero">Carpintero</option>
+                  <option value="pintor">Pintor</option>
+                  <option value="gasista">Gasista</option>
+                  <option value="albanil">Albañil</option>
+                  <option value="jardinero">Jardinero</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="filterLocation" class="form-label small">Zona</label>
+                <input type="text" class="form-select" id="filterLocation" placeholder="Todas las zonas" disabled>
+              </div>
+              <div class="col-md-4">
+                <button class="btn btn-primary w-100" onclick="loadAvailableRequests()">
+                  <i class="bi bi-arrow-clockwise me-2"></i>
+                  Actualizar
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </header>
 
-      <!-- Content -->
-      <main class="flex-grow-1 overflow-auto p-4">
-        <div class="container-fluid">
-
-          <!-- Grid de Solicitudes -->
-          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-
-            <!-- Solicitud 1 -->
-            <div class="col">
-              <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                  <div class="d-flex justify-content-between align-items-start mb-3">
-                    <h5 class="card-title text-primary mb-0">Plomería</h5>
-                    <small class="text-muted">hace 2h</small>
-                  </div>
-                  <p class="card-text">Reparación de fuga en tubería principal.</p>
-
-                  <div class="mb-3">
-                    <div class="d-flex align-items-center gap-2 mb-2 text-muted small">
-                      <span>📍</span>
-                      <span>Barrio Santa Rita, Mar del Plata</span>
-                    </div>
-                    <div class="d-flex align-items-center gap-2 text-muted small">
-                      <span>📅</span>
-                      <span>25 de Mayo, 10:00 AM</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-footer bg-white border-top">
-                  <button class="btn btn-primary w-100">Ver Detalles y Aceptar</button>
-                </div>
+        <!-- Contenedor de solicitudes DINÁMICO -->
+        <div class="row g-4" id="availableRequestsContainer">
+          <!-- Loading inicial -->
+          <div class="col-12">
+            <div class="text-center py-5">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
               </div>
+              <p class="text-muted mt-3">Cargando solicitudes disponibles...</p>
             </div>
-
-            <!-- Solicitud 2 -->
-            <div class="col">
-              <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                  <div class="d-flex justify-content-between align-items-start mb-3">
-                    <h5 class="card-title text-primary mb-0">Jardinería</h5>
-                    <small class="text-muted">hace 5h</small>
-                  </div>
-                  <p class="card-text">Instalación de sistema de riego automático.</p>
-
-                  <div class="mb-3">
-                    <div class="d-flex align-items-center gap-2 mb-2 text-muted small">
-                      <span>📍</span>
-                      <span>Barrio San Juan, Mar del Plata</span>
-                    </div>
-                    <div class="d-flex align-items-center gap-2 text-muted small">
-                      <span>📅</span>
-                      <span>Flexible</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-footer bg-white border-top">
-                  <button class="btn btn-primary w-100">Ver Detalles y Aceptar</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Solicitud 3 -->
-            <div class="col">
-              <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                  <div class="d-flex justify-content-between align-items-start mb-3">
-                    <h5 class="card-title text-primary mb-0">Climatización</h5>
-                    <small class="text-muted">hace 1d</small>
-                  </div>
-                  <p class="card-text">Mantenimiento preventivo de aire acondicionado.</p>
-
-                  <div class="mb-3">
-                    <div class="d-flex align-items-center gap-2 mb-2 text-muted small">
-                      <span>📍</span>
-                      <span>Barrio La Perla, Mar del Plata</span>
-                    </div>
-                    <div class="d-flex align-items-center gap-2 text-muted small">
-                      <span>📅</span>
-                      <span>28 de Mayo, por la tarde</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-footer bg-white border-top">
-                  <button class="btn btn-primary w-100">Ver Detalles y Aceptar</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Solicitud 4 -->
-            <div class="col">
-              <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                  <div class="d-flex justify-content-between align-items-start mb-3">
-                    <h5 class="card-title text-primary mb-0">Electricidad</h5>
-                    <small class="text-muted">hace 2d</small>
-                  </div>
-                  <p class="card-text">Reparación de cortocircuito en instalación eléctrica.</p>
-
-                  <div class="mb-3">
-                    <div class="d-flex align-items-center gap-2 mb-2 text-muted small">
-                      <span>📍</span>
-                      <span>Barrio San Jose, Mar del Plata</span>
-                    </div>
-                    <div class="d-flex align-items-center gap-2 text-muted small">
-                      <span>📅</span>
-                      <span>Urgente</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-footer bg-white border-top">
-                  <button class="btn btn-primary w-100">Ver Detalles y Aceptar</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Solicitud 5 -->
-            <div class="col">
-              <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                  <div class="d-flex justify-content-between align-items-start mb-3">
-                    <h5 class="card-title text-primary mb-0">Pintura</h5>
-                    <small class="text-muted">hace 3d</small>
-                  </div>
-                  <p class="card-text">Pintura de fachada exterior de casa de dos pisos.</p>
-
-                  <div class="mb-3">
-                    <div class="d-flex align-items-center gap-2 mb-2 text-muted small">
-                      <span>📍</span>
-                      <span>Barrio Punta Mogotes, Mar del Plata</span>
-                    </div>
-                    <div class="d-flex align-items-center gap-2 text-muted small">
-                      <span>📅</span>
-                      <span>A convenir</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-footer bg-white border-top">
-                  <button class="btn btn-primary w-100">Ver Detalles y Aceptar</button>
-                </div>
-              </div>
-            </div>
-
           </div>
         </div>
-      </main>
 
-    </div>
+      </div>
+    </main>
+
   </div>
 
   <!-- Scripts -->
   <script src="../assets/js/authService.js"></script>
   <script src="../assets/js/dashboard.js"></script>
   <script src="../assets/js/availableRequests.js"></script>
-
-  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

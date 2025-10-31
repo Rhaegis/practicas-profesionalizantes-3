@@ -130,13 +130,18 @@ function initRoleToggle() {
     const workerFields = document.getElementById('worker-fields');
     if (roleSelect && workerFields) {
         roleSelect.addEventListener('change', function () {
-            const workerInputs = workerFields.querySelectorAll('input[type="text"]');
             if (this.value === 'trabajador') {
                 workerFields.classList.remove('hidden');
-                workerInputs.forEach(input => input.required = true);
+                // Solo trade y work-area son obligatorios (registration-number es opcional)
+                document.getElementById('trade').required = true;
+                document.getElementById('work-area').required = true;
+                document.getElementById('registration-number').required = false; // OPCIONAL
             } else {
                 workerFields.classList.add('hidden');
-                workerInputs.forEach(input => input.required = false);
+                // Quitar required de todos los campos
+                document.getElementById('trade').required = false;
+                document.getElementById('work-area').required = false;
+                document.getElementById('registration-number').required = false;
             }
         });
     }

@@ -1,6 +1,3 @@
-// frontend/src/assets/js/verificationFlow.js
-// Flujo completo del sistema de verificación con código único
-
 // ========================================
 // TRABAJADOR: Marcar trabajo como completado y generar código
 // ========================================
@@ -175,7 +172,7 @@ async function showClientConfirmationModal(serviceId) {
                         <h6 class="mb-4">¿El trabajo fue completado satisfactoriamente?</h6>
                     </div>
                     <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-danger" onclick="openDispute(${serviceId})">
+                        <button type="button" class="btn btn-danger" onclick="openDisputeModal(${serviceId})">
                             ❌ No, hay problemas
                         </button>
                         <button type="button" class="btn btn-success" onclick="showCodeToClient(${serviceId})">
@@ -258,14 +255,6 @@ async function showCodeToClient(serviceId) {
 }
 
 // ========================================
-// CLIENTE: Abrir disputa (placeholder para siguiente fase)
-// ========================================
-function openDispute(serviceId) {
-    showNotification('Sistema de disputas disponible próximamente', 'info');
-    // TODO: Implementar en Fase 3
-}
-
-// ========================================
 // UTILIDAD: Mostrar notificación
 // ========================================
 function showNotification(message, type = 'info') {
@@ -286,4 +275,3 @@ window.markAsCompleted = markAsCompleted;
 window.verifyCodeFromWorker = verifyCodeFromWorker;
 window.showClientConfirmationModal = showClientConfirmationModal;
 window.showCodeToClient = showCodeToClient;
-window.openDispute = openDispute;
