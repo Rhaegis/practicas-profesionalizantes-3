@@ -1,4 +1,3 @@
-// frontend/src/assets/js/clientProfile.js
 // Perfil del CLIENTE con historial de trabajos
 
 // Cargar datos del perfil y historial

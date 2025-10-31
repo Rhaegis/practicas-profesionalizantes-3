@@ -1,4 +1,3 @@
-// frontend/src/assets/js/serviceModal.js
 // VERSIÓN BOOTSTRAP 5
 
 function openServiceModal() {

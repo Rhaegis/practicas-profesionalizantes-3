@@ -1,4 +1,3 @@
-// frontend/src/assets/js/workerAgenda.js
 // Agenda del TRABAJADOR con eventos programados
 
 // Cargar próximos trabajos y eventos

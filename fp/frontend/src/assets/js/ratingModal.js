@@ -1,4 +1,3 @@
-// frontend/src/assets/js/ratingModal.js
 // Sistema de calificaciones con estrellas
 
 let currentRatingValue = 0;

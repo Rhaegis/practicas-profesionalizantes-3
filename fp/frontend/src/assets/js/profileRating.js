@@ -1,4 +1,3 @@
-// frontend/src/assets/js/profileRating.js
 // Sistema para mostrar promedio de calificaciones en perfiles
 
 // Obtener y mostrar promedio de calificaciones

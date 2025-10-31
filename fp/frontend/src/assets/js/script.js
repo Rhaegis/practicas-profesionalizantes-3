@@ -1,5 +1,3 @@
-// script.js
-
 // Verificar preferencia del usuario al cargar la página
 document.addEventListener('DOMContentLoaded', function () {
     // Verificar preferencia guardada

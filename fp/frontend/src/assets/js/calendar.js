@@ -1,5 +1,4 @@
-// frontend/src/assets/js/calendar.js
-// Calendario dinámico mejorado
+// Calendario
 
 let currentDate = new Date();
 

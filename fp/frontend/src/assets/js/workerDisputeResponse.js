@@ -1,4 +1,3 @@
-// frontend/src/assets/js/workerDisputeResponse.js
 // Modal para que el trabajador responda a disputas
 
 let currentDisputeId = null;

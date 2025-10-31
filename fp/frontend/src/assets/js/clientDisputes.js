@@ -1,4 +1,3 @@
-// frontend/src/assets/js/clientDisputes.js
 // Sistema de gestión de disputas para clientes
 
 let allDisputes = [];

@@ -1,4 +1,3 @@
-// frontend/src/assets/js/disputeModal.js
 // Sistema de disputas
 
 let currentDisputeServiceId = null;

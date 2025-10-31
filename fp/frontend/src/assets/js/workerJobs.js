@@ -1,5 +1,3 @@
-// frontend/src/assets/js/workerJobs.js
-
 let allJobs = [];
 
 // Cargar todos los trabajos del trabajador

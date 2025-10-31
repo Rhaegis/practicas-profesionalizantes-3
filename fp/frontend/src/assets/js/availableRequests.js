@@ -1,4 +1,3 @@
-// frontend/src/assets/js/availableRequests.js
 // Cargar solicitudes disponibles para el trabajador
 
 let allRequests = [];

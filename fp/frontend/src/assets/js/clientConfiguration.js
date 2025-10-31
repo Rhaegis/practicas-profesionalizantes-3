@@ -1,4 +1,3 @@
-// frontend/src/assets/js/clientConfiguration.js
 // Configuración del cliente
 
 // Cargar datos del usuario

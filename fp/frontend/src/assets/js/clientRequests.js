@@ -1,5 +1,3 @@
-// frontend/src/assets/js/clientRequests.js
-
 let allRequests = [];
 let currentFilter = 'all';
 

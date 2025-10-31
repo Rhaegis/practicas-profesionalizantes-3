@@ -1,4 +1,3 @@
-// frontend/src/assets/js/dashboardClient.js
 // Dashboard principal del CLIENTE
 
 // Cargar solicitudes recientes (últimas 5)

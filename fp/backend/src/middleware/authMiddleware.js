@@ -1,4 +1,3 @@
-// backend/src/middleware/authMiddleware.js
 const jwt = require('jsonwebtoken');
 
 // Usar la MISMA clave secreta que en authController.js

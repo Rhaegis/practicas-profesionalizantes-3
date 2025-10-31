@@ -1,4 +1,3 @@
-// frontend/src/assets/js/workerDashboard.js
 // Dashboard principal del TRABAJADOR (ACTUALIZADO PARA BOOTSTRAP 5)
 
 // Cargar solicitudes pendientes

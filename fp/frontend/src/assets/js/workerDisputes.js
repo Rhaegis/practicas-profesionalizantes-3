@@ -1,4 +1,3 @@
-// frontend/src/assets/js/workerDisputes.js
 // Sistema de gestión de disputas para trabajadores
 
 let allDisputes = [];

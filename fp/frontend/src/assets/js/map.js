@@ -1,5 +1,3 @@
-// frontend/src/assets/js/map.js
-
 // URL base del API
 const MAP_API_BASE_URL = "http://localhost:3000/api";
 
