@@ -5,88 +5,200 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trabajapp - Registro</title>
-    <link rel="stylesheet" href="/fp/frontend/src/assets/css/styles.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- CSS Custom -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 
-<body>
-    <div class="app-container">
-        <header class="header">
-            <div class="container">
-                <div class="header-content">
-                    <div class="logo">
-                        <svg class="logo-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M14.243 2.343L5.657 10.929c-.39.39-.39 1.023 0 1.414l8.586 8.586c.39.39 1.023.39 1.414 0l8.586-8.586c.39-.39.39-1.023 0-1.414L15.657 2.343c-.39-.39-1.023-.39-1.414 0zM12 12.07l-3.535 3.536-1.414-1.414L12 9.243l4.95 4.95-1.415 1.414L12 12.07zM3.515 8.828l7.07-7.071c.78-.781 2.048-.781 2.828 0l7.071 7.071c.781.781.781 2.047 0 2.828l-7.07 7.071c-.782.781-2.048.781-2.829 0l-7.07-7.07c-.782-.782-.782-2.048 0-2.829z">
-                            </path>
-                        </svg>
-                        <h1>Trabajapp</h1>
-                    </div>
-                </div>
-            </div>
-        </header>
+<body class="bg-light">
+    <!-- Header Simple -->
+    <header class="bg-white border-bottom">
+        <div class="container py-3">
+            <a href="index.html" class="d-flex align-items-center gap-2 text-decoration-none">
+                <i class="bi bi-tools text-primary fs-3"></i>
+                <h1 class="h4 mb-0 text-primary">Trabajapp</h1>
+            </a>
+        </div>
+    </header>
 
-        <main class="main-content">
-            <div class="container">
-                <div class="register-container">
-                    <div class="register-header text-center">
-                        <h1 class="register-title">Trabajapp</h1>
-                        <p class="register-subtitle">Crea tu cuenta para empezar</p>
+    <!-- Main Content -->
+    <main class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
+
+                    <!-- Header -->
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold mb-2">Crear cuenta</h2>
+                        <p class="text-muted">Unite a Trabajapp y comenzá hoy</p>
                     </div>
 
-                    <div class="register-card">
-                        <form id="registration-form" class="register-form">
-                            <div class="form-fields">
-                                <div class="input-container">
-                                    <input class="form-input" id="full-name" placeholder="Nombre completo" type="text"
-                                        required>
-                                </div>
-                                <div class="input-container">
-                                    <input class="form-input" id="email" placeholder="Email" type="email" required>
-                                </div>
-                                <div class="input-container">
-                                    <input class="form-input" id="password" placeholder="Contraseña" type="password"
-                                        required>
-                                </div>
-                                <div class="input-container">
-                                    <select class="form-select" id="role" required>
-                                        <option value="" disabled selected>Selecciona tu rol</option>
-                                        <option value="cliente">Cliente</option>
-                                        <option value="trabajador">Trabajador</option>
-                                    </select>
-                                </div>
+                    <!-- Register Card -->
+                    <div class="card border-0 shadow-lg">
+                        <div class="card-body p-4 p-md-5">
 
-                                <div class="worker-fields hidden" id="worker-fields">
+                            <!-- Form - IMPORTANTE: ID "registration-form" -->
+                            <form id="registration-form">
+
+                                <!-- Nombre Completo -->
+                                <div class="mb-3">
+                                    <label for="full-name" class="form-label">Nombre completo</label>
                                     <div class="input-container">
-                                        <input class="form-input" id="trade" placeholder="Oficio principal" type="text">
-                                    </div>
-                                    <div class="input-container">
-                                        <input class="form-input" id="registration-number"
-                                            placeholder="Número de matrícula (opcional)" type="text">
-                                    </div>
-                                    <div class="input-container">
-                                        <input class="form-input" id="work-area" placeholder="Zona de trabajo"
-                                            type="text">
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-light border-end-0">
+                                                <i class="bi bi-person text-muted"></i>
+                                            </span>
+                                            <input class="form-control form-input border-start-0 bg-light"
+                                                id="full-name" placeholder="Juan Pérez" type="text" required>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="form-actions">
-                                <button class="btn btn-primary register-button" type="submit">
-                                    Crear cuenta
-                                </button>
-                            </div>
-                        </form>
+                                <!-- Email -->
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Correo electrónico</label>
+                                    <div class="input-container">
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-light border-end-0">
+                                                <i class="bi bi-envelope text-muted"></i>
+                                            </span>
+                                            <input class="form-control form-input border-start-0 bg-light" id="email"
+                                                placeholder="tu@ejemplo.com" type="email" required>
+                                        </div>
+                                    </div>
+                                </div>
 
-                        <div class="register-footer">
-                            <a class="footer-link" href="login.html">¿Ya tenés cuenta? Iniciar sesión</a>
+                                <!-- Password -->
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Contraseña</label>
+                                    <div class="input-container">
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-light border-end-0">
+                                                <i class="bi bi-lock text-muted"></i>
+                                            </span>
+                                            <input class="form-control form-input border-start-0 bg-light" id="password"
+                                                placeholder="Mínimo 6 caracteres" type="password" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Rol -->
+                                <div class="mb-4">
+                                    <label for="role" class="form-label">¿Cómo vas a usar Trabajapp?</label>
+                                    <div class="input-container">
+                                        <select class="form-select form-select-lg bg-light" id="role" required>
+                                            <option value="" disabled selected>Selecciona tu rol</option>
+                                            <option value="cliente">🙋 Cliente - Necesito contratar servicios</option>
+                                            <option value="trabajador">🔧 Trabajador - Quiero ofrecer mis servicios
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Campos de Trabajador (hidden por defecto) -->
+                                <div class="hidden" id="worker-fields">
+                                    <div class="alert alert-info mb-3">
+                                        <i class="bi bi-info-circle me-2"></i>
+                                        <strong>Información adicional para trabajadores</strong>
+                                    </div>
+
+                                    <!-- Oficio -->
+                                    <div class="mb-3">
+                                        <label for="trade" class="form-label">Oficio principal</label>
+                                        <div class="input-container">
+                                            <div class="input-group">
+                                                <span class="input-group-text bg-light border-end-0">
+                                                    <i class="bi bi-tools text-muted"></i>
+                                                </span>
+                                                <input class="form-control form-input border-start-0 bg-light"
+                                                    id="trade" placeholder="Ej: Plomero, Electricista, Carpintero"
+                                                    type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Número de Matrícula -->
+                                    <div class="mb-3">
+                                        <label for="registration-number" class="form-label">
+                                            Número de matrícula
+                                            <span class="text-muted small">(opcional)</span>
+                                        </label>
+                                        <div class="input-container">
+                                            <div class="input-group">
+                                                <span class="input-group-text bg-light border-end-0">
+                                                    <i class="bi bi-card-text text-muted"></i>
+                                                </span>
+                                                <input class="form-control form-input border-start-0 bg-light"
+                                                    id="registration-number"
+                                                    placeholder="Tu número de matrícula profesional" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Zona de Trabajo -->
+                                    <div class="mb-3">
+                                        <label for="work-area" class="form-label">Zona de trabajo</label>
+                                        <div class="input-container">
+                                            <div class="input-group">
+                                                <span class="input-group-text bg-light border-end-0">
+                                                    <i class="bi bi-geo-alt text-muted"></i>
+                                                </span>
+                                                <input class="form-control form-input border-start-0 bg-light"
+                                                    id="work-area" placeholder="Ej: Mar del Plata, Zona Norte"
+                                                    type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="d-grid mb-3">
+                                    <button class="btn btn-primary btn-lg register-button" type="submit">
+                                        Crear cuenta
+                                    </button>
+                                </div>
+
+                                <!-- Divider -->
+                                <div class="position-relative my-4">
+                                    <hr>
+                                    <span
+                                        class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted small">o</span>
+                                </div>
+
+                                <!-- Login Link -->
+                                <div class="text-center">
+                                    <p class="text-muted mb-0">
+                                        ¿Ya tenés cuenta?
+                                        <a href="login.html"
+                                            class="text-primary fw-semibold text-decoration-none">Iniciar sesión</a>
+                                    </p>
+                                </div>
+
+                            </form>
+
                         </div>
                     </div>
+
+                    <!-- Back to Home -->
+                    <div class="text-center mt-4">
+                        <a href="index.html" class="text-decoration-none text-muted">
+                            <i class="bi bi-arrow-left me-1"></i> Volver al inicio
+                        </a>
+                    </div>
+
                 </div>
             </div>
-        </main>
-    </div>
+        </div>
+    </main>
 
-    <script src="/fp/frontend/src/assets/js/authService.js"></script>
+    <!-- Scripts -->
+    <script src="../assets/js/authService.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trabajapp - Solicitudes Disponibles</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- CSS Custom (colores de marca) -->
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+
+<body class="bg-light">
+  <!-- Dashboard Container -->
+  <div class="d-flex min-vh-100">
+
+    <!-- Sidebar Trabajador -->
+    <aside class="worker-sidebar d-flex flex-column" style="width: 260px; min-height: 100vh;">
+      <!-- Logo -->
+      <div class="p-3 border-bottom border-white border-opacity-25">
+        <h1 class="h4 text-white mb-0">Trabajapp</h1>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="flex-grow-1 p-3">
+        <a href="dashboard-worker.html"
+          class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+          <i class="bi bi-house-door"></i>
+          <span>Inicio</span>
+        </a>
+        <a href="available-worker-requests.html"
+          class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+          <i class="bi bi-list-task"></i>
+          <span>Solicitudes Disponibles</span>
+        </a>
+        <a href="worker-jobs.html"
+          class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+          <i class="bi bi-briefcase"></i>
+          <span>Mis Trabajos</span>
+        </a>
+        <a href="worker-agenda.html"
+          class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+          <i class="bi bi-calendar3"></i>
+          <span>Agenda</span>
+        </a>
+        <a href="worker-profile.html"
+          class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+          <i class="bi bi-person-circle"></i>
+          <span>Mi Perfil</span>
+        </a>
+        <a href="worker-configuration.html"
+          class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+          <i class="bi bi-gear"></i>
+          <span>Configuración</span>
+        </a>
+      </nav>
+
+      <!-- Logout -->
+      <div class="p-3 border-top border-white border-opacity-25">
+        <button class="btn btn-outline-light w-100" id="logoutBtn">
+          <i class="bi bi-box-arrow-right me-2"></i>
+          Cerrar sesión
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-grow-1 d-flex flex-column">
+
+      <!-- Header -->
+      <header class="bg-white border-bottom shadow-sm p-3">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div class="col">
+              <h2 class="h4 mb-1">Solicitudes Disponibles</h2>
+              <p class="text-muted small mb-0">Encuentra y acepta nuevos trabajos en tu área</p>
+            </div>
+            <div class="col-auto d-flex align-items-center gap-3">
+              <button class="btn btn-link position-relative p-2">
+                <span class="fs-5">🔔</span>
+                <span
+                  class="position-absolute top-0 start-100 translate-middle p-1 bg-primary border border-light rounded-circle">
+                  <span class="visually-hidden">Nuevas notificaciones</span>
+                </span>
+              </button>
+              <img src="../assets/img/user-avatar.jpg" alt="Avatar" class="rounded-circle" width="40" height="40">
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <main class="flex-grow-1 overflow-auto p-4">
+        <div class="container-fluid">
+
+          <!-- Grid de Solicitudes -->
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+            <!-- Solicitud 1 -->
+            <div class="col">
+              <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start mb-3">
+                    <h5 class="card-title text-primary mb-0">Plomería</h5>
+                    <small class="text-muted">hace 2h</small>
+                  </div>
+                  <p class="card-text">Reparación de fuga en tubería principal.</p>
+
+                  <div class="mb-3">
+                    <div class="d-flex align-items-center gap-2 mb-2 text-muted small">
+                      <span>📍</span>
+                      <span>Barrio Santa Rita, Mar del Plata</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 text-muted small">
+                      <span>📅</span>
+                      <span>25 de Mayo, 10:00 AM</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer bg-white border-top">
+                  <button class="btn btn-primary w-100">Ver Detalles y Aceptar</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Solicitud 2 -->
+            <div class="col">
+              <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start mb-3">
+                    <h5 class="card-title text-primary mb-0">Jardinería</h5>
+                    <small class="text-muted">hace 5h</small>
+                  </div>
+                  <p class="card-text">Instalación de sistema de riego automático.</p>
+
+                  <div class="mb-3">
+                    <div class="d-flex align-items-center gap-2 mb-2 text-muted small">
+                      <span>📍</span>
+                      <span>Barrio San Juan, Mar del Plata</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 text-muted small">
+                      <span>📅</span>
+                      <span>Flexible</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer bg-white border-top">
+                  <button class="btn btn-primary w-100">Ver Detalles y Aceptar</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Solicitud 3 -->
+            <div class="col">
+              <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start mb-3">
+                    <h5 class="card-title text-primary mb-0">Climatización</h5>
+                    <small class="text-muted">hace 1d</small>
+                  </div>
+                  <p class="card-text">Mantenimiento preventivo de aire acondicionado.</p>
+
+                  <div class="mb-3">
+                    <div class="d-flex align-items-center gap-2 mb-2 text-muted small">
+                      <span>📍</span>
+                      <span>Barrio La Perla, Mar del Plata</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 text-muted small">
+                      <span>📅</span>
+                      <span>28 de Mayo, por la tarde</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer bg-white border-top">
+                  <button class="btn btn-primary w-100">Ver Detalles y Aceptar</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Solicitud 4 -->
+            <div class="col">
+              <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start mb-3">
+                    <h5 class="card-title text-primary mb-0">Electricidad</h5>
+                    <small class="text-muted">hace 2d</small>
+                  </div>
+                  <p class="card-text">Reparación de cortocircuito en instalación eléctrica.</p>
+
+                  <div class="mb-3">
+                    <div class="d-flex align-items-center gap-2 mb-2 text-muted small">
+                      <span>📍</span>
+                      <span>Barrio San Jose, Mar del Plata</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 text-muted small">
+                      <span>📅</span>
+                      <span>Urgente</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer bg-white border-top">
+                  <button class="btn btn-primary w-100">Ver Detalles y Aceptar</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Solicitud 5 -->
+            <div class="col">
+              <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start mb-3">
+                    <h5 class="card-title text-primary mb-0">Pintura</h5>
+                    <small class="text-muted">hace 3d</small>
+                  </div>
+                  <p class="card-text">Pintura de fachada exterior de casa de dos pisos.</p>
+
+                  <div class="mb-3">
+                    <div class="d-flex align-items-center gap-2 mb-2 text-muted small">
+                      <span>📍</span>
+                      <span>Barrio Punta Mogotes, Mar del Plata</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 text-muted small">
+                      <span>📅</span>
+                      <span>A convenir</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer bg-white border-top">
+                  <button class="btn btn-primary w-100">Ver Detalles y Aceptar</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../assets/js/authService.js"></script>
+  <script src="../assets/js/dashboard.js"></script>
+  <script src="../assets/js/availableRequests.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

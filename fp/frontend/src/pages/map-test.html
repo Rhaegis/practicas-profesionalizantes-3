@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de prueba - Trabajapp</title>
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Mapa de prueba de Google</h1>
+    <div id="map"></div>
+
+    <script>
+        function initMap() {
+            const marDelPlata = { lat: -38.0055, lng: -57.5426 };
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 13,
+                center: marDelPlata,
+            });
+            new google.maps.Marker({ position: marDelPlata, map });
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiOOPI_cGsEPBcaWFVfdkD2vBriraeDdQ&callback=initMap" async defer></script>
+</body>
+
+</html>

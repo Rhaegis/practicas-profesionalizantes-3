@@ -93,7 +93,6 @@ document.addEventListener('DOMContentLoaded', function () {
     initLoginForm();
     initRegisterForm();
     initRoleToggle();
-    initDarkMode();
 });
 
 // Inicializar formulario de login

@@ -5,160 +5,166 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trabajapp - Dashboard Trabajador</title>
-    <link rel="stylesheet" href="/fp/frontend/src/assets/css/styles.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS Custom (colores de marca) -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 
-<body>
-    <div class="dashboard-worker-container">
-        <aside class="worker-sidebar">
-            <div class="sidebar-header">
-                <h1>Trabajapp</h1>
+<body class="bg-light">
+    <!-- Dashboard Container -->
+    <div class="d-flex min-vh-100">
+
+        <!-- Sidebar Trabajador -->
+        <aside class="worker-sidebar d-flex flex-column" style="width: 260px; min-height: 100vh;">
+            <!-- Logo -->
+            <div class="p-3 border-bottom border-white border-opacity-25">
+                <h1 class="h4 text-white mb-0">Trabajapp</h1>
             </div>
-            <nav class="worker-nav">
-                <a class="worker-nav-item active" href="#">
-                    <span class="nav-icon">🔧</span>
-                    <span>Solicitudes disponibles</span>
+
+            <!-- Navigation -->
+            <nav class="flex-grow-1 p-3">
+                <a href="dashboard-worker.html"
+                    class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+                    <i class="bi bi-house-door"></i>
+                    <span>Inicio</span>
                 </a>
-                <a class="worker-nav-item" href="worker-jobs.html">
-                    <span class="nav-icon">🏗️</span>
-                    <span>Mis trabajos</span>
+                <a href="available-worker-requests.html"
+                    class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+                    <i class="bi bi-list-task"></i>
+                    <span>Solicitudes Disponibles</span>
                 </a>
-                <a class="worker-nav-item" href="worker-agenda.html">
-                    <span class="nav-icon">📅</span>
+                <a href="worker-jobs.html"
+                    class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+                    <i class="bi bi-briefcase"></i>
+                    <span>Mis Trabajos</span>
+                </a>
+                <a href="worker-agenda.html"
+                    class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+                    <i class="bi bi-calendar3"></i>
                     <span>Agenda</span>
                 </a>
-                <a class="worker-nav-item" href="#">
-                    <span class="nav-icon">👤</span>
-                    <span>Perfil</span>
+                <a href="worker-profile.html"
+                    class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+                    <i class="bi bi-person-circle"></i>
+                    <span>Mi Perfil</span>
+                </a>
+                <a href="worker-configuration.html"
+                    class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+                    <i class="bi bi-gear"></i>
+                    <span>Configuración</span>
                 </a>
             </nav>
+
+            <!-- Logout -->
+            <div class="p-3 border-top border-white border-opacity-25">
+                <button class="btn btn-outline-light w-100" id="logoutBtn">
+                    <i class="bi bi-box-arrow-right me-2"></i>
+                    Cerrar sesión
+                </button>
+            </div>
         </aside>
 
-        <div class="worker-main">
-            <header class="worker-header">
-                <div class="header-left">
-                    <span class="header-title">Dashboard</span>
-                </div>
-                <div class="header-right">
-                    <span class="user-name">Juan Pérez</span>
-                    <img alt="User avatar" class="user-avatar" src="images/user-avatar.jpg">
-                    <button class="logout-btn" id="logoutBtn">
-                        <span class="nav-icon">🚪</span>
-                        <span>Cerrar sesión</span>
-                    </button>
+        <!-- Main Content -->
+        <div class="flex-grow-1 d-flex flex-column">
+
+            <!-- Header -->
+            <header class="bg-white border-bottom shadow-sm p-3">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h2 class="h5 mb-0">Dashboard</h2>
+                        </div>
+                        <div class="col-auto d-flex align-items-center gap-3">
+                            <span class="fw-semibold" id="worker-name">Cargando...</span>
+                            <img src="../assets/img/user-avatar.jpg" alt="Avatar" class="rounded-circle" width="40"
+                                height="40">
+                        </div>
+                    </div>
                 </div>
             </header>
 
-            <main class="worker-content">
-                <section class="worker-section">
-                    <h2>Solicitudes de clientes en tu zona</h2>
-                    <div class="jobs-grid">
-                        <div class="job-card">
-                            <div class="job-info">
-                                <h3>Reparación de Plomería</h3>
-                                <p>Arreglar un grifo que gotea en la cocina. Se necesita con urgencia.</p>
-                            </div>
-                            <div class="job-actions">
-                                <button class="btn btn-success">Aceptar</button>
-                            </div>
-                        </div>
+            <!-- Content -->
+            <main class="flex-grow-1 overflow-auto p-4">
+                <div class="container-fluid">
 
-                        <div class="job-card">
-                            <div class="job-info">
-                                <h3>Cableado Eléctrico</h3>
-                                <p>Recablear una habitación en una casa. Horario flexible.</p>
-                            </div>
-                            <div class="job-actions">
-                                <button class="btn btn-success">Aceptar</button>
-                            </div>
+                    <!-- Solicitudes Disponibles -->
+                    <section class="mb-5">
+                        <h3 class="h5 mb-3">Solicitudes de clientes en tu zona</h3>
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 jobs-grid">
+                            <!-- Se llena dinámicamente con workerDashboard.js -->
                         </div>
+                    </section>
 
-                        <div class="job-card">
-                            <div class="job-info">
-                                <h3>Servicio de Pintura</h3>
-                                <p>Pintar un dormitorio. Necesita estar listo para la próxima semana.</p>
-                            </div>
-                            <div class="job-actions">
-                                <button class="btn btn-success">Aceptar</button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                    <!-- Trabajos en Curso -->
+                    <section class="mb-5">
+                        <h3 class="h5 mb-3">Mis trabajos en curso</h3>
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Renovación de Cocina</h5>
+                                <p class="text-muted">Renovación completa de la cocina. En progreso.</p>
 
-                <section class="worker-section">
-                    <h2>Mis trabajos en curso</h2>
-                    <div class="current-job">
-                        <div class="job-details">
-                            <h3>Renovación de Cocina</h3>
-                            <p>Renovación completa de la cocina. En progreso.</p>
-                            <div class="progress-container">
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 60%;"></div>
+                                <div class="mt-3">
+                                    <div class="progress" style="height: 10px;">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 60%;"
+                                            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <p class="text-muted small mt-2 mb-0">60% completado</p>
                                 </div>
-                                <p class="progress-text">60% completado</p>
                             </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
 
-                <section class="worker-section">
-                    <h2>Mi disponibilidad</h2>
-                    <div class="calendar">
-                        <div class="calendar-header">
-                            <button class="calendar-nav">◀</button>
-                            <h3>Julio 2024</h3>
-                            <button class="calendar-nav">▶</button>
-                        </div>
-                        <div class="calendar-grid">
-                            <div class="calendar-day header">Do</div>
-                            <div class="calendar-day header">Lu</div>
-                            <div class="calendar-day header">Ma</div>
-                            <div class="calendar-day header">Mi</div>
-                            <div class="calendar-day header">Ju</div>
-                            <div class="calendar-day header">Vi</div>
-                            <div class="calendar-day header">Sá</div>
+                    <!-- Calendario de Disponibilidad -->
+                    <section class="mb-5">
+                        <h3 class="h5 mb-3">Mi disponibilidad</h3>
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <!-- Calendar Header -->
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <button class="btn btn-sm btn-outline-secondary"
+                                        onclick="previousMonth()">◀</button>
+                                    <h5 class="mb-0">Cargando...</h5>
+                                    <button class="btn btn-sm btn-outline-secondary" onclick="nextMonth()">▶</button>
+                                </div>
 
-                            <div class="calendar-day inactive">30</div>
-                            <div class="calendar-day">1</div>
-                            <div class="calendar-day">2</div>
-                            <div class="calendar-day">3</div>
-                            <div class="calendar-day available">4</div>
-                            <div class="calendar-day">5</div>
-                            <div class="calendar-day">6</div>
-                            <div class="calendar-day">7</div>
-                            <div class="calendar-day">8</div>
-                            <div class="calendar-day busy">9</div>
-                            <div class="calendar-day">10</div>
-                            <div class="calendar-day">11</div>
-                            <div class="calendar-day">12</div>
-                            <div class="calendar-day">13</div>
-                            <div class="calendar-day">14</div>
-                            <div class="calendar-day">15</div>
-                            <div class="calendar-day">16</div>
-                            <div class="calendar-day">17</div>
-                            <div class="calendar-day busy">18</div>
-                            <div class="calendar-day">19</div>
-                            <div class="calendar-day">20</div>
-                            <div class="calendar-day">21</div>
-                            <div class="calendar-day available">22</div>
-                            <div class="calendar-day">23</div>
-                            <div class="calendar-day">24</div>
-                            <div class="calendar-day">25</div>
-                            <div class="calendar-day">26</div>
-                            <div class="calendar-day">27</div>
-                            <div class="calendar-day">28</div>
-                            <div class="calendar-day">29</div>
-                            <div class="calendar-day">30</div>
-                            <div class="calendar-day">31</div>
+                                <!-- Calendar Grid -->
+                                <div class="calendar-grid"
+                                    style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem;">
+                                    <!-- Headers -->
+                                    <div class="text-center fw-semibold text-muted small">Do</div>
+                                    <div class="text-center fw-semibold text-muted small">Lu</div>
+                                    <div class="text-center fw-semibold text-muted small">Ma</div>
+                                    <div class="text-center fw-semibold text-muted small">Mi</div>
+                                    <div class="text-center fw-semibold text-muted small">Ju</div>
+                                    <div class="text-center fw-semibold text-muted small">Vi</div>
+                                    <div class="text-center fw-semibold text-muted small">Sá</div>
+
+                                    <!-- Los días se generan dinámicamente con calendar.js -->
+                                </div>
+
+                                <div class="mt-3 d-flex gap-3 justify-content-center small">
+                                    <span><span class="badge bg-primary">●</span> Disponible</span>
+                                    <span><span class="badge bg-success">●</span> Ocupado</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+
+                </div>
             </main>
+
         </div>
     </div>
 
-    <script src="/fp/frontend/src/assets/js/authService.js"></script>
-    <script src="/fp/frontend/src/assets/js/dashboard.js"></script>
+    <!-- Scripts -->
+    <script src="../assets/js/authService.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
+    <script src="../assets/js/calendar.js"></script>
+    <script src="../assets/js/workerDashboard.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

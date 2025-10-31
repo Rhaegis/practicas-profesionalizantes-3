@@ -5,107 +5,216 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trabajapp - Dashboard Cliente</title>
-    <link rel="stylesheet" href="/fp/frontend/src/assets/css/styles.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS Custom (colores de marca) -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 
-<body>
-    <div class="dashboard-container">
-        <aside class="sidebar">
-            <div class="sidebar-content">
-                <h1 class="sidebar-logo">Trabajapp</h1>
-                <nav class="sidebar-nav">
-                    <a class="nav-item active" href="#">
-                        <span class="nav-icon">📋</span>
-                        <span>Mis solicitudes</span>
-                    </a>
-                    <a class="nav-item" href="#">
-                        <span class="nav-icon">➕</span>
-                        <span>Nueva solicitud</span>
-                    </a>
-                    <a class="nav-item" href="#">
-                        <span class="nav-icon">📚</span>
-                        <span>Historial</span>
-                    </a>
-                    <a class="nav-item" href="#">
-                        <span class="nav-icon">⚙️</span>
-                        <span>Configuración</span>
-                    </a>
-                </nav>
+<body class="bg-light">
+    <!-- Dashboard Container -->
+    <div class="d-flex min-vh-100">
+
+        <!-- Sidebar Cliente -->
+        <aside class="sidebar bg-white border-end d-none d-lg-flex flex-column"
+            style="width: 260px; min-height: 100vh;">
+            <!-- Logo -->
+            <div class="p-3 border-bottom">
+                <h1 class="h4 text-primary mb-0">Trabajapp</h1>
             </div>
-            <button class="logout-btn" id="logoutBtn">
-                <span class="nav-icon">🚪</span>
-                <span>Cerrar sesión</span>
-            </button>
+
+            <!-- Navigation -->
+            <nav class="flex-grow-1 p-3">
+                <a href="dashboard-client.html"
+                    class="nav-item d-flex align-items-center gap-2 text-decoration-none text-dark p-2 rounded mb-2 hover-bg-light">
+                    <i class="bi bi-house-door"></i>
+                    <span>Inicio</span>
+                </a>
+                <a href="client-requests.html"
+                    class="nav-item d-flex align-items-center gap-2 text-decoration-none text-dark p-2 rounded mb-2 hover-bg-light">
+                    <i class="bi bi-list-check"></i>
+                    <span>Mis Solicitudes</span>
+                </a>
+                <a href="client-profile.html"
+                    class="nav-item d-flex align-items-center gap-2 text-decoration-none text-dark p-2 rounded mb-2 hover-bg-light">
+                    <i class="bi bi-person-circle"></i>
+                    <span>Mi Perfil</span>
+                </a>
+                <a href="#"
+                    class="nav-item d-flex align-items-center gap-2 text-decoration-none text-dark p-2 rounded mb-2 hover-bg-light">
+                    <i class="bi bi-chat-dots"></i>
+                    <span>Mensajes</span>
+                </a>
+                <a href="client-configuration.html"
+                    class="nav-item d-flex align-items-center gap-2 text-decoration-none text-dark p-2 rounded mb-2 hover-bg-light">
+                    <i class="bi bi-gear"></i>
+                    <span>Configuración</span>
+                </a>
+            </nav>
+
+            <!-- Logout -->
+            <div class="p-3 border-top">
+                <button class="btn btn-outline-danger w-100" id="logoutBtn">
+                    <i class="bi bi-box-arrow-right me-2"></i>
+                    Cerrar sesión
+                </button>
+            </div>
         </aside>
 
-        <main class="main-content">
-            <header class="dashboard-header">
-                <div class="header-info">
-                    <h2>Dashboard del Cliente</h2>
-                    <p>Bienvenido, Juan Pérez</p>
+        <!-- Main Content -->
+        <main class="flex-grow-1 overflow-auto">
+
+            <!-- Header -->
+            <header class="bg-white border-bottom shadow-sm p-3 sticky-top">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h2 class="h4 mb-1">Dashboard del Cliente</h2>
+                            <p class="text-muted small mb-0" id="welcomeMessage">Cargando...</p>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-primary new-request-btn">
+                                ➕ Nueva solicitud de servicio
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <button class="btn btn-primary new-request-btn">
-                    <span class="btn-icon">➕</span>
-                    Nueva solicitud de servicio
-                </button>
             </header>
 
-            <section class="dashboard-section">
-                <h3>Solicitudes Activas</h3>
-                <div class="requests-grid">
-                    <div class="request-card">
-                        <div class="card-header">
-                            <h4>Reparación de Plomería</h4>
-                            <span class="status-badge status-pending">Pendiente</span>
-                        </div>
-                        <p class="card-description">Fuga en el lavabo de la cocina.</p>
-                        <div class="card-details">
-                            <p>Fecha: 25 de Octubre, 2025</p>
-                        </div>
-                    </div>
+            <!-- Content -->
+            <div class="p-4">
+                <div class="container-fluid">
 
-                    <div class="request-card">
-                        <div class="card-header">
-                            <h4>Instalación Eléctrica</h4>
-                            <span class="status-badge status-accepted">Aceptada</span>
+                    <!-- Solicitudes Recientes -->
+                    <section class="mb-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h3 class="h5 mb-0">Mis Solicitudes Recientes</h3>
                         </div>
-                        <p class="card-description">Instalar nuevo punto de luz en la sala.</p>
-                        <div class="card-details">
-                            <p>Fecha: 24 de Octubre, 2025</p>
-                            <p>Trabajador: Carlos Gómez</p>
-                        </div>
-                    </div>
 
-                    <div class="request-card">
-                        <div class="card-header">
-                            <h4>Servicio de Pintura</h4>
-                            <span class="status-badge status-in-progress">En Curso</span>
+                        <!-- Grid de Solicitudes -->
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" id="recentRequestsContainer">
+                            <!-- Se llena dinámicamente con dashboardClient.js -->
                         </div>
-                        <p class="card-description">Pintar pared de la habitación principal.</p>
-                        <div class="card-details">
-                            <p>Fecha: 22 de Octubre, 2025</p>
-                            <p>Trabajador: Ana Torres</p>
-                        </div>
-                    </div>
 
-                    <div class="request-card">
-                        <div class="card-header">
-                            <h4>Ensamblaje de Muebles</h4>
-                            <span class="status-badge status-completed">Finalizada</span>
+                        <div class="text-center mt-4">
+                            <a href="client-requests.html" class="btn btn-outline-primary">
+                                Ver todas mis solicitudes →
+                            </a>
                         </div>
-                        <p class="card-description">Montaje de estantería modelo 'Kallax'.</p>
-                        <div class="card-details">
-                            <p>Fecha: 20 de Octubre, 2025</p>
-                            <p>Trabajador: Luis Fernandez</p>
+                    </section>
+
+                    <!-- Mapa de Trabajadores -->
+                    <section class="mb-5">
+                        <div class="mb-3">
+                            <h3 class="h5 mb-1">Trabajadores cercanos</h3>
+                            <p class="text-muted small mb-0">Encuentra profesionales en tu área</p>
                         </div>
-                    </div>
+
+                        <div class="card shadow-sm">
+                            <div class="card-body p-0">
+                                <div id="map" style="height: 500px; border-radius: 0.375rem;"></div>
+                            </div>
+                        </div>
+                    </section>
+
                 </div>
-            </section>
+            </div>
+
         </main>
     </div>
 
-    <script src="/fp/frontend/src/assets/js/authService.js"></script>
-    <script src="/fp/frontend/src/assets/js/dashboard.js"></script>
+    <!-- Modal Solicitar Servicio -->
+    <div class="modal fade" id="serviceModal" tabindex="-1" aria-labelledby="serviceModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="serviceModalLabel">Solicitar Servicio</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Worker Info -->
+                    <div class="alert alert-info d-flex align-items-center mb-4">
+                        <i class="bi bi-person-circle fs-3 me-3"></i>
+                        <div>
+                            <p class="mb-1"><strong>Trabajador:</strong> <span id="modal-worker-name">-</span></p>
+                            <p class="mb-0"><strong>Oficio:</strong> <span id="modal-worker-trade">-</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Form -->
+                    <form id="service-request-form">
+                        <!-- Título -->
+                        <div class="mb-3">
+                            <label for="service-title" class="form-label">Título del trabajo <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="service-title"
+                                placeholder="Ej: Reparación de enchufes" required>
+                        </div>
+
+                        <!-- Descripción -->
+                        <div class="mb-3">
+                            <label for="service-description" class="form-label">Descripción detallada <span
+                                    class="text-danger">*</span></label>
+                            <textarea class="form-control" id="service-description" rows="4"
+                                placeholder="Describe el problema o trabajo que necesitás..." required></textarea>
+                        </div>
+
+                        <!-- Tipo de servicio -->
+                        <div class="mb-3">
+                            <label for="service-type" class="form-label">Tipo de servicio <span
+                                    class="text-danger">*</span></label>
+                            <select class="form-select" id="service-type" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="urgent">Urgente (lo antes posible)</option>
+                                <option value="scheduled">Programada (elegir fecha)</option>
+                            </select>
+                        </div>
+
+                        <!-- Fecha programada (oculto por defecto) -->
+                        <div class="mb-3" id="scheduled-date-group" style="display: none;">
+                            <label for="scheduled-date" class="form-label">Fecha y hora preferida</label>
+                            <input type="datetime-local" class="form-control" id="scheduled-date">
+                        </div>
+
+                        <!-- Dirección -->
+                        <div class="mb-3">
+                            <label for="service-address" class="form-label">Dirección del trabajo <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="service-address"
+                                placeholder="Calle, número, piso, depto..." required>
+                        </div>
+
+                        <!-- Hidden fields -->
+                        <input type="hidden" id="service-lat">
+                        <input type="hidden" id="service-lng">
+                        <input type="hidden" id="modal-worker-id">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="submitServiceRequest"
+                        onclick="document.getElementById('service-request-form').dispatchEvent(new Event('submit'))">
+                        Enviar Solicitud
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/authService.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
+    <script src="../assets/js/map.js"></script>
+    <script src="../assets/js/serviceModal.js"></script>
+    <script src="../assets/js/dashboardClient.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiOOPI_cGsEPBcaWFVfdkD2vBriraeDdQ&callback=initMap"
+        async defer></script>
+
 </body>
 
 </html>

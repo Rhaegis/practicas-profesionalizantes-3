@@ -1,104 +1,199 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Publicar un trabajo - Trabajapp</title>
-    <link rel="stylesheet" href="/fp/frontend/src/assets/css/styles.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- CSS Custom -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
-<body>
-    <div class="app-container">
-        <header class="header">
-            <div class="container">
-                <div class="header-content">
-                    <div class="logo">
-                        <div class="logo-icon">🔧</div>
-                        <h1>Trabajapp</h1>
-                    </div>
-                    <nav class="nav">
-                        <a class="nav-link" href="dashboard-client.html">Inicio</a>
-                        <a class="nav-link" href="#">Buscar</a>
-                        <a class="nav-link" href="#">Mensajes</a>
-                        <a class="nav-link" href="#">Notificaciones</a>
-                    </nav>
-                    <div class="header-actions">
-                        <button class="help-btn">
-                            <span class="nav-icon">❓</span>
+
+<body class="bg-light">
+    <!-- Header -->
+    <header class="bg-white border-bottom shadow-sm sticky-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light py-3">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="dashboard-client.html">
+                    <i class="bi bi-tools text-primary fs-4"></i>
+                    <span class="fw-bold text-primary">Trabajapp</span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link" href="dashboard-client.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="client-requests.html">Mis solicitudes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Mensajes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Notificaciones</a></li>
+                    </ul>
+                    <div class="d-flex align-items-center gap-2">
+                        <button class="btn btn-link">
+                            <i class="bi bi-question-circle fs-5"></i>
                         </button>
-                        <img alt="Foto de perfil" class="user-avatar" src="images/user-avatar.jpg">
+                        <img src="../assets/img/user-avatar.jpg" alt="Avatar" class="rounded-circle" width="40"
+                            height="40">
                     </div>
                 </div>
-            </div>
-        </header>
+            </nav>
+        </div>
+    </header>
 
-        <main class="main-content">
-            <div class="container">
-                <div class="post-job-container">
-                    <div class="post-job-card">
-                        <div class="card-header">
-                            <h2>Publicar un trabajo</h2>
-                            <p>Conecta con los mejores profesionales para tu proyecto.</p>
+    <!-- Main Content -->
+    <main class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-xl-8">
+
+                    <!-- Page Header -->
+                    <div class="text-center mb-4">
+                        <h1 class="display-6 fw-bold mb-2">Publicar un trabajo</h1>
+                        <p class="text-muted">Conectá con los mejores profesionales para tu proyecto</p>
+                    </div>
+
+                    <!-- Form Card -->
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4 p-md-5">
+
+                            <form id="postJobForm">
+
+                                <!-- Oficio Requerido -->
+                                <div class="mb-4">
+                                    <label for="oficio" class="form-label fw-semibold">
+                                        Oficio Requerido <span class="text-danger">*</span>
+                                    </label>
+                                    <select class="form-select form-select-lg" id="oficio" required>
+                                        <option value="">Selecciona un oficio</option>
+                                        <option value="plomeria">Plomería</option>
+                                        <option value="electricidad">Electricidad</option>
+                                        <option value="carpinteria">Carpintería</option>
+                                        <option value="pintura">Pintura</option>
+                                        <option value="jardineria">Jardinería</option>
+                                        <option value="albanileria">Albañilería</option>
+                                        <option value="herreria">Herrería</option>
+                                        <option value="climatizacion">Climatización</option>
+                                    </select>
+                                </div>
+
+                                <!-- Descripción -->
+                                <div class="mb-4">
+                                    <label for="descripcion" class="form-label fw-semibold">
+                                        Descripción del Trabajo <span class="text-danger">*</span>
+                                    </label>
+                                    <textarea class="form-control" id="descripcion"
+                                        placeholder="Describe el trabajo en detalle. Incluye medidas, materiales necesarios, etc."
+                                        rows="5" required></textarea>
+                                    <div class="form-text">Sé lo más específico posible para recibir mejores propuestas
+                                    </div>
+                                </div>
+
+                                <!-- Dirección -->
+                                <div class="mb-4">
+                                    <label for="direccion" class="form-label fw-semibold">
+                                        Dirección <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-text">
+                                            <i class="bi bi-geo-alt"></i>
+                                        </span>
+                                        <input class="form-control" id="direccion"
+                                            placeholder="Calle, número, colonia, ciudad" type="text" required>
+                                    </div>
+                                </div>
+
+                                <!-- Fecha y Hora -->
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <label for="fecha" class="form-label fw-semibold">
+                                            Fecha Preferida
+                                            <span class="text-muted small">(Opcional)</span>
+                                        </label>
+                                        <input class="form-control" id="fecha" type="date">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="hora" class="form-label fw-semibold">
+                                            Hora Preferida
+                                            <span class="text-muted small">(Opcional)</span>
+                                        </label>
+                                        <input class="form-control" id="hora" type="time">
+                                    </div>
+                                </div>
+
+                                <!-- Info Box -->
+                                <div class="alert alert-info d-flex align-items-start mb-4">
+                                    <i class="bi bi-info-circle-fill me-2 fs-5"></i>
+                                    <div class="small">
+                                        <strong>¿Cómo funciona?</strong> Los profesionales de tu zona recibirán tu
+                                        solicitud y podrán enviarte propuestas. Podrás comparar perfiles, calificaciones
+                                        y precios antes de elegir.
+                                    </div>
+                                </div>
+
+                                <!-- Buttons -->
+                                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-end">
+                                    <button class="btn btn-outline-secondary btn-lg px-4" type="button"
+                                        onclick="window.history.back()">
+                                        Cancelar
+                                    </button>
+                                    <button class="btn btn-primary btn-lg px-4" type="submit">
+                                        <i class="bi bi-check-circle me-2"></i>
+                                        Publicar Trabajo
+                                    </button>
+                                </div>
+
+                            </form>
+
                         </div>
-                        
-                        <form class="post-job-form" id="postJobForm">
-                            <div class="form-group">
-                                <label for="oficio">Oficio Requerido</label>
-                                <select class="form-select" id="oficio" required>
-                                    <option value="">Selecciona un oficio</option>
-                                    <option value="plomeria">Plomería</option>
-                                    <option value="electricidad">Electricidad</option>
-                                    <option value="carpinteria">Carpintería</option>
-                                    <option value="pintura">Pintura</option>
-                                    <option value="jardineria">Jardinería</option>
-                                    <option value="albanileria">Albañilería</option>
-                                    <option value="herreria">Herrería</option>
-                                    <option value="climatizacion">Climatización</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="descripcion">Descripción del Trabajo</label>
-                                <textarea class="form-textarea" id="descripcion" placeholder="Describe el trabajo en detalle. Incluye medidas, materiales necesarios, etc." rows="5" required></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="direccion">Dirección</label>
-                                <input class="form-input" id="direccion" placeholder="Calle, número, colonia, ciudad" type="text" required>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="fecha">
-                                        Fecha Preferida 
-                                        <span class="optional">(Opcional)</span>
-                                    </label>
-                                    <input class="form-input" id="fecha" type="date">
-                                </div>
-                                <div class="form-group">
-                                    <label for="hora">
-                                        Hora Preferida 
-                                        <span class="optional">(Opcional)</span>
-                                    </label>
-                                    <input class="form-input" id="hora" type="time">
-                                </div>
-                            </div>
-
-                            <div class="form-actions">
-                                <button class="btn btn-secondary cancel-btn" type="button">
-                                    Cancelar
-                                </button>
-                                <button class="btn btn-primary submit-btn" type="submit">
-                                    Publicar Trabajo
-                                </button>
-                            </div>
-                        </form>
                     </div>
+
+                    <!-- Back Link -->
+                    <div class="text-center mt-4">
+                        <a href="dashboard-client.html" class="text-decoration-none text-muted">
+                            <i class="bi bi-arrow-left me-1"></i> Volver al dashboard
+                        </a>
+                    </div>
+
                 </div>
             </div>
-        </main>
-    </div>
+        </div>
+    </main>
 
-    <script src="/fp/frontend/src/assets/js/authService.js"></script>
-    <script src="/fp/frontend/src/assets/js/dashboard.js"></script>
+    <!-- Scripts -->
+    <script src="../assets/js/authService.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Form Handler -->
+    <script>
+        document.getElementById('postJobForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = {
+                oficio: document.getElementById('oficio').value,
+                descripcion: document.getElementById('descripcion').value,
+                direccion: document.getElementById('direccion').value,
+                fecha: document.getElementById('fecha').value,
+                hora: document.getElementById('hora').value
+            };
+
+            console.log('Trabajo a publicar:', formData);
+
+            // Mostrar mensaje de éxito
+            alert('¡Trabajo publicado exitosamente! Los profesionales comenzarán a enviarte propuestas.');
+
+            // Redireccionar
+            window.location.href = 'dashboard-client.html';
+        });
+    </script>
 </body>
+
 </html>

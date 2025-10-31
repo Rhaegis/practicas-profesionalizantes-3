@@ -1,3 +1,10 @@
+// ===== VERIFICAR SI ES PÁGINA PÚBLICA =====
+function isPublicPage() {
+    const publicPages = ['login.html', 'register.html', 'index.html', ''];
+    const currentPage = window.location.pathname.split('/').pop();
+    return publicPages.includes(currentPage);
+}
+
 // ===== DASHBOARD PRINCIPAL =====
 function initDashboard() {
     // Verificar autenticación
@@ -199,6 +206,52 @@ function initWorkerAgenda() {
     });
 }
 
+// ===== NAVEGACIÓN ===== 
+function initNavigation() {
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        item.addEventListener('click', function () {
+            navItems.forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+}
+
+function initRequestButtons() {
+    const requestButtons = document.querySelectorAll('.new-request-btn');
+    requestButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            showNotification('Próximamente: formulario de solicitud', 'info');
+        });
+    });
+}
+
+function initLogoutButtons() {
+    const logoutButtons = document.querySelectorAll('.logout-btn, #logoutBtn');
+    logoutButtons.forEach(button => {
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                AuthService.logout();
+            }
+        });
+    });
+}
+
+function updateUserInfo(user) {
+    const userNameElements = document.querySelectorAll('.user-name, .header-info p');
+    userNameElements.forEach(element => {
+        if (element.textContent.includes('Bienvenido')) {
+            element.textContent = `Bienvenido, ${user.full_name || user.fullName}`;
+        }
+    });
+}
+
+function completeJob(jobId) {
+    console.log(`Completando trabajo ${jobId}`);
+    showNotification('Trabajo marcado como completado', 'success');
+}
+
 // ===== UTILIDADES =====
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -250,18 +303,6 @@ function showNotification(message, type = 'info') {
     document.body.appendChild(notification);
     setTimeout(() => notification.remove(), 5000);
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    const logoutBtn = document.getElementById("logoutBtn");
-
-    if (logoutBtn) {
-        logoutBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            AuthService.logout();
-        });
-    }
-});
-
 
 // ===== INICIALIZACIÓN =====
 document.addEventListener('DOMContentLoaded', () => {

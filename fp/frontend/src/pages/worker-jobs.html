@@ -5,155 +5,181 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trabajapp - Mis Trabajos</title>
-  <link rel="stylesheet" href="/fp/frontend/src/assets/css/styles.css">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <!-- CSS Custom -->
+  <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 
-<body>
-  <div class="app-container">
-    <header class="header">
-      <div class="container">
-        <div class="header-content">
-          <div class="logo">
-            <div class="logo-icon">🔧</div>
-            <h1>Trabajapp</h1>
-          </div>
-          <nav class="nav">
-            <a class="nav-link" href="dashboard-worker.html">Inicio</a>
-            <a class="nav-link" href="available-worker-request.html">Buscar</a>
-            <a class="nav-link active" href="worker-jobs.html">Mis trabajos</a>
-            <a class="nav-link" href="#">Mensajes</a>
-          </nav>
-          <div class="header-actions">
-            <button class="notification-btn">
-              <span class="nav-icon">🔔</span>
-            </button>
-            <img alt="User avatar" class="user-avatar" src="images/user-avatar.jpg">
-          </div>
-        </div>
+<body class="bg-light">
+  <!-- Dashboard Container -->
+  <div class="d-flex min-vh-100">
+
+    <!-- Sidebar Trabajador -->
+    <aside class="worker-sidebar d-flex flex-column" style="width: 260px; min-height: 100vh;">
+      <!-- Logo -->
+      <div class="p-3 border-bottom border-white border-opacity-25">
+        <h1 class="h4 text-white mb-0">Trabajapp</h1>
       </div>
-    </header>
 
-    <main class="main-content">
-      <div class="container">
-        <div class="worker-jobs-container">
-          <h2>Mis trabajos</h2>
+      <!-- Navigation -->
+      <nav class="flex-grow-1 p-3">
+        <a href="dashboard-worker.html"
+          class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+          <i class="bi bi-house-door"></i>
+          <span>Inicio</span>
+        </a>
+        <a href="available-worker-requests.html"
+          class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+          <i class="bi bi-list-task"></i>
+          <span>Solicitudes Disponibles</span>
+        </a>
+        <a href="worker-jobs.html"
+          class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+          <i class="bi bi-briefcase"></i>
+          <span>Mis Trabajos</span>
+        </a>
+        <a href="worker-agenda.html"
+          class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+          <i class="bi bi-calendar3"></i>
+          <span>Agenda</span>
+        </a>
+        <a href="worker-profile.html"
+          class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+          <i class="bi bi-person-circle"></i>
+          <span>Mi Perfil</span>
+        </a>
+        <a href="worker-configuration.html"
+          class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+          <i class="bi bi-gear"></i>
+          <span>Configuración</span>
+        </a>
+      </nav>
 
-          <div class="jobs-tabs">
-            <div class="tabs-header">
-              <button class="tab-button active" data-tab="en-curso">En curso</button>
-              <button class="tab-button" data-tab="finalizados">Finalizados</button>
+      <!-- Logout -->
+      <div class="p-3 border-top border-white border-opacity-25">
+        <button class="btn btn-outline-light w-100" id="logoutBtn">
+          <i class="bi bi-box-arrow-right me-2"></i>
+          Cerrar sesión
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-grow-1 d-flex flex-column">
+
+      <!-- Header -->
+      <header class="bg-white border-bottom shadow-sm p-3">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div class="col">
+              <h2 class="h5 mb-0">Mis Trabajos</h2>
             </div>
-
-            <div class="tab-content active" id="en-curso">
-              <!-- Trabajo 1 - Fontanería -->
-              <div class="job-card">
-                <div class="job-icon">🚰</div>
-                <div class="job-details">
-                  <div class="job-header">
-                    <div class="job-info">
-                      <h3>Fontanería</h3>
-                      <p>Instalación de un nuevo lavavajillas</p>
-                    </div>
-                    <span class="status-badge status-accepted">Aceptado</span>
-                  </div>
-                  <div class="job-divider"></div>
-                  <div class="job-meta">
-                    <div class="meta-item">
-                      <span class="meta-icon">👤</span>
-                      <span>Cliente: Sofia Rodriguez</span>
-                    </div>
-                    <div class="meta-item">
-                      <span class="meta-icon">📍</span>
-                      <span>Dirección: Calle Mayor, 123, Madrid</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="job-actions">
-                  <button class="btn btn-primary view-details-btn">
-                    Ver detalles
-                    <span class="btn-arrow">→</span>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Trabajo 2 - Electricidad -->
-              <div class="job-card">
-                <div class="job-icon">⚡</div>
-                <div class="job-details">
-                  <div class="job-header">
-                    <div class="job-info">
-                      <h3>Electricidad</h3>
-                      <p>Reparación de un enchufe</p>
-                    </div>
-                    <span class="status-badge status-in-progress">En curso</span>
-                  </div>
-                  <div class="job-divider"></div>
-                  <div class="job-meta">
-                    <div class="meta-item">
-                      <span class="meta-icon">👤</span>
-                      <span>Cliente: Carlos Perez</span>
-                    </div>
-                    <div class="meta-item">
-                      <span class="meta-icon">📍</span>
-                      <span>Avenida de la Paz, 456, Barcelona</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="job-actions">
-                  <button class="btn btn-primary view-details-btn">
-                    Ver detalles
-                    <span class="btn-arrow">→</span>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Trabajo 3 - Pintura -->
-              <div class="job-card">
-                <div class="job-icon">🎨</div>
-                <div class="job-details">
-                  <div class="job-header">
-                    <div class="job-info">
-                      <h3>Pintura</h3>
-                      <p>Pintura de una habitación</p>
-                    </div>
-                    <span class="status-badge status-pending-payment">Pendiente de pago</span>
-                  </div>
-                  <div class="job-divider"></div>
-                  <div class="job-meta">
-                    <div class="meta-item">
-                      <span class="meta-icon">👤</span>
-                      <span>Cliente: Laura Martinez</span>
-                    </div>
-                    <div class="meta-item">
-                      <span class="meta-icon">📍</span>
-                      <span>Plaza del Sol, 789, Valencia</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="job-actions">
-                  <button class="btn btn-primary view-details-btn">
-                    Ver detalles
-                    <span class="btn-arrow">→</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="tab-content" id="finalizados">
-              <div class="empty-state">
-                <div class="empty-icon">📋</div>
-                <h3>No hay trabajos finalizados</h3>
-                <p>Los trabajos que completes aparecerán aquí</p>
-              </div>
+            <div class="col-auto">
+              <span class="fw-semibold me-3" id="userName">Cargando...</span>
             </div>
           </div>
         </div>
-      </div>
-    </main>
+      </header>
+
+      <!-- Content -->
+      <main class="flex-grow-1 overflow-auto p-4">
+        <div class="container-fluid">
+
+          <div class="mb-4">
+            <h3 class="h5">Gestión de Trabajos</h3>
+            <p class="text-muted small">Administrá tus trabajos aceptados, en progreso y completados</p>
+          </div>
+
+          <!-- Bootstrap Tabs -->
+          <ul class="nav nav-tabs mb-4" id="jobsTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="accepted-tab" data-bs-toggle="tab" data-bs-target="#tab-accepted"
+                type="button" role="tab">
+                Aceptados (<span id="count-accepted">0</span>)
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="in_progress-tab" data-bs-toggle="tab" data-bs-target="#tab-in_progress"
+                type="button" role="tab">
+                En Progreso (<span id="count-in_progress">0</span>)
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="completed-tab" data-bs-toggle="tab" data-bs-target="#tab-completed"
+                type="button" role="tab">
+                Completados (<span id="count-completed">0</span>)
+              </button>
+            </li>
+          </ul>
+
+          <!-- Tab Content -->
+          <div class="tab-content" id="jobsTabContent">
+
+            <!-- Tab: Aceptados -->
+            <div class="tab-pane fade show active" id="tab-accepted" role="tabpanel">
+              <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" id="jobs-accepted-container">
+                <!-- Loading state -->
+                <div class="col-12">
+                  <div class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="visually-hidden">Cargando...</span>
+                    </div>
+                    <p class="text-muted mt-3">Cargando trabajos aceptados...</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab: En Progreso -->
+            <div class="tab-pane fade" id="tab-in_progress" role="tabpanel">
+              <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" id="jobs-in_progress-container">
+                <!-- Loading state -->
+                <div class="col-12">
+                  <div class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="visually-hidden">Cargando...</span>
+                    </div>
+                    <p class="text-muted mt-3">Cargando trabajos en progreso...</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab: Completados -->
+            <div class="tab-pane fade" id="tab-completed" role="tabpanel">
+              <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" id="jobs-completed-container">
+                <!-- Loading state -->
+                <div class="col-12">
+                  <div class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="visually-hidden">Cargando...</span>
+                    </div>
+                    <p class="text-muted mt-3">Cargando trabajos completados...</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </main>
+
+    </div>
   </div>
 
-  <script src="/fp/frontend/src/assets/js/authService.js"></script>
-  <script src="/fp/frontend/src/assets/js/dashboard.js"></script>
+  <!-- Scripts -->
+  <script src="../assets/js/authService.js"></script>
+  <script src="../assets/js/dashboard.js"></script>
+  <script src="../assets/js/workerJobs.js"></script>
+  <script src="../assets/js/verificationFlow.js"></script>
+  <script src="../assets/js/ratingModal.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
