@@ -30,12 +30,11 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Servicios</a></li>
                         <li class="nav-item"><a class="nav-link active" href="tech-support.html">Cómo funciona</a></li>
                     </ul>
                     <div class="d-flex gap-2">
-                        <a href="post-job.html" class="btn btn-outline-primary">Publicar trabajo</a>
-                        <a href="login.html" class="btn btn-primary">Iniciar sesión</a>
+                        <a href="login.html" class="btn btn-outline-primary">Iniciar sesión</a>
+                        <a href="register.html" class="btn btn-primary">Registrate</a>
                     </div>
                 </div>
             </nav>
@@ -46,8 +45,7 @@
     <section class="bg-primary text-white py-5">
         <div class="container text-center py-4">
             <h1 class="display-5 fw-bold mb-3">Centro de Ayuda</h1>
-            <p class="lead">Encuentra respuestas a tus preguntas y contáctanos si necesitas más ayuda. Estamos aquí para
-                asistirte.</p>
+            <p class="lead">Encuentra respuestas a tus preguntas sobre cómo funciona Trabajapp</p>
         </div>
     </section>
 
@@ -61,7 +59,7 @@
 
                     <!-- FAQ Section -->
                     <section class="mb-5">
-                        <h2 class="h4 mb-4">Preguntas Frecuentes (FAQ)</h2>
+                        <h2 class="h4 mb-4">Preguntas Frecuentes</h2>
 
                         <div class="accordion" id="faqAccordion">
                             <!-- FAQ 1 -->
@@ -69,15 +67,15 @@
                                 <h3 class="accordion-header">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#faq1">
-                                        ¿Cómo puedo publicar un trabajo?
+                                        ¿Cómo funciona Trabajapp?
                                     </button>
                                 </h3>
                                 <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
                                     <div class="accordion-body">
-                                        Para publicar un trabajo, primero debes registrarte o iniciar sesión. Luego, haz
-                                        clic en 'Publicar un trabajo' y completa el formulario con los detalles del
-                                        proyecto, incluyendo descripción, presupuesto y ubicación. Los profesionales
-                                        interesados te contactarán.
+                                        Trabajapp conecta clientes con trabajadores calificados cerca de tu ubicación.
+                                        Los clientes envían solicitudes de servicios, los trabajadores las reciben si
+                                        están dentro de su zona de trabajo, y pueden aceptar o rechazar. Una vez
+                                        completado el trabajo, ambas partes se califican mutuamente.
                                     </div>
                                 </div>
                             </div>
@@ -87,14 +85,15 @@
                                 <h3 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#faq2">
-                                        ¿Cómo encuentro al profesional adecuado?
+                                        ¿Cómo envío una solicitud de servicio?
                                     </button>
                                 </h3>
                                 <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                     <div class="accordion-body">
-                                        Revisa los perfiles de los profesionales que apliquen a tu oferta. Puedes ver
-                                        sus trabajos anteriores, calificaciones y comentarios de otros clientes para
-                                        tomar una decisión informada.
+                                        Después de iniciar sesión como cliente, buscá trabajadores en el mapa según el
+                                        oficio que necesitás. Seleccioná un trabajador, describí el trabajo, elegí fecha
+                                        y hora, y enviá la solicitud. El trabajador recibirá una notificación y podrá
+                                        aceptar o rechazar tu solicitud.
                                     </div>
                                 </div>
                             </div>
@@ -104,14 +103,15 @@
                                 <h3 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#faq3">
-                                        ¿Cómo funciona el sistema de pagos?
+                                        ¿Qué es el código de verificación?
                                     </button>
                                 </h3>
                                 <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                     <div class="accordion-body">
-                                        Los pagos se realizan de forma segura a través de nuestra plataforma. Liberas el
-                                        pago al profesional una vez que el trabajo ha sido completado a tu satisfacción,
-                                        garantizando seguridad para ambas partes.
+                                        Cuando el trabajador completa el trabajo, el cliente recibe un código de
+                                        verificación de 6 dígitos. Entregá este código al trabajador para confirmar que
+                                        el servicio se completó satisfactoriamente. Esto garantiza seguridad para ambas
+                                        partes y permite que se califiquen mutuamente.
                                     </div>
                                 </div>
                             </div>
@@ -121,14 +121,15 @@
                                 <h3 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#faq4">
-                                        ¿Puedo cancelar un trabajo después de publicarlo?
+                                        ¿Cómo funciona el sistema de calificaciones?
                                     </button>
                                 </h3>
                                 <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                     <div class="accordion-body">
-                                        Sí, puedes cancelar un trabajo en cualquier momento antes de que un profesional
-                                        sea contratado. Si ya has contratado a alguien, contacta con nuestro equipo de
-                                        soporte para asistencia.
+                                        Trabajapp usa calificaciones bilaterales: tanto el cliente como el trabajador
+                                        pueden calificarse después de completar el servicio. Las calificaciones (1-5
+                                        estrellas) y comentarios son visibles en los perfiles y ayudan a otros usuarios
+                                        a tomar decisiones informadas.
                                     </div>
                                 </div>
                             </div>
@@ -138,23 +139,151 @@
                                 <h3 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#faq5">
-                                        ¿Qué hago si no estoy satisfecho con el trabajo realizado?
+                                        ¿Qué es la zona de trabajo GPS?
                                     </button>
                                 </h3>
                                 <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                     <div class="accordion-body">
-                                        Si no estás satisfecho con el trabajo, primero intenta resolverlo directamente
-                                        con el profesional. Si no llegas a un acuerdo, contacta con nuestro equipo de
-                                        soporte para mediar en la situación.
+                                        Los trabajadores pueden configurar su zona de trabajo en un mapa, definiendo un
+                                        radio de cobertura (ej: 10 km). Solo recibirán solicitudes de clientes ubicados
+                                        dentro de ese radio, optimizando así los tiempos de traslado y la eficiencia.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FAQ 6 -->
+                            <div class="accordion-item">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq6">
+                                        ¿Qué hago si tengo un problema con un servicio?
+                                    </button>
+                                </h3>
+                                <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Podés reportar una disputa desde tu panel. El trabajador recibirá la
+                                        notificación y podrá responder. Un administrador revisará el caso y tomará una
+                                        decisión. El sistema de disputas garantiza transparencia y justicia para ambas
+                                        partes.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FAQ 7 -->
+                            <div class="accordion-item">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq7">
+                                        ¿Puedo cancelar una solicitud?
+                                    </button>
+                                </h3>
+                                <div id="faq7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Sí, podés cancelar una solicitud en estado "Pendiente". Si ya fue aceptada por
+                                        el trabajador, considerá comunicarte con él para explicar la situación antes de
+                                        cancelar.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FAQ 8 -->
+                            <div class="accordion-item">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq8">
+                                        ¿Cómo funciona la agenda del trabajador?
+                                    </button>
+                                </h3>
+                                <div id="faq8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Los trabajadores tienen un calendario donde pueden ver todos sus trabajos
+                                        programados, configurar sus horarios semanales de disponibilidad, y bloquear
+                                        fechas específicas cuando no puedan trabajar.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FAQ 9 -->
+                            <div class="accordion-item">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq9">
+                                        ¿Cómo me registro como trabajador?
+                                    </button>
+                                </h3>
+                                <div id="faq9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Al registrarte, elegí el rol "Trabajador", completá tus datos personales,
+                                        especificá tu oficio (electricista, plomero, carpintero, etc.), configurá tu
+                                        zona de trabajo en el mapa, y establecé tus horarios disponibles. Tu perfil
+                                        estará visible para clientes en tu área.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FAQ 10 -->
+                            <div class="accordion-item">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq10">
+                                        ¿Las notificaciones son en tiempo real?
+                                    </button>
+                                </h3>
+                                <div id="faq10" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Sí, Trabajapp tiene un sistema de notificaciones en tiempo real. Recibirás
+                                        alertas cuando: un trabajador acepte tu solicitud, se complete un trabajo,
+                                        recibas una calificación, haya una disputa, o cualquier actualización importante
+                                        de tus servicios.
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
 
+                    <!-- Guía de Uso -->
+                    <section class="mb-5">
+                        <h2 class="h4 mb-4">Guía Paso a Paso</h2>
+
+                        <div class="card border-0 shadow-sm mb-3">
+                            <div class="card-body p-4">
+                                <h5 class="fw-bold mb-3">Para Clientes:</h5>
+                                <ol class="mb-0">
+                                    <li class="mb-2">Registrate con tu email y elegí el rol "Cliente"</li>
+                                    <li class="mb-2">Desde el dashboard, buscá trabajadores en el mapa según el oficio
+                                    </li>
+                                    <li class="mb-2">Seleccioná un trabajador y enviá una solicitud con los detalles del
+                                        trabajo</li>
+                                    <li class="mb-2">Esperá a que el trabajador acepte tu solicitud</li>
+                                    <li class="mb-2">Cuando el trabajo esté completo, verás un código de verificación
+                                    </li>
+                                    <li class="mb-2">Entregá el código al trabajador para confirmar</li>
+                                    <li class="mb-2">Calificá al trabajador y dejá un comentario</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body p-4">
+                                <h5 class="fw-bold mb-3">Para Trabajadores:</h5>
+                                <ol class="mb-0">
+                                    <li class="mb-2">Registrate con tu email y elegí el rol "Trabajador"</li>
+                                    <li class="mb-2">Configurá tu zona de trabajo en el mapa (ubicación y radio)</li>
+                                    <li class="mb-2">Establecé tus horarios semanales de disponibilidad</li>
+                                    <li class="mb-2">Recibirás notificaciones de solicitudes dentro de tu zona</li>
+                                    <li class="mb-2">Aceptá o rechazá las solicitudes según tu disponibilidad</li>
+                                    <li class="mb-2">Cuando completes el trabajo, marcalo como "Completado"</li>
+                                    <li class="mb-2">Pedile al cliente el código de verificación de 6 dígitos</li>
+                                    <li class="mb-2">Ingresá el código para finalizar el servicio</li>
+                                    <li class="mb-2">Calificá al cliente y dejá un comentario</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </section>
+
                     <!-- Contact Form -->
                     <section>
-                        <h2 class="h4 mb-4">Envíanos un Mensaje</h2>
+                        <h2 class="h4 mb-4">¿Aún tenés dudas?</h2>
 
                         <div class="card border-0 shadow-sm">
                             <div class="card-body p-4">
@@ -204,14 +333,6 @@
 
                             <div class="d-flex flex-column gap-3">
                                 <div class="d-flex align-items-center gap-2">
-                                    <i class="bi bi-telephone text-primary fs-5"></i>
-                                    <span>+54 9 (0223) 123-4567</span>
-                                </div>
-                                <div class="d-flex align-items-center gap-2">
-                                    <i class="bi bi-chat-dots text-primary fs-5"></i>
-                                    <a href="#" class="text-decoration-none">Iniciar Chat en Vivo</a>
-                                </div>
-                                <div class="d-flex align-items-center gap-2">
                                     <i class="bi bi-envelope text-primary fs-5"></i>
                                     <a href="mailto:soporte@trabajapp.com"
                                         class="text-decoration-none">soporte@trabajapp.com</a>
@@ -227,34 +348,33 @@
                     <!-- Recursos Adicionales -->
                     <div class="card border-0 shadow-sm">
                         <div class="card-body p-4">
-                            <h3 class="h5 mb-3">Recursos Adicionales</h3>
+                            <h3 class="h5 mb-3">Funcionalidades Destacadas</h3>
 
                             <div class="list-group list-group-flush">
-                                <a href="#"
-                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0 px-0">
-                                    <span>Tutoriales en Video</span>
-                                    <i class="bi bi-chevron-right"></i>
-                                </a>
-                                <a href="#"
-                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0 px-0">
-                                    <span>Guías de Uso</span>
-                                    <i class="bi bi-chevron-right"></i>
-                                </a>
-                                <a href="#"
-                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0 px-0">
-                                    <span>Términos de Servicio</span>
-                                    <i class="bi bi-chevron-right"></i>
-                                </a>
-                                <a href="#"
-                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0 px-0">
-                                    <span>Política de Privacidad</span>
-                                    <i class="bi bi-chevron-right"></i>
-                                </a>
-                                <a href="#"
-                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0 px-0">
-                                    <span>Centro de Seguridad</span>
-                                    <i class="bi bi-chevron-right"></i>
-                                </a>
+                                <div class="list-group-item border-0 px-0">
+                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                    <span>Búsqueda con GPS</span>
+                                </div>
+                                <div class="list-group-item border-0 px-0">
+                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                    <span>Código de verificación</span>
+                                </div>
+                                <div class="list-group-item border-0 px-0">
+                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                    <span>Calificaciones bilaterales</span>
+                                </div>
+                                <div class="list-group-item border-0 px-0">
+                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                    <span>Sistema de disputas</span>
+                                </div>
+                                <div class="list-group-item border-0 px-0">
+                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                    <span>Notificaciones en tiempo real</span>
+                                </div>
+                                <div class="list-group-item border-0 px-0">
+                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                    <span>Agenda y calendario</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -269,30 +389,17 @@
     <footer class="bg-white border-top py-4 mt-5">
         <div class="container">
             <div class="row align-items-center g-3">
-                <div class="col-md-4 text-center text-md-start">
-                    <div class="d-flex gap-3 justify-content-center justify-content-md-start">
-                        <a href="#" class="text-muted text-decoration-none">Facebook</a>
-                        <a href="#" class="text-muted text-decoration-none">Twitter</a>
-                        <a href="#" class="text-muted text-decoration-none">Instagram</a>
-                        <a href="#" class="text-muted text-decoration-none">LinkedIn</a>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center">
+                <div class="col-md-6 text-center text-md-start">
                     <p class="text-muted mb-0">© 2025 Trabajapp. Todos los derechos reservados.</p>
                 </div>
-                <div class="col-md-4 text-center text-md-end">
-                    <a href="#" class="text-muted text-decoration-none me-2">Política de Privacidad</a>
-                    <span class="text-muted">·</span>
-                    <a href="#" class="text-muted text-decoration-none ms-2">Términos de Uso</a>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="index.html" class="text-muted text-decoration-none me-3">Inicio</a>
+                    <a href="register.html" class="text-muted text-decoration-none">Registrate</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="../assets/js/authService.js"></script>
-    <script src="../assets/js/dashboard.js"></script>
-    
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
