@@ -262,7 +262,3 @@ Chat en tiempo real
 Pagos integrados
 Trabajadores subordinados
 Videos/fotos en disputas
-
----
-
-**Fin del documento**

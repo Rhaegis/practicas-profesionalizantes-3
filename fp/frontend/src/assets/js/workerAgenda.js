@@ -1,4 +1,3 @@
-// frontend/src/assets/js/workerAgenda.js
 // Sistema de agenda y calendario para trabajadores
 
 let currentMonth = new Date().getMonth();

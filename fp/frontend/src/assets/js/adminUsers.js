@@ -1,4 +1,3 @@
-// frontend/src/assets/js/adminUsers.js
 // Gestión de usuarios para administradores
 
 let allUsers = [];

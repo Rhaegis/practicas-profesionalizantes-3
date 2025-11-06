@@ -1,5 +1,4 @@
-// frontend/src/assets/js/serviceModal.js
-// VERSIÓN BOOTSTRAP 5 - Mejorada con detección de ubicación visual
+// VERSIÓN BOOTSTRAP 5 - Con detección de ubicación visual
 
 function openServiceModal() {
     const worker = JSON.parse(sessionStorage.getItem('selectedWorker'));

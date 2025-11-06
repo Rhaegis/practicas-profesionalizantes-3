@@ -1,4 +1,4 @@
-// Dashboard principal del TRABAJADOR (ACTUALIZADO PARA BOOTSTRAP 5)
+// Dashboard principal del TRABAJADOR
 
 // Cargar solicitudes pendientes
 async function loadPendingRequests() {
