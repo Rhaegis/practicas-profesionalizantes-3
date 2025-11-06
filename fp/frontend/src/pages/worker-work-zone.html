@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurar Zona de Trabajo - Trabajapp</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- CSS Custom -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <!-- Dashboard Container -->
+    <div class="d-flex min-vh-100">
+
+        <!-- Sidebar Trabajador -->
+        <aside class="worker-sidebar d-flex flex-column" style="width: 260px; min-height: 100vh;">
+            <!-- Logo -->
+            <div class="p-3 border-bottom border-white border-opacity-25">
+                <h1 class="h4 text-white mb-0">Trabajapp</h1>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex-grow-1 p-3">
+                <a href="dashboard-worker.html"
+                    class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+                    <i class="bi bi-house-door"></i>
+                    <span>Inicio</span>
+                </a>
+                <a href="available-worker-requests.html"
+                    class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+                    <i class="bi bi-list-task"></i>
+                    <span>Solicitudes Disponibles</span>
+                </a>
+                <a href="worker-jobs.html"
+                    class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+                    <i class="bi bi-briefcase"></i>
+                    <span>Mis Trabajos</span>
+                </a>
+                <a href="worker-disputes.html"
+                    class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+                    <i class="bi bi-exclamation-triangle"></i>
+                    <span>Disputas</span>
+                </a>
+                <a href="worker-work-zone.html"
+                    class="worker-nav-item active d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    <span>Zona de Trabajo</span>
+                </a>
+                <a href="worker-agenda.html"
+                    class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+                    <i class="bi bi-calendar3"></i>
+                    <span>Agenda</span>
+                </a>
+                <a href="worker-profile.html"
+                    class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+                    <i class="bi bi-person-circle"></i>
+                    <span>Mi Perfil</span>
+                </a>
+                <a href="worker-configuration.html"
+                    class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+                    <i class="bi bi-gear"></i>
+                    <span>Configuración</span>
+                </a>
+            </nav>
+
+            <!-- Logout -->
+            <div class="p-3 border-top border-white border-opacity-25">
+                <button class="btn btn-outline-light w-100" id="logoutBtn">
+                    <i class="bi bi-box-arrow-right me-2"></i>
+                    Cerrar sesión
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-grow-1 overflow-auto">
+            <div class="container-fluid p-4">
+
+                <!-- Header -->
+                <div class="mb-4">
+                    <h1 class="h3 mb-2">📍 Configurar Zona de Trabajo</h1>
+                    <p class="text-muted">Define tu área de cobertura y disponibilidad</p>
+                </div>
+
+                <!-- Controles Superiores -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="immediateAvailability" checked>
+                                    <label class="form-check-label" for="immediateAvailability">
+                                        <strong>Disponible para trabajos inmediatos</strong>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-end">
+                                <button class="btn btn-outline-secondary" id="pauseAccountBtn">
+                                    <i class="bi bi-pause-circle me-2"></i>
+                                    Pausar mi cuenta
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mapa y Controles -->
+                <div class="row g-4">
+                    <!-- Mapa -->
+                    <div class="col-lg-8">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-primary text-white">
+                                <i class="bi bi-map me-2"></i>
+                                <strong>Área de Cobertura</strong>
+                            </div>
+                            <div class="card-body p-0">
+                                <div id="map"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controles -->
+                    <div class="col-lg-4">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-white border-bottom">
+                                <strong>Configuración</strong>
+                            </div>
+                            <div class="card-body">
+                                <!-- Radio de cobertura -->
+                                <div class="mb-4">
+                                    <label for="radiusSlider" class="form-label">
+                                        <i class="bi bi-arrow-left-right me-1"></i>
+                                        Radio de cobertura
+                                    </label>
+                                    <div class="d-flex align-items-center gap-3 mb-3">
+                                        <span class="badge bg-primary fs-4 px-3 py-2" id="radiusValue">10 km</span>
+                                    </div>
+                                    <input type="range" class="form-range" id="radiusSlider" min="1" max="50" value="10"
+                                        step="1">
+                                    <div class="d-flex justify-content-between text-muted small">
+                                        <span>1 km</span>
+                                        <span>50 km</span>
+                                    </div>
+                                </div>
+
+                                <!-- Ubicación Central -->
+                                <div class="mb-4">
+                                    <label class="form-label">
+                                        <i class="bi bi-geo-alt me-1"></i>
+                                        Centro de operaciones
+                                    </label>
+                                    <div class="alert alert-info small mb-0">
+                                        <i class="bi bi-info-circle me-1"></i>
+                                        Arrastrá el marcador en el mapa para cambiar tu ubicación central
+                                    </div>
+                                </div>
+
+                                <!-- Botones -->
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-success" id="saveSettingsBtn">
+                                        <i class="bi bi-check-circle me-2"></i>
+                                        Guardar Configuración
+                                    </button>
+                                    <button class="btn btn-outline-secondary" id="resetBtn">
+                                        <i class="bi bi-arrow-clockwise me-2"></i>
+                                        Restablecer
+                                    </button>
+                                </div>
+
+                                <!-- Info -->
+                                <div class="mt-4">
+                                    <small class="text-muted">
+                                        <i class="bi bi-lightbulb me-1"></i>
+                                        <strong>Tip:</strong> Las solicitudes dentro de tu zona aparecerán
+                                        automáticamente en "Solicitudes Disponibles"
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/authService.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
+    <script src="../assets/js/workZone.js"></script>
+    <!-- Google Maps -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiOOPI_cGsEPBcaWFVfdkD2vBriraeDdQ&callback=initMap&libraries=geometry"
+        async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

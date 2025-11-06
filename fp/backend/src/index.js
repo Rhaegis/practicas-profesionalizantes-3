@@ -38,6 +38,22 @@ const disputeRoutes = require('./routes/disputeRoutes');
 app.use('/api/disputes', disputeRoutes);
 console.log('✅ Rutas de disputes cargadas: /api/disputes');
 
+const workSettingsRoutes = require('./routes/workSettingsRoutes');
+app.use('/api/work-settings', workSettingsRoutes);
+console.log('✅ Rutas de work-settings cargadas: /api/work-settings');
+
+const agendaRoutes = require('./routes/agendaRoutes');
+app.use('/api/agenda', agendaRoutes);
+console.log('✅ Rutas de agenda cargadas: /api/agenda');
+
+const adminRoutes = require('./routes/adminRoutes');
+app.use('/api/admin', adminRoutes);
+console.log('✅ Rutas de admin cargadas: /api/admin');
+
+const notificationRoutes = require('./routes/notificationRoutes');
+app.use('/api/notifications', notificationRoutes);
+console.log('✅ Rutas de notifications cargadas: /api/notifications');
+
 // Sincronizar BD
 sequelize.sync()
     .then(() => console.log("✅ Base de datos sincronizada"))

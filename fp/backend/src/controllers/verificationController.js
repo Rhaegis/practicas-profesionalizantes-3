@@ -1,5 +1,6 @@
 const VerificationCode = require('../models/verificationCode');
 const Service = require('../models/service');
+const { notifyCodeGenerated, notifyServiceCompleted } = require('../helpers/notificationHelper');
 
 // Generar código de verificación
 exports.generateCode = async (req, res) => {
@@ -44,10 +45,15 @@ exports.generateCode = async (req, res) => {
             code
         });
 
+        // Notificar al cliente que el código está disponible
+        await notifyCodeGenerated(service.client_id, service_id);
+
+        // Notificar al cliente que el trabajo fue completado
+        await notifyServiceCompleted(service.client_id, service_id);
+
         res.status(201).json({
-            message: "Código generado exitosamente",
-            code: verificationCode.code,
-            service_id
+            message: "Código de verificación generado",
+            code: verificationCode.code
         });
 
     } catch (error) {

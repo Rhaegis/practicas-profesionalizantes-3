@@ -21,4 +21,10 @@ router.patch('/:id/status', authMiddleware, serviceController.updateServiceStatu
 // Aceptar solicitud (trabajador)
 router.patch('/:id/accept', authMiddleware, serviceController.acceptService);
 
+// Obtener solicitudes cercanas (filtradas por zona del trabajador)
+router.get('/nearby', authMiddleware, serviceController.getNearbyServices);
+
+// Actualizar estado de servicio
+router.patch('/:id/status', authMiddleware, serviceController.updateServiceStatus);
+
 module.exports = router;

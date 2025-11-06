@@ -3,6 +3,8 @@ const Service = require('./service');
 const VerificationCode = require('./verificationCode');
 const Rating = require('./rating');
 const Dispute = require('./dispute');
+const AvailabilityBlock = require('./availabilityBlock');
+const Notification = require('./notification');
 
 // Asociaciones User ↔ Service (Cliente)
 User.hasMany(Service, { foreignKey: 'client_id', as: 'clientServices' });
@@ -43,6 +45,18 @@ Dispute.belongsTo(User, { foreignKey: 'reported_against_user_id', as: 'reportedU
 // Asociaciones Dispute ↔ User (Admin que resolvió)
 User.hasMany(Dispute, { foreignKey: 'resolved_by', as: 'disputesResolved' });
 Dispute.belongsTo(User, { foreignKey: 'resolved_by', as: 'resolver' });
+
+// Asociaciones AvailabilityBlock ↔ User
+User.hasMany(AvailabilityBlock, { foreignKey: 'worker_id', as: 'availabilityBlocks' });
+AvailabilityBlock.belongsTo(User, { foreignKey: 'worker_id', as: 'worker' });
+
+// Asociaciones Notification ↔ User
+User.hasMany(Notification, { foreignKey: 'user_id', as: 'notifications' });
+Notification.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
+
+module.exports = { User, Service, VerificationCode, Rating, Dispute, AvailabilityBlock, Notification };
+
+module.exports = { User, Service, VerificationCode, Rating, Dispute, AvailabilityBlock };
 
 module.exports = { User, Service, VerificationCode, Rating, Dispute };
 

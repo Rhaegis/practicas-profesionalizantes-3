@@ -1,6 +1,7 @@
 const Dispute = require('../models/dispute');
 const Service = require('../models/service');
 const User = require('../models/user');
+const { notifyNewDispute, notifyDisputeResponse } = require('../helpers/notificationHelper');
 
 // Crear una disputa (cliente reporta problema)
 exports.createDispute = async (req, res) => {
@@ -53,6 +54,14 @@ exports.createDispute = async (req, res) => {
             status: 'abierta'
         });
 
+        // Obtener nombre del reportador
+        const reporter = await User.findByPk(user_id);
+
+        // Notificar al trabajador
+        if (reported_by === 'client') {
+            await notifyNewDispute(reported_against_user_id, dispute.id, reporter.full_name);
+        }
+
         res.status(201).json({
             message: "Disputa creada exitosamente",
             dispute
@@ -89,6 +98,12 @@ exports.addWorkerResponse = async (req, res) => {
         dispute.worker_evidence_url = worker_evidence_url ? JSON.stringify(worker_evidence_url) : null;
         dispute.status = 'en_revision';
         await dispute.save();
+
+        // Obtener nombre del trabajador
+        const worker = await User.findByPk(user_id);
+
+        // Notificar al cliente que reportó
+        await notifyDisputeResponse(dispute.reported_by_user_id, dispute.id, worker.full_name);
 
         res.json({
             message: "Descargo agregado exitosamente",

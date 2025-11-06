@@ -80,3 +80,43 @@ exports.login = async (req, res) => {
         res.status(500).json({ message: "Error en el login", error });
     }
 };
+
+// Crear admin (solo para desarrollo - eliminar en producción)
+exports.createAdmin = async (req, res) => {
+    try {
+        const { email, password, fullName } = req.body;
+
+        // Verificar si ya existe un admin con ese email
+        const existingUser = await User.findOne({ where: { email } });
+        if (existingUser) {
+            return res.status(400).json({ message: "El email ya está registrado" });
+        }
+
+        // Hashear contraseña
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Crear admin
+        const admin = await User.create({
+            full_name: fullName,
+            email,
+            password: hashedPassword,
+            role: 'admin'
+        });
+
+        // Generar token
+        const token = jwt.sign({ id: admin.id, role: admin.role }, SECRET_KEY, { expiresIn: '1d' });
+
+        // Eliminar contraseña del objeto
+        const { password: _, ...adminData } = admin.toJSON();
+
+        res.status(201).json({
+            message: "Admin creado exitosamente",
+            user: adminData,
+            token
+        });
+
+    } catch (error) {
+        console.error("❌ Error al crear admin:", error);
+        res.status(500).json({ message: "Error al crear admin", error });
+    }
+};

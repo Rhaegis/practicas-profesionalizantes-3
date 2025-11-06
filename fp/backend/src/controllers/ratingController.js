@@ -3,6 +3,7 @@ const Service = require('../models/service');
 const User = require('../models/user');
 const { Op } = require('sequelize');
 const sequelize = require('../models/index');
+const { notifyNewRating } = require('../helpers/notificationHelper');
 
 // Crear calificación
 exports.createRating = async (req, res) => {
@@ -59,10 +60,16 @@ exports.createRating = async (req, res) => {
             rating,
             comment: comment || null
         });
+        
+        // Obtener nombre del calificador
+        const rater = await User.findByPk(rater_id);
+
+        // Notificar al calificado
+        await notifyNewRating(rated_user_id, rater.full_name, rating.rating);
 
         res.status(201).json({
             message: "Calificación creada exitosamente",
-            rating: newRating
+            rating
         });
 
     } catch (error) {

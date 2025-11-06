@@ -39,6 +39,37 @@ const User = sequelize.define('User', {
     type: DataTypes.FLOAT,
     allowNull: true,
   },
+  // ===== NUEVOS CAMPOS PARA ZONA DE TRABAJO =====
+  work_radius: {
+    type: DataTypes.INTEGER,
+    defaultValue: 10,
+    comment: 'Radio de cobertura en kilómetros'
+  },
+  work_location_lat: {
+    type: DataTypes.DECIMAL(10, 8),
+    allowNull: true,
+    comment: 'Latitud del centro de operaciones'
+  },
+  work_location_lng: {
+    type: DataTypes.DECIMAL(11, 8),
+    allowNull: true,
+    comment: 'Longitud del centro de operaciones'
+  },
+  work_schedule: {
+    type: DataTypes.JSON,
+    allowNull: true,
+    comment: 'Horarios de disponibilidad por día'
+  },
+  immediate_availability: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: true,
+    comment: 'Disponible para trabajos inmediatos'
+  },
+  is_active: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: true,
+    comment: 'Cuenta activa/pausada'
+  }
 }, {
   timestamps: true,
   tableName: 'users'

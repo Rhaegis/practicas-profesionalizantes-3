@@ -4,13 +4,120 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agenda - Trabajapp</title>
+  <title>Mi Agenda - Trabajapp</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
   <!-- CSS Custom -->
   <link rel="stylesheet" href="../assets/css/styles.css">
+  <style>
+    .calendar {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .calendar-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1.5rem;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+      background: #e9ecef;
+    }
+
+    .calendar-day-header {
+      background: #f8f9fa;
+      padding: 0.75rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: #495057;
+    }
+
+    .calendar-day {
+      background: white;
+      min-height: 100px;
+      padding: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .calendar-day:hover {
+      background: #f8f9fa;
+    }
+
+    .calendar-day.other-month {
+      background: #fafafa;
+      color: #adb5bd;
+    }
+
+    .calendar-day.today {
+      background: #e3f2fd;
+      border: 2px solid #2196f3;
+    }
+
+    .calendar-day.blocked {
+      background: #ffebee;
+    }
+
+    .day-number {
+      font-weight: 600;
+      font-size: 0.875rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .day-events {
+      font-size: 0.75rem;
+    }
+
+    .event-badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 3px;
+      margin-bottom: 2px;
+      font-size: 0.7rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+    .event-pending {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .event-accepted {
+      background: #cfe2ff;
+      color: #084298;
+    }
+
+    .event-in_progress {
+      background: #d1e7dd;
+      color: #0f5132;
+    }
+
+    .event-completed {
+      background: #d1ecf1;
+      color: #0c5460;
+    }
+
+    .schedule-row {
+      padding: 1rem;
+      border-bottom: 1px solid #dee2e6;
+    }
+
+    .schedule-row:last-child {
+      border-bottom: none;
+    }
+  </style>
 </head>
 
 <body class="bg-light">
@@ -41,8 +148,18 @@
           <i class="bi bi-briefcase"></i>
           <span>Mis Trabajos</span>
         </a>
-        <a href="worker-agenda.html"
+        <a href="worker-disputes.html"
           class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+          <i class="bi bi-exclamation-triangle"></i>
+          <span>Disputas</span>
+        </a>
+        <a href="worker-work-zone.html"
+          class="worker-nav-item d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
+          <i class="bi bi-geo-alt-fill"></i>
+          <span>Zona de Trabajo</span>
+        </a>
+        <a href="worker-agenda.html"
+          class="worker-nav-item active d-flex align-items-center gap-2 text-decoration-none text-white p-2 rounded mb-2">
           <i class="bi bi-calendar3"></i>
           <span>Agenda</span>
         </a>
@@ -73,89 +190,275 @@
 
         <!-- Header -->
         <div class="mb-4">
-          <h1 class="h3 mb-3">Agenda</h1>
-
-          <!-- Sync Card -->
-          <div class="alert alert-primary d-flex align-items-center justify-content-between">
-            <div class="d-flex align-items-center gap-3">
-              <i class="bi bi-calendar-check fs-2"></i>
-              <div>
-                <div class="fw-semibold">Sincroniza tu calendario</div>
-                <small>Conecta tu Google Calendar para ver tus eventos aquí</small>
-              </div>
-            </div>
-            <button class="btn btn-primary">Conectar</button>
-          </div>
+          <h1 class="h3 mb-2">📅 Mi Agenda</h1>
+          <p class="text-muted">Gestiona tus trabajos programados y disponibilidad</p>
         </div>
 
-        <!-- Calendar Section -->
-        <div class="card shadow-sm mb-4">
-          <div class="card-body p-4">
+        <!-- Tabs -->
+        <ul class="nav nav-tabs mb-4" id="agendaTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="calendar-tab" data-bs-toggle="tab" data-bs-target="#calendar"
+              type="button">
+              <i class="bi bi-calendar3 me-2"></i>Calendario
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule" type="button">
+              <i class="bi bi-clock me-2"></i>Horarios Semanales
+            </button>
+          </li>
+        </ul>
 
-            <!-- Calendar Header -->
-            <div class="calendar-header d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
-              <div class="d-flex align-items-center gap-2">
-                <!-- BOTÓN ANTERIOR - CON ONCLICK -->
-                <button class="btn btn-outline-secondary btn-sm" onclick="previousMonth()">
-                  <i class="bi bi-chevron-left"></i>
-                </button>
-                <!-- TÍTULO DEL MES - SE ACTUALIZA DINÁMICAMENTE -->
-                <h5 class="mb-0 mx-3">Cargando...</h5>
-                <!-- BOTÓN SIGUIENTE - CON ONCLICK -->
-                <button class="btn btn-outline-secondary btn-sm" onclick="nextMonth()">
-                  <i class="bi bi-chevron-right"></i>
-                </button>
-              </div>
-              <div class="d-flex gap-2">
-                <!-- BOTÓN HOY - CON ONCLICK -->
-                <button class="btn btn-outline-secondary btn-sm" onclick="goToToday()">Hoy</button>
-                <button class="btn btn-primary btn-sm">
-                  <i class="bi bi-plus-lg me-1"></i>
-                  Añadir evento
-                </button>
-              </div>
-            </div>
+        <!-- Tab Content -->
+        <div class="tab-content" id="agendaTabContent">
 
-            <!-- Calendar Grid -->
-            <div class="calendar-grid" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem;">
-              <!-- Headers de días -->
-              <div class="text-center fw-semibold text-muted small py-2">Dom</div>
-              <div class="text-center fw-semibold text-muted small py-2">Lun</div>
-              <div class="text-center fw-semibold text-muted small py-2">Mar</div>
-              <div class="text-center fw-semibold text-muted small py-2">Mié</div>
-              <div class="text-center fw-semibold text-muted small py-2">Jue</div>
-              <div class="text-center fw-semibold text-muted small py-2">Vie</div>
-              <div class="text-center fw-semibold text-muted small py-2">Sáb</div>
+          <!-- Calendario -->
+          <div class="tab-pane fade show active" id="calendar" role="tabpanel">
 
-              <!-- Los días se generan dinámicamente con calendar.js -->
-            </div>
-
-            <!-- Legend -->
-            <div class="mt-4 d-flex gap-3 justify-content-center small">
-              <span><span class="badge bg-primary">●</span> Trabajo</span>
-              <span><span class="badge bg-info">●</span> Personal</span>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Upcoming Events -->
-        <div class="card shadow-sm">
-          <div class="card-body p-4">
-            <h2 class="h5 mb-4">Próximos trabajos y eventos</h2>
-
-            <!-- CONTENEDOR VACÍO - Se llena dinámicamente -->
-            <div class="list-group list-group-flush">
-              <!-- Se llena dinámicamente con workerAgenda.js -->
-              <div class="list-group-item text-center py-4">
-                <div class="spinner-border text-primary" role="status">
-                  <span class="visually-hidden">Cargando...</span>
+            <!-- Controles del Calendario -->
+            <div class="card shadow-sm mb-4">
+              <div class="card-body">
+                <div class="row align-items-center">
+                  <div class="col-md-6">
+                    <div class="d-flex align-items-center gap-3">
+                      <button class="btn btn-outline-primary" onclick="previousMonth()">
+                        <i class="bi bi-chevron-left"></i>
+                      </button>
+                      <h5 class="mb-0" id="currentMonthYear">Cargando...</h5>
+                      <button class="btn btn-outline-primary" onclick="nextMonth()">
+                        <i class="bi bi-chevron-right"></i>
+                      </button>
+                      <button class="btn btn-outline-secondary" onclick="goToToday()">
+                        Hoy
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-md-6 text-end">
+                    <div class="d-flex justify-content-end align-items-center gap-3 flex-wrap">
+                      <span class="badge bg-warning text-dark">Pendiente</span>
+                      <span class="badge bg-primary">Aceptado</span>
+                      <span class="badge bg-success">En Progreso</span>
+                      <span class="badge bg-info text-dark">Completado</span>
+                    </div>
+                  </div>
                 </div>
-                <p class="text-muted mt-3 mb-0">Cargando agenda...</p>
+              </div>
+            </div>
+
+            <!-- Calendario -->
+            <div class="calendar shadow-sm">
+              <div class="calendar-header">
+                <div class="row align-items-center">
+                  <div class="col">
+                    <h4 class="mb-0" id="calendarTitle">Cargando...</h4>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Días de la semana -->
+              <div class="calendar-grid">
+                <div class="calendar-day-header">Lun</div>
+                <div class="calendar-day-header">Mar</div>
+                <div class="calendar-day-header">Mié</div>
+                <div class="calendar-day-header">Jue</div>
+                <div class="calendar-day-header">Vie</div>
+                <div class="calendar-day-header">Sáb</div>
+                <div class="calendar-day-header">Dom</div>
+              </div>
+
+              <!-- Días del mes -->
+              <div class="calendar-grid" id="calendarDays">
+                <!-- Se llena dinámicamente -->
               </div>
             </div>
 
           </div>
+
+          <!-- Horarios Semanales -->
+          <div class="tab-pane fade" id="schedule" role="tabpanel">
+
+            <div class="card shadow-sm">
+              <div class="card-header bg-white border-bottom">
+                <h5 class="mb-0">
+                  <i class="bi bi-clock-history me-2"></i>
+                  Configurar Horarios de Trabajo
+                </h5>
+              </div>
+              <div class="card-body">
+                <div class="alert alert-info">
+                  <i class="bi bi-info-circle me-2"></i>
+                  Define tus horarios habituales de trabajo. Puedes bloquear días específicos desde el calendario.
+                </div>
+
+                <form id="scheduleForm">
+                  <!-- Lunes -->
+                  <div class="schedule-row">
+                    <div class="row align-items-center">
+                      <div class="col-md-2">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="monday-enabled" checked>
+                          <label class="form-check-label fw-bold" for="monday-enabled">
+                            Lunes
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label small">Desde</label>
+                        <input type="time" class="form-control" id="monday-start" value="09:00">
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label small">Hasta</label>
+                        <input type="time" class="form-control" id="monday-end" value="18:00">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Martes -->
+                  <div class="schedule-row">
+                    <div class="row align-items-center">
+                      <div class="col-md-2">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="tuesday-enabled" checked>
+                          <label class="form-check-label fw-bold" for="tuesday-enabled">
+                            Martes
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label small">Desde</label>
+                        <input type="time" class="form-control" id="tuesday-start" value="09:00">
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label small">Hasta</label>
+                        <input type="time" class="form-control" id="tuesday-end" value="18:00">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Miércoles -->
+                  <div class="schedule-row">
+                    <div class="row align-items-center">
+                      <div class="col-md-2">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="wednesday-enabled" checked>
+                          <label class="form-check-label fw-bold" for="wednesday-enabled">
+                            Miércoles
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label small">Desde</label>
+                        <input type="time" class="form-control" id="wednesday-start" value="09:00">
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label small">Hasta</label>
+                        <input type="time" class="form-control" id="wednesday-end" value="18:00">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Jueves -->
+                  <div class="schedule-row">
+                    <div class="row align-items-center">
+                      <div class="col-md-2">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="thursday-enabled" checked>
+                          <label class="form-check-label fw-bold" for="thursday-enabled">
+                            Jueves
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label small">Desde</label>
+                        <input type="time" class="form-control" id="thursday-start" value="09:00">
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label small">Hasta</label>
+                        <input type="time" class="form-control" id="thursday-end" value="18:00">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Viernes -->
+                  <div class="schedule-row">
+                    <div class="row align-items-center">
+                      <div class="col-md-2">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="friday-enabled" checked>
+                          <label class="form-check-label fw-bold" for="friday-enabled">
+                            Viernes
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label small">Desde</label>
+                        <input type="time" class="form-control" id="friday-start" value="09:00">
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label small">Hasta</label>
+                        <input type="time" class="form-control" id="friday-end" value="18:00">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Sábado -->
+                  <div class="schedule-row">
+                    <div class="row align-items-center">
+                      <div class="col-md-2">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="saturday-enabled">
+                          <label class="form-check-label fw-bold" for="saturday-enabled">
+                            Sábado
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label small">Desde</label>
+                        <input type="time" class="form-control" id="saturday-start" value="09:00">
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label small">Hasta</label>
+                        <input type="time" class="form-control" id="saturday-end" value="14:00">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Domingo -->
+                  <div class="schedule-row">
+                    <div class="row align-items-center">
+                      <div class="col-md-2">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="sunday-enabled">
+                          <label class="form-check-label fw-bold" for="sunday-enabled">
+                            Domingo
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label small">Desde</label>
+                        <input type="time" class="form-control" id="sunday-start" value="09:00">
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label small">Hasta</label>
+                        <input type="time" class="form-control" id="sunday-end" value="14:00">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Botón Guardar -->
+                  <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">
+                      <i class="bi bi-check-circle me-2"></i>
+                      Guardar Horarios
+                    </button>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+
+          </div>
+
         </div>
 
       </div>
@@ -166,22 +469,8 @@
   <!-- Scripts -->
   <script src="../assets/js/authService.js"></script>
   <script src="../assets/js/dashboard.js"></script>
-  <script src="../assets/js/calendar.js"></script>
   <script src="../assets/js/workerAgenda.js"></script>
-
-  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script>
-    // Actualizar nombre del usuario en el sidebar
-    document.addEventListener('DOMContentLoaded', () => {
-      const user = JSON.parse(localStorage.getItem('user') || '{}');
-      const nameEl = document.getElementById('agenda-user-name');
-      if (nameEl && user.full_name) {
-        nameEl.textContent = user.full_name;
-      }
-    });
-  </script>
 </body>
 
 </html>

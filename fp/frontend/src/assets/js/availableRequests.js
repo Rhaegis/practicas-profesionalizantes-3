@@ -1,7 +1,3 @@
-// Cargar solicitudes disponibles para el trabajador
-
-let allRequests = [];
-
 // Cargar solicitudes disponibles
 async function loadAvailableRequests() {
     try {
@@ -12,48 +8,49 @@ async function loadAvailableRequests() {
             return;
         }
 
-        // Obtener el ID del trabajador actual
-        const user = JSON.parse(localStorage.getItem('user') || '{}');
-        const workerId = user.id;
-
-        const response = await fetch('http://localhost:3000/api/services/all', {
+        // Usar endpoint de solicitudes cercanas
+        const response = await fetch('http://localhost:3000/api/services/nearby', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         });
 
+        const data = await response.json();
+
+        // Si el trabajador no tiene zona configurada
+        if (!response.ok && data.needsConfiguration) {
+            const container = document.getElementById('availableRequestsContainer');
+            container.innerHTML = `
+                <div class="col-12">
+                    <div class="alert alert-warning" role="alert">
+                        <h5 class="alert-heading">
+                            <i class="bi bi-geo-alt me-2"></i>
+                            Configura tu zona de trabajo
+                        </h5>
+                        <p>Para ver solicitudes disponibles, primero debes configurar tu área de cobertura.</p>
+                        <hr>
+                        <a href="worker-work-zone.html" class="btn btn-primary">
+                            <i class="bi bi-geo-alt-fill me-2"></i>
+                            Configurar Ahora
+                        </a>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
         if (!response.ok) {
             throw new Error('Error al cargar solicitudes');
         }
 
-        const data = await response.json();
-        console.log('📋 Todas las solicitudes:', data);
+        console.log('📋 Solicitudes cercanas:', data);
 
-        // Filtrar solo solicitudes PENDING que están asignadas a este trabajador pero aún no aceptadas
-        allRequests = data.services.filter(service =>
-            service.status === 'pending' && service.worker_id === workerId
-        );
-
-        console.log('📋 Solicitudes disponibles para aceptar:', allRequests);
-
+        allRequests = data.services;
         displayRequests();
 
     } catch (error) {
         console.error('❌ Error:', error);
         showNotification('Error al cargar solicitudes disponibles', 'error');
-
-        // Mostrar mensaje de error en el contenedor
-        const container = document.getElementById('availableRequestsContainer');
-        if (container) {
-            container.innerHTML = `
-                <div class="col-12">
-                    <div class="alert alert-danger" role="alert">
-                        <i class="bi bi-exclamation-triangle me-2"></i>
-                        Error al cargar solicitudes. Por favor, intenta nuevamente.
-                    </div>
-                </div>
-            `;
-        }
     }
 }
 
@@ -90,6 +87,16 @@ function createRequestCard(request) {
                         <h5 class="card-title mb-0 text-primary">${request.title}</h5>
                         <span class="badge bg-primary">${timeAgo}</span>
                     </div>
+                    
+                    ${request.distance !== undefined ? `
+                        <div class="mb-2">
+                            <span class="badge bg-success">
+                                <i class="bi bi-geo-alt-fill me-1"></i>
+                                A ${request.distance} km
+                            </span>
+                        </div>
+                    ` : ''}
+                    
                     <p class="card-text text-muted small mb-3">${request.description}</p>
                     
                     <div class="mb-3">
