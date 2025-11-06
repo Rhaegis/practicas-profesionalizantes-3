@@ -156,15 +156,3 @@ CREATE TABLE IF NOT EXISTS notifications (
 SHOW TABLES;
 
 SELECT '✅ Estructura de base de datos creada correctamente' AS status;
-```
-
----
-
-## ✅ **ESTRUCTURA FINAL DE `release/`:**
-```
-fp/release/
-├── README.md                    ✅ Guía de pruebas
-├── setup.sh                     ✅ Script Linux/Mac
-├── setup.bat                    ✅ Script Windows
-├── database-setup.sql           ✅ CREAR ESTE (estructura BD)
-└── database-seed.sql            ✅ Datos de prueba
