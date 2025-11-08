@@ -35,16 +35,27 @@ function initMap() {
             // Obtener trabajadores cercanos
             try {
                 const response = await fetch(
-                    `${API_BASE_URL}/workers/nearby?lat=${userLocation.lat}&lng=${userLocation.lng}&radio=15`
+                    `${MAP_API_BASE_URL}/workers/nearby?lat=${userLocation.lat}&lng=${userLocation.lng}&radio=15`
                 );
-                const data = await response.json();
 
-                console.log("📍 Trabajadores cercanos:", data);
+                const data = await response.json();
+                console.log("📍 Respuesta del servidor:", data);
 
                 if (data.trabajadores && data.trabajadores.length > 0) {
+                    console.log(`✅ ${data.trabajadores.length} trabajadores encontrados`);
+
                     data.trabajadores.forEach((trabajador) => {
+                        // Validar que tenga coordenadas
+                        if (!trabajador.lat || !trabajador.lng) {
+                            console.warn("⚠️ Trabajador sin coordenadas:", trabajador);
+                            return;
+                        }
+
                         const marker = new google.maps.Marker({
-                            position: { lat: trabajador.lat, lng: trabajador.lng },
+                            position: {
+                                lat: parseFloat(trabajador.lat),
+                                lng: parseFloat(trabajador.lng)
+                            },
                             map,
                             title: `${trabajador.full_name} - ${trabajador.trade}`,
                             icon: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
@@ -90,15 +101,16 @@ function initMap() {
                     });
                 } else {
                     console.log("⚠️ No hay trabajadores cercanos.");
+                    alert("No se encontraron trabajadores cercanos en un radio de 15km.");
                 }
             } catch (err) {
                 console.error("❌ Error al cargar trabajadores:", err);
-                alert("No se pudieron cargar los trabajadores cercanos.");
+                alert("No se pudieron cargar los trabajadores cercanos. Verifica la consola.");
             }
         },
         (err) => {
-            alert("No se pudo obtener tu ubicación. Habilitá los permisos.");
-            console.error(err);
+            alert("No se pudo obtener tu ubicación. Habilitá los permisos de geolocalización.");
+            console.error("Error de geolocalización:", err);
         }
     );
 }
@@ -106,7 +118,7 @@ function initMap() {
 // Función para solicitar servicio
 function solicitarServicio(workerId, workerName, workerTrade) {
     console.log("🔔 Solicitud de servicio:", { workerId, workerName, workerTrade });
-    
+
     // Guardar datos del trabajador
     sessionStorage.setItem('selectedWorker', JSON.stringify({
         id: workerId,

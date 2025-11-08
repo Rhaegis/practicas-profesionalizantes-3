@@ -28,7 +28,7 @@ async function loadWorkerJobs() {
         // Actualizar contadores
         updateCounters();
 
-        // Mostrar trabajos en cada tab (con delay para asegurar que el DOM está listo)
+        // Mostrar trabajos en cada tab
         setTimeout(() => {
             displayJobsByStatus('accepted');
             displayJobsByStatus('in_progress');
@@ -60,7 +60,6 @@ function updateCounters() {
 
 // Mostrar trabajos según estado
 function displayJobsByStatus(status) {
-    console.log(`🔍 Buscando contenedor: jobs-${status}-container`);
     const container = document.getElementById(`jobs-${status}-container`);
 
     if (!container) {
@@ -68,11 +67,7 @@ function displayJobsByStatus(status) {
         return;
     }
 
-    console.log(`✅ Contenedor encontrado para ${status}`);
-
-    // Filtrar trabajos por estado
     const filteredJobs = allJobs.filter(j => j.status === status);
-    console.log(`📊 Trabajos con estado ${status}:`, filteredJobs.length);
 
     if (filteredJobs.length === 0) {
         container.innerHTML = `
@@ -86,12 +81,12 @@ function displayJobsByStatus(status) {
     }
 
     container.innerHTML = filteredJobs.map(job => createJobCard(job)).join('');
-    console.log(`✅ Contenedor ${status} actualizado con ${filteredJobs.length} trabajos`);
 }
 
 // Crear tarjeta de trabajo
 function createJobCard(job) {
     const statusInfo = getStatusInfo(job.status);
+    const hasDispute = job.disputes && job.disputes.length > 0;
 
     return `
         <div class="col">
@@ -114,38 +109,50 @@ function createJobCard(job) {
                 </div>
                 
                 ${job.status === 'accepted' || job.status === 'in_progress' || job.status === 'completed' ? `
-<div class="card-footer bg-white border-top">
-    <div class="d-grid gap-2">
-        ${job.status === 'accepted' ? `
-            <button class="btn btn-primary" onclick="markJobInProgress(${job.id})">
-                ▶️ Iniciar Trabajo
-            </button>
-        ` : ''}
-        ${job.status === 'in_progress' ? `
-            <button class="btn btn-success" onclick="markAsCompleted(${job.id})">
-                ✅ Marcar como Completado
-            </button>
-        ` : ''}
-        ${job.status === 'completed' ? (
+                    <div class="card-footer bg-white border-top">
+                        <div class="d-grid gap-2">
+                            ${job.status === 'accepted' ? `
+                                <button class="btn btn-primary" onclick="markJobInProgress(${job.id})">
+                                    ▶️ Iniciar Trabajo
+                                </button>
+                            ` : ''}
+                            ${job.status === 'in_progress' ? `
+                                <button class="btn btn-success" onclick="markAsCompleted(${job.id})">
+                                    ✅ Marcar como Completado
+                                </button>
+                            ` : ''}
+                            ${job.status === 'completed' ? (
                 job.ratings && job.ratings.length > 0 ? `
-                <div class="text-center py-2">
-                    <small class="text-muted d-block mb-1">Tu calificación:</small>
-                    <div class="d-flex justify-content-center gap-1">
-                        ${generateStars(job.ratings[0].rating)}
-                    </div>
-                    ${job.ratings[0].comment ? `
-                        <small class="text-muted fst-italic mt-2 d-block">"${job.ratings[0].comment}"</small>
-                    ` : ''}
-                </div>
-            ` : `
-                <button class="btn btn-primary" onclick="openRatingModal(${job.id}, ${job.client_id}, '${job.client?.full_name?.replace(/'/g, "\\'")}', 'client')">
-                    ⭐ Calificar cliente
-                </button>
-            `
+                                    <div class="text-center py-2">
+                                        <small class="text-muted d-block mb-1">Tu calificación:</small>
+                                        <div class="d-flex justify-content-center gap-1">
+                                            ${generateStars(job.ratings[0].rating)}
+                                        </div>
+                                        ${job.ratings[0].comment ? `
+                                            <small class="text-muted fst-italic mt-2 d-block">"${job.ratings[0].comment}"</small>
+                                        ` : ''}
+                                    </div>
+                                ` : `
+                                    <button class="btn btn-primary" onclick="openRatingModal(${job.id}, ${job.client_id}, '${job.client?.full_name?.replace(/'/g, "\\'")}', 'client')">
+                                        ⭐ Calificar cliente
+                                    </button>
+                                `
             ) : ''}
-    </div>
-</div>
-` : ''}
+                            ${job.status === 'completed' ? (
+                hasDispute ? `
+                                    <div class="alert alert-info mb-0">
+                                        <i class="bi bi-info-circle me-2"></i>
+                                        <small><strong>Disputa existente:</strong> ${getDisputeStatusText(job.disputes[0].status)}</small>
+                                    </div>
+                                ` : `
+                                    <button class="btn btn-sm btn-warning" onclick="openDisputeModal(${job.id})">
+                                        ⚠️ Reportar problema
+                                    </button>
+                                `
+            ) : ''}
+                        </div>
+                    </div>
+                ` : ''}
             </div>
         </div>
     `;
@@ -203,6 +210,18 @@ function getStatusText(status) {
     return texts[status] || '';
 }
 
+// Obtener texto de estado de disputa
+function getDisputeStatusText(status) {
+    const statusMap = {
+        'abierta': 'Abierta',
+        'en_revision': 'En revisión',
+        'resuelta_cliente': 'Resuelta a favor del cliente',
+        'resuelta_trabajador': 'Resuelta a favor del trabajador',
+        'rechazada': 'Rechazada'
+    };
+    return statusMap[status] || status;
+}
+
 // Formatear fecha
 function formatDate(dateString) {
     const date = new Date(dateString);
@@ -244,10 +263,8 @@ function generateStars(rating) {
     let stars = '';
     for (let i = 1; i <= 5; i++) {
         if (i <= rating) {
-            // Estrella llena (amarilla)
             stars += '<i class="bi bi-star-fill" style="color: #ffc107; font-size: 1.2rem;"></i>';
         } else {
-            // Estrella vacía (gris)
             stars += '<i class="bi bi-star" style="color: #ddd; font-size: 1.2rem;"></i>';
         }
     }

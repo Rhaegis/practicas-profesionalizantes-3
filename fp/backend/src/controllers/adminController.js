@@ -200,7 +200,7 @@ exports.getUserDetails = async (req, res) => {
 
             // Calificación promedio
             const avgRating = await Rating.findOne({
-                where: { rated_user_id: user_id },
+                where: { rated_id: user_id },
                 attributes: [
                     [require('sequelize').fn('AVG', require('sequelize').col('rating')), 'average']
                 ],

@@ -18,6 +18,7 @@ function initDashboard() {
 
     // Inicializar secciones
     initNavigation();
+    updateActiveNavigation();
     initRequestButtons();
     initClientProfile();
     initSettings();
@@ -25,6 +26,38 @@ function initDashboard() {
     initTechSupport();
     initWorkerDashboard();
     initWorkerAgenda();
+}
+
+// ===== ACTUALIZAR NAVEGACIÓN ACTIVA =====
+function updateActiveNavigation() {
+    const currentPage = window.location.pathname.split('/').pop();
+
+    // Remover todas las clases active y estilos
+    document.querySelectorAll('.nav-item, .worker-nav-item').forEach(link => {
+        link.classList.remove('active');
+        link.style.backgroundColor = '';
+        link.style.color = '';
+        link.style.fontWeight = '';
+    });
+
+    // Encontrar y activar el enlace correspondiente
+    const activeLink = document.querySelector(`a[href="${currentPage}"]`);
+    if (activeLink) {
+        activeLink.classList.add('active');
+
+        // Aplicar estilos específicos según el tipo de navegación
+        if (activeLink.classList.contains('worker-nav-item')) {
+            // Estilo para trabajador (fondo azul, texto blanco)
+            activeLink.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+            activeLink.style.color = 'white';
+            activeLink.style.fontWeight = '600';
+        } else if (activeLink.classList.contains('nav-item')) {
+            // Estilo para cliente (fondo gris claro, texto oscuro)
+            activeLink.style.backgroundColor = '#f3f4f6';
+            activeLink.style.color = '#1f2937';
+            activeLink.style.fontWeight = '600';
+        }
+    }
 }
 
 // ===== DASHBOARD TRABAJADOR =====
@@ -208,11 +241,10 @@ function initWorkerAgenda() {
 
 // ===== NAVEGACIÓN ===== 
 function initNavigation() {
-    const navItems = document.querySelectorAll('.nav-item');
+    const navItems = document.querySelectorAll('.nav-item, .worker-nav-item');
     navItems.forEach(item => {
-        item.addEventListener('click', function () {
-            navItems.forEach(i => i.classList.remove('active'));
-            this.classList.add('active');
+        item.addEventListener('click', function (e) {
+            // No prevenir el comportamiento por defecto, dejar que navegue
         });
     });
 }
@@ -226,16 +258,71 @@ function initRequestButtons() {
     });
 }
 
+// ===== LOGOUT CON MODAL PERSONALIZADO =====
 function initLogoutButtons() {
     const logoutButtons = document.querySelectorAll('.logout-btn, #logoutBtn');
     logoutButtons.forEach(button => {
         button.addEventListener('click', function (e) {
             e.preventDefault();
-            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
-                AuthService.logout();
-            }
+            showLogoutModal();
         });
     });
+}
+
+function showLogoutModal() {
+    // Verificar si el modal ya existe
+    let modal = document.getElementById('logoutModal');
+
+    if (!modal) {
+        // Crear el modal
+        const modalHTML = `
+            <div class="modal fade" id="logoutModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header border-0 pb-0">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center py-4">
+                            <div class="mb-3">
+                                <i class="bi bi-box-arrow-right text-danger" style="font-size: 4rem;"></i>
+                            </div>
+                            <h5 class="mb-3">¿Cerrar sesión?</h5>
+                            <p class="text-muted mb-0">
+                                ¿Estás seguro de que deseas cerrar tu sesión?
+                            </p>
+                        </div>
+                        <div class="modal-footer border-0 justify-content-center pb-4">
+                            <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">
+                                Cancelar
+                            </button>
+                            <button type="button" class="btn btn-danger px-4" id="confirmLogout">
+                                <i class="bi bi-box-arrow-right me-2"></i>
+                                Cerrar sesión
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+        modal = document.getElementById('logoutModal');
+
+        // Agregar evento al botón de confirmar
+        document.getElementById('confirmLogout').addEventListener('click', function () {
+            const bsModal = bootstrap.Modal.getInstance(modal);
+            bsModal.hide();
+
+            // Esperar a que el modal se cierre antes de hacer logout
+            modal.addEventListener('hidden.bs.modal', function () {
+                AuthService.logout();
+            }, { once: true });
+        });
+    }
+
+    // Mostrar el modal
+    const bsModal = new bootstrap.Modal(modal);
+    bsModal.show();
 }
 
 function updateUserInfo(user) {

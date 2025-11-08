@@ -15,16 +15,16 @@ router.get('/my-jobs', authMiddleware, serviceController.getWorkerServices);
 // Obtener TODOS los servicios (para solicitudes disponibles)
 router.get('/all', authMiddleware, serviceController.getAllServices);
 
-// Actualizar estado de una solicitud (solo trabajador)
-router.patch('/:id/status', authMiddleware, serviceController.updateServiceStatus);
+// Obtener solicitudes cercanas (filtradas por zona del trabajador)
+router.get('/nearby', authMiddleware, serviceController.getNearbyServices);
 
 // Aceptar solicitud (trabajador)
 router.patch('/:id/accept', authMiddleware, serviceController.acceptService);
 
-// Obtener solicitudes cercanas (filtradas por zona del trabajador)
-router.get('/nearby', authMiddleware, serviceController.getNearbyServices);
-
-// Actualizar estado de servicio
+// Actualizar estado de servicio (trabajador)
 router.patch('/:id/status', authMiddleware, serviceController.updateServiceStatus);
+
+// Cancelar servicio (cliente o trabajador)
+router.patch('/:id/cancel', authMiddleware, serviceController.cancelService);
 
 module.exports = router;

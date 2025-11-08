@@ -1,6 +1,7 @@
 const Service = require('../models/service');
 const User = require('../models/user');
 const Rating = require('../models/rating');
+const Dispute = require('../models/dispute');
 const { notifyNewService, notifyServiceAccepted, notifyServiceStarted } = require('../helpers/notificationHelper');
 
 // Crear una nueva solicitud de servicio
@@ -63,6 +64,11 @@ exports.getClientServices = async (req, res) => {
                     as: 'ratings',
                     where: { rater_id: client_id },
                     required: false
+                },
+                {
+                    model: Dispute,
+                    as: 'disputes',
+                    required: false
                 }
             ],
             order: [['createdAt', 'DESC']]
@@ -92,6 +98,11 @@ exports.getWorkerServices = async (req, res) => {
                     model: Rating,
                     as: 'ratings',
                     where: { rater_id: worker_id },
+                    required: false
+                },
+                {
+                    model: Dispute,
+                    as: 'disputes',
                     required: false
                 }
             ],
@@ -131,7 +142,7 @@ exports.getAllServices = async (req, res) => {
     }
 };
 
-// Actualizar el estado de una solicitud
+// Actualizar el estado de una solicitud (solo trabajador)
 exports.updateServiceStatus = async (req, res) => {
     try {
         const { id } = req.params;
@@ -148,9 +159,7 @@ exports.updateServiceStatus = async (req, res) => {
             return res.status(403).json({ message: "No autorizado" });
         }
 
-        service.status = status;
-        await service.save();
-
+        // Actualizar estado
         service.status = status;
         await service.save();
 
@@ -210,6 +219,44 @@ exports.acceptService = async (req, res) => {
     } catch (error) {
         console.error("Error al aceptar solicitud:", error);
         res.status(500).json({ message: "Error al aceptar la solicitud" });
+    }
+};
+
+// Cancelar servicio (cliente o trabajador)
+exports.cancelService = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user_id = req.user.id;
+
+        const service = await Service.findByPk(id);
+        if (!service) {
+            return res.status(404).json({ message: "Servicio no encontrado" });
+        }
+
+        // Verificar que el usuario es parte del servicio (cliente o trabajador)
+        if (service.client_id !== user_id && service.worker_id !== user_id) {
+            return res.status(403).json({ message: "No estás autorizado para cancelar este servicio" });
+        }
+
+        // Solo se puede cancelar si está en pending o accepted
+        if (service.status !== 'pending' && service.status !== 'accepted') {
+            return res.status(400).json({
+                message: "Solo se pueden cancelar servicios pendientes o aceptados"
+            });
+        }
+
+        // Cambiar estado a cancelled
+        service.status = 'cancelled';
+        await service.save();
+
+        res.json({
+            message: "Servicio cancelado exitosamente",
+            service
+        });
+
+    } catch (error) {
+        console.error("Error al cancelar servicio:", error);
+        res.status(500).json({ message: "Error al cancelar el servicio" });
     }
 };
 

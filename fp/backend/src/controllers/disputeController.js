@@ -3,7 +3,7 @@ const Service = require('../models/service');
 const User = require('../models/user');
 const { notifyNewDispute, notifyDisputeResponse } = require('../helpers/notificationHelper');
 
-// Crear una disputa (cliente reporta problema)
+// Crear una disputa (cliente o trabajador reporta problema)
 exports.createDispute = async (req, res) => {
     try {
         const { service_id, reason, evidence_url } = req.body;
@@ -31,16 +31,18 @@ exports.createDispute = async (req, res) => {
             reported_against_user_id = service.client_id;
         }
 
-        // Verificar que no exista ya una disputa abierta para este servicio
+        // Verificar que no exista ya una disputa para este servicio
         const existingDispute = await Dispute.findOne({
             where: {
-                service_id,
-                status: ['abierta', 'en_revision']
+                service_id
             }
         });
 
         if (existingDispute) {
-            return res.status(400).json({ message: "Ya existe una disputa abierta para este servicio" });
+            return res.status(400).json({
+                message: "Ya existe una disputa para este servicio. No se pueden crear disputas duplicadas.",
+                dispute: existingDispute
+            });
         }
 
         // Crear la disputa
@@ -57,10 +59,8 @@ exports.createDispute = async (req, res) => {
         // Obtener nombre del reportador
         const reporter = await User.findByPk(user_id);
 
-        // Notificar al trabajador
-        if (reported_by === 'client') {
-            await notifyNewDispute(reported_against_user_id, dispute.id, reporter.full_name);
-        }
+        // Notificar a la otra parte
+        await notifyNewDispute(reported_against_user_id, dispute.id, reporter.full_name);
 
         res.status(201).json({
             message: "Disputa creada exitosamente",
@@ -113,6 +113,54 @@ exports.addWorkerResponse = async (req, res) => {
     } catch (error) {
         console.error("Error al agregar descargo:", error);
         res.status(500).json({ message: "Error al agregar descargo" });
+    }
+};
+
+// Cliente agrega descargo (NUEVA FUNCIÓN)
+exports.addClientResponse = async (req, res) => {
+    try {
+        const { dispute_id } = req.params;
+        const { client_response, client_evidence_url } = req.body;
+        const user_id = req.user.id;
+
+        const dispute = await Dispute.findByPk(dispute_id, {
+            include: [{ model: Service, as: 'service' }]
+        });
+
+        if (!dispute) {
+            return res.status(404).json({ message: "Disputa no encontrada" });
+        }
+
+        // Verificar que el usuario es el cliente del servicio
+        if (dispute.service.client_id !== user_id) {
+            return res.status(403).json({ message: "No autorizado" });
+        }
+
+        // Verificar que el trabajador fue quien reportó
+        if (dispute.reported_by !== 'worker') {
+            return res.status(400).json({ message: "Esta disputa no requiere respuesta del cliente" });
+        }
+
+        // Actualizar descargo usando el mismo campo worker_response para mantener compatibilidad
+        dispute.worker_response = client_response;
+        dispute.worker_evidence_url = client_evidence_url ? JSON.stringify(client_evidence_url) : null;
+        dispute.status = 'en_revision';
+        await dispute.save();
+
+        // Obtener nombre del cliente
+        const client = await User.findByPk(user_id);
+
+        // Notificar al trabajador que reportó
+        await notifyDisputeResponse(dispute.reported_by_user_id, dispute.id, client.full_name);
+
+        res.json({
+            message: "Respuesta agregada exitosamente",
+            dispute
+        });
+
+    } catch (error) {
+        console.error("Error al agregar respuesta:", error);
+        res.status(500).json({ message: "Error al agregar respuesta" });
     }
 };
 

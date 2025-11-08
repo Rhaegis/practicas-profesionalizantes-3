@@ -9,6 +9,9 @@ router.post('/', authMiddleware, disputeController.createDispute);
 // Agregar descargo del trabajador
 router.patch('/:dispute_id/response', authMiddleware, disputeController.addWorkerResponse);
 
+// Cliente agrega descargo
+router.post('/:dispute_id/client-response', authMiddleware, disputeController.addClientResponse);
+
 // Obtener disputas del usuario
 router.get('/my-disputes', authMiddleware, disputeController.getUserDisputes);
 

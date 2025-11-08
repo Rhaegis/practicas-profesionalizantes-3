@@ -4,6 +4,17 @@ let allDisputes = [];
 let currentFilter = 'all';
 let currentDisputeId = null;
 
+// Leer parámetros de URL
+function getUrlFilter() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const filter = urlParams.get('filter');
+
+    if (filter && ['abierta', 'en_revision', 'resuelta'].includes(filter)) {
+        return filter;
+    }
+    return 'all';
+}
+
 // Cargar todas las disputas
 async function loadDisputes() {
     try {
@@ -21,6 +32,9 @@ async function loadDisputes() {
             window.location.href = 'login.html';
             return;
         }
+
+        // LEER FILTRO ANTES DE HACER EL FETCH
+        currentFilter = getUrlFilter();
 
         const response = await fetch('http://localhost:3000/api/admin/disputes', {
             headers: {
@@ -40,8 +54,14 @@ async function loadDisputes() {
         // Actualizar contadores
         updateCounters();
 
-        // Mostrar disputas
+        // Mostrar disputas CON EL FILTRO YA APLICADO
         displayDisputes(currentFilter);
+
+        // Actualizar botones activos
+        document.querySelectorAll('[data-filter]').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.querySelector(`[data-filter="${currentFilter}"]`)?.classList.add('active');
 
     } catch (error) {
         console.error('❌ Error:', error);

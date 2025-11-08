@@ -230,12 +230,13 @@ async function handleRegister(formData) {
 // ===== FUNCIONES UTILITARIAS =====
 function redirectByRole(user) {
     if (user.role === 'cliente') {
-        window.location.href = '/fp/frontend/src/pages/dashboard-client.html';
+        window.location.href = 'dashboard-client.html';
     } else if (user.role === 'trabajador') {
-        window.location.href = '/fp/frontend/src/pages/dashboard-worker.html';
-    } else {
-        window.location.href = '/fp/frontend/src/pages/login.html';
+        window.location.href = 'dashboard-worker.html';
+    } else if (user.role === 'admin') {
+        window.location.href = 'dashboard-admin.html';
     }
+
 }
 
 function getRegisterFormData() {

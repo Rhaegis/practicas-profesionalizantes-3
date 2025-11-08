@@ -44,17 +44,24 @@
 .sidebar .nav-item {
     border-radius: 0.375rem;
     transition: all 0.2s ease;
+    color: #4b5563;
 }
 
-.sidebar .nav-item:hover,
+.sidebar .nav-item:hover {
+    background-color: #f3f4f6;
+    color: #1f2937;
+}
+
+/* ESTILOS PARA NAV-ITEM ACTIVO - IMPORTANTE */
 .sidebar .nav-item.active {
-    background-color: rgba(0, 127, 255, 0.1);
-    color: var(--primary) !important;
+    background-color: #f3f4f6 !important;
+    color: #1f2937 !important;
+    font-weight: 600;
 }
 
 /* ===== SIDEBAR DEL TRABAJADOR (Azul) ===== */
 .worker-sidebar {
-    background-color: var(--primary);
+    background: linear-gradient(180deg, #1e40af 0%, #1e3a8a 100%);
     color: white;
     min-height: 100vh;
 }
@@ -65,9 +72,13 @@
     transition: all 0.2s ease;
 }
 
-.worker-nav-item:hover,
+.worker-nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
 .worker-nav-item.active {
     background-color: rgba(255, 255, 255, 0.2);
+    font-weight: 600;
 }
 
 /* ===== STATUS BADGES ===== */
@@ -205,49 +216,61 @@
     color: #ffc107 !important;
 }
 
-/* Hover en navegación */
-.nav-item.hover-bg-light:hover {
-    background-color: #f8f9fa !important;
-}
-
-.nav-item.active {
-    background-color: #e7f1ff !important;
-    color: #0d6efd !important;
-}
-
 /* ========================================
-   NAVEGACIÓN CONSISTENTE
+   MODAL DE LOGOUT PERSONALIZADO
    ======================================== */
 
-/* Sidebar Cliente */
-.nav-item {
+#logoutModal .modal-content {
+    border-radius: 1rem;
+    border: none;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+#logoutModal .modal-header {
+    padding: 1rem 1rem 0 1rem;
+}
+
+#logoutModal .btn-close {
+    padding: 0.75rem;
+    opacity: 0.5;
+}
+
+#logoutModal .btn-close:hover {
+    opacity: 1;
+}
+
+#logoutModal .modal-body i {
+    animation: bounceIn 0.6s ease-out;
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+#logoutModal .btn {
+    border-radius: 0.5rem;
+    font-weight: 500;
     transition: all 0.2s ease;
 }
 
-.nav-item.hover-bg-light:hover {
-    background-color: #f8f9fa !important;
+#logoutModal .btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
 }
 
-.nav-item.active {
-    background-color: #e7f1ff !important;
-    color: #0d6efd !important;
-    font-weight: 500;
-}
-
-/* Sidebar Trabajador */
-.worker-sidebar {
-    background: linear-gradient(180deg, #1e40af 0%, #1e3a8a 100%);
-}
-
-.worker-nav-item {
-    transition: all 0.2s ease;
-}
-
-.worker-nav-item:hover {
-    background-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-.worker-nav-item.active {
-    background-color: rgba(255, 255, 255, 0.2) !important;
-    font-weight: 500;
+#logoutModal .btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
 }

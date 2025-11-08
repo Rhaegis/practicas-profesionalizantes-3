@@ -104,7 +104,8 @@ function displayRequests(filter) {
 // Crear tarjeta de solicitud
 function createRequestCard(request) {
     const statusInfo = getStatusInfo(request.status);
-    const canCancel = request.status === 'pending';
+    const canCancel = request.status === 'pending' || request.status === 'accepted';
+    const hasDispute = request.disputes && request.disputes.length > 0;
 
     return `
         <div class="col">
@@ -146,9 +147,9 @@ function createRequestCard(request) {
                 request.ratings && request.ratings.length > 0 ? `
                                     <div class="text-center py-2">
                                         <small class="text-muted d-block mb-1">Tu calificación:</small>
-                                            <div class="d-flex justify-content-center gap-1">
-                                                ${generateStars(request.ratings[0].rating)}
-                                            </div>
+                                        <div class="d-flex justify-content-center gap-1">
+                                            ${generateStars(request.ratings[0].rating)}
+                                        </div>
                                         ${request.ratings[0].comment ? `
                                             <small class="text-muted fst-italic mt-2 d-block">"${request.ratings[0].comment}"</small>
                                         ` : ''}
@@ -157,7 +158,19 @@ function createRequestCard(request) {
                                     <button class="btn btn-sm btn-primary" onclick="openRatingModal(${request.id}, ${request.worker_id}, '${request.worker?.full_name?.replace(/'/g, "\\'")}', 'worker')">
                                         ⭐ Calificar trabajador
                                     </button>
-                                      `
+                                `
+            ) : ''}
+                            ${request.status === 'completed' ? (
+                hasDispute ? `
+                                    <div class="alert alert-info mb-0">
+                                        <i class="bi bi-info-circle me-2"></i>
+                                        <small><strong>Disputa existente:</strong> ${getDisputeStatusText(request.disputes[0].status)}</small>
+                                    </div>
+                                ` : `
+                                    <button class="btn btn-sm btn-warning" onclick="openDisputeModal(${request.id})">
+                                        ⚠️ Reportar problema
+                                    </button>
+                                `
             ) : ''}
                         </div>
                     </div>
@@ -174,29 +187,28 @@ async function cancelRequest(requestId) {
     try {
         const token = localStorage.getItem('authToken');
 
-        // Por ahora, el cliente no puede actualizar el estado directamente
-        // Tendríamos que crear un endpoint específico o permitirlo en el middleware
+        const response = await fetch(`http://localhost:3000/api/services/${requestId}/cancel`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
 
-        showNotification('Esta funcionalidad estará disponible próximamente', 'info');
+        if (!response.ok) {
+            const data = await response.json();
+            throw new Error(data.message || 'Error al cancelar');
+        }
 
-        // TODO: Implementar endpoint para que el cliente pueda cancelar
-        // const response = await fetch(`http://localhost:3000/api/services/${requestId}/cancel`, {
-        //     method: 'PATCH',
-        //     headers: {
-        //         'Authorization': `Bearer ${token}`
-        //     }
-        // });
+        showNotification('✅ Solicitud cancelada correctamente', 'success');
+
+        // Recargar solicitudes
+        setTimeout(() => loadClientRequests(), 1000);
 
     } catch (error) {
         console.error('❌ Error:', error);
-        showNotification('Error al cancelar la solicitud', 'error');
+        showNotification(error.message || 'Error al cancelar la solicitud', 'error');
     }
-}
-
-// Calificar trabajador (placeholder para siguiente fase)
-function rateWorker(requestId, workerId) {
-    showNotification('Sistema de calificaciones disponible próximamente', 'info');
-    // TODO: Implementar en la siguiente fase
 }
 
 // Mostrar código directamente
@@ -278,6 +290,18 @@ function getStatusText(status) {
     return texts[status] || '';
 }
 
+// Obtener texto de estado de disputa
+function getDisputeStatusText(status) {
+    const statusMap = {
+        'abierta': 'Abierta',
+        'en_revision': 'En revisión',
+        'resuelta_cliente': 'Resuelta a favor del cliente',
+        'resuelta_trabajador': 'Resuelta a favor del trabajador',
+        'rechazada': 'Rechazada'
+    };
+    return statusMap[status] || status;
+}
+
 // Formatear fecha
 function formatDate(dateString) {
     const date = new Date(dateString);
@@ -332,10 +356,8 @@ function generateStars(rating) {
     let stars = '';
     for (let i = 1; i <= 5; i++) {
         if (i <= rating) {
-            // Estrella llena (amarilla)
             stars += '<i class="bi bi-star-fill" style="color: #ffc107; font-size: 1.2rem;"></i>';
         } else {
-            // Estrella vacía (gris)
             stars += '<i class="bi bi-star" style="color: #ddd; font-size: 1.2rem;"></i>';
         }
     }
@@ -345,7 +367,6 @@ function generateStars(rating) {
 // Hacer funciones globales
 window.filterRequests = filterRequests;
 window.cancelRequest = cancelRequest;
-window.rateWorker = rateWorker;
 window.viewVerificationCode = viewVerificationCode;
 
 // Inicializar

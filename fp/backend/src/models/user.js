@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('./index');
+const sequelize = require('../config/database');
 
 const User = sequelize.define('User', {
   full_name: {
@@ -16,7 +16,7 @@ const User = sequelize.define('User', {
     allowNull: false,
   },
   role: {
-    type: DataTypes.ENUM('cliente', 'trabajador'),
+    type: DataTypes.ENUM('cliente', 'trabajador', 'admin'),
     allowNull: false,
   },
   trade: {
@@ -39,7 +39,6 @@ const User = sequelize.define('User', {
     type: DataTypes.FLOAT,
     allowNull: true,
   },
-  // ===== NUEVOS CAMPOS PARA ZONA DE TRABAJO =====
   work_radius: {
     type: DataTypes.INTEGER,
     defaultValue: 10,

@@ -1,51 +1,54 @@
--- ==========================================
--- TRABAJAPP - Script de Creación de Base de Datos
--- ==========================================
+-- ============================================
+-- BASE DE DATOS: TRABAJAPP
+-- ============================================
 
--- Crear base de datos
-CREATE DATABASE IF NOT EXISTS trabajapp_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
+DROP DATABASE IF EXISTS trabajapp_db;
+CREATE DATABASE trabajapp_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE trabajapp_db;
 
--- ==========================================
--- TABLA: users
--- ==========================================
-CREATE TABLE IF NOT EXISTS users (
+-- ============================================
+-- TABLA: USUARIOS
+-- ============================================
+CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    full_name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
+    full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     role ENUM('cliente', 'trabajador', 'admin') NOT NULL,
-    trade VARCHAR(100) DEFAULT NULL COMMENT 'Oficio del trabajador',
-    work_area VARCHAR(255) DEFAULT NULL COMMENT 'Zona de trabajo',
-    work_latitude DECIMAL(10, 8) DEFAULT NULL,
-    work_longitude DECIMAL(11, 8) DEFAULT NULL,
-    work_radius DECIMAL(5, 2) DEFAULT NULL COMMENT 'Radio en km',
-    enrollment_number VARCHAR(100) DEFAULT NULL COMMENT 'Matrícula profesional',
-    is_active BOOLEAN DEFAULT TRUE,
-    weekly_schedule JSON DEFAULT NULL COMMENT 'Horarios semanales',
+    trade VARCHAR(100),
+    registration_number VARCHAR(50),
+    work_area VARCHAR(100),
+    lat FLOAT,
+    lng FLOAT,
+    work_radius INT DEFAULT 10,
+    work_location_lat DECIMAL(10, 8) NULL,
+    work_location_lng DECIMAL(11, 8) NULL,
+    work_schedule JSON NULL,
+    immediate_availability BOOLEAN DEFAULT true,
+    is_active BOOLEAN DEFAULT true,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     INDEX idx_role (role),
     INDEX idx_email (email),
     INDEX idx_trade (trade),
-    INDEX idx_location (work_latitude, work_longitude)
+    INDEX idx_work_location (work_location_lat, work_location_lng),
+    INDEX idx_is_active (is_active)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ==========================================
--- TABLA: services
--- ==========================================
-CREATE TABLE IF NOT EXISTS services (
+-- ============================================
+-- TABLA: SERVICIOS
+-- ============================================
+CREATE TABLE services (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL,
-    status ENUM('pending', 'accepted', 'rejected', 'in_progress', 'completed', 'cancelled') NOT NULL DEFAULT 'pending',
     client_id INT NOT NULL,
     worker_id INT NOT NULL,
-    scheduled_date TIMESTAMP NULL,
-    client_latitude DECIMAL(10, 8) NOT NULL,
-    client_longitude DECIMAL(11, 8) NOT NULL,
-    client_address VARCHAR(500) NOT NULL,
+    title VARCHAR(200) NOT NULL,
+    description TEXT,
+    service_location_lat FLOAT NOT NULL,
+    service_location_lng FLOAT NOT NULL,
+    service_address VARCHAR(255),
+    status ENUM('pending', 'accepted', 'rejected', 'in_progress', 'completed', 'cancelled') DEFAULT 'pending',
+    scheduled_date DATETIME,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (client_id) REFERENCES users(id) ON DELETE CASCADE,
@@ -56,56 +59,58 @@ CREATE TABLE IF NOT EXISTS services (
     INDEX idx_scheduled_date (scheduled_date)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ==========================================
--- TABLA: verification_codes
--- ==========================================
-CREATE TABLE IF NOT EXISTS verification_codes (
+-- ============================================
+-- TABLA: CÓDIGOS DE VERIFICACIÓN
+-- ============================================
+CREATE TABLE verification_codes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     service_id INT NOT NULL,
     code VARCHAR(6) NOT NULL,
-    is_used BOOLEAN DEFAULT FALSE,
-    expires_at TIMESTAMP NOT NULL,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    generated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    verified_at TIMESTAMP NULL DEFAULT NULL,
+    is_used BOOLEAN DEFAULT false,
     FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE,
     INDEX idx_service (service_id),
     INDEX idx_code (code)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ==========================================
--- TABLA: ratings
--- ==========================================
-CREATE TABLE IF NOT EXISTS ratings (
+-- ============================================
+-- TABLA: CALIFICACIONES
+-- ============================================
+CREATE TABLE ratings (
     id INT AUTO_INCREMENT PRIMARY KEY,
     service_id INT NOT NULL,
-    rater_id INT NOT NULL COMMENT 'Quien califica',
-    rated_user_id INT NOT NULL COMMENT 'Quien es calificado',
+    rater_id INT NOT NULL COMMENT 'ID del usuario que califica',
+    rated_id INT NOT NULL COMMENT 'ID del usuario calificado',
+    rater_type ENUM('client', 'worker') NOT NULL COMMENT 'Tipo del que califica',
     rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5),
-    comment TEXT DEFAULT NULL,
+    comment TEXT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE,
     FOREIGN KEY (rater_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (rated_user_id) REFERENCES users(id) ON DELETE CASCADE,
-    UNIQUE KEY unique_rating (service_id, rater_id, rated_user_id),
-    INDEX idx_rated_user (rated_user_id),
-    INDEX idx_rating (rating)
+    FOREIGN KEY (rated_id) REFERENCES users(id) ON DELETE CASCADE,
+    INDEX idx_service (service_id),
+    INDEX idx_rater (rater_id),
+    INDEX idx_rated (rated_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ==========================================
--- TABLA: disputes
--- ==========================================
-CREATE TABLE IF NOT EXISTS disputes (
+-- ============================================
+-- TABLA: DISPUTAS
+-- ============================================
+CREATE TABLE disputes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     service_id INT NOT NULL,
-    reported_by ENUM('client', 'worker') NOT NULL,
-    reported_by_user_id INT NOT NULL,
-    reported_against_user_id INT NOT NULL,
-    reason TEXT NOT NULL,
-    status ENUM('abierta', 'en_revision', 'resuelta_cliente', 'resuelta_trabajador', 'rechazada') NOT NULL DEFAULT 'abierta',
-    worker_response TEXT DEFAULT NULL,
-    admin_notes TEXT DEFAULT NULL,
-    resolved_by INT DEFAULT NULL COMMENT 'ID del admin que resolvió',
+    reported_by ENUM('client', 'worker') NOT NULL COMMENT 'Quién reporta el problema',
+    reported_by_user_id INT NOT NULL COMMENT 'ID del usuario que reporta',
+    reported_against_user_id INT NOT NULL COMMENT 'ID del usuario reportado',
+    reason TEXT NOT NULL COMMENT 'Motivo de la disputa',
+    evidence_url TEXT NULL COMMENT 'URLs de fotos/evidencias (JSON array)',
+    worker_response TEXT NULL COMMENT 'Descargo del trabajador',
+    worker_evidence_url TEXT NULL COMMENT 'Evidencias del trabajador (JSON array)',
+    status ENUM('abierta', 'en_revision', 'resuelta_cliente', 'resuelta_trabajador', 'rechazada') DEFAULT 'abierta',
+    admin_notes TEXT NULL COMMENT 'Notas del administrador',
+    resolved_by INT NULL COMMENT 'ID del admin que resolvió',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE,
@@ -116,33 +121,35 @@ CREATE TABLE IF NOT EXISTS disputes (
     INDEX idx_service (service_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ==========================================
--- TABLA: availability_blocks
--- ==========================================
-CREATE TABLE IF NOT EXISTS availability_blocks (
+-- ============================================
+-- TABLA: DISPONIBILIDAD
+-- ============================================
+CREATE TABLE availability_blocks (
     id INT AUTO_INCREMENT PRIMARY KEY,
     worker_id INT NOT NULL,
-    date DATE NOT NULL,
-    reason VARCHAR(255) DEFAULT NULL,
+    date DATE NOT NULL COMMENT 'Fecha específica bloqueada',
+    reason VARCHAR(255) NULL COMMENT 'Motivo del bloqueo',
+    is_available BOOLEAN DEFAULT false COMMENT 'true = disponible especial, false = no disponible',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (worker_id) REFERENCES users(id) ON DELETE CASCADE,
-    UNIQUE KEY unique_block (worker_id, date),
-    INDEX idx_date (date)
+    UNIQUE KEY unique_worker_date (worker_id, date),
+    INDEX idx_date (date),
+    INDEX idx_worker (worker_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ==========================================
--- TABLA: notifications
--- ==========================================
-CREATE TABLE IF NOT EXISTS notifications (
+-- ============================================
+-- TABLA: NOTIFICACIONES
+-- ============================================
+CREATE TABLE notifications (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL COMMENT 'Usuario que recibe la notificación',
     type VARCHAR(50) NOT NULL COMMENT 'Tipo de notificación',
     title VARCHAR(255) NOT NULL COMMENT 'Título de la notificación',
     message TEXT NOT NULL COMMENT 'Mensaje detallado',
-    link VARCHAR(255) DEFAULT NULL COMMENT 'URL a la que redirige',
-    is_read BOOLEAN DEFAULT FALSE COMMENT 'Si fue leída',
-    related_id INT DEFAULT NULL COMMENT 'ID relacionado (servicio, disputa, etc)',
+    link VARCHAR(255) NULL COMMENT 'URL a la que redirige',
+    is_read BOOLEAN DEFAULT false COMMENT 'Si fue leída',
+    related_id INT NULL COMMENT 'ID relacionado (servicio, disputa, etc)',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
@@ -153,6 +160,4 @@ CREATE TABLE IF NOT EXISTS notifications (
 -- ==========================================
 -- VERIFICACIÓN
 -- ==========================================
-SHOW TABLES;
-
 SELECT '✅ Estructura de base de datos creada correctamente' AS status;
