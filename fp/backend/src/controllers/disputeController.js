@@ -116,7 +116,7 @@ exports.addWorkerResponse = async (req, res) => {
     }
 };
 
-// Cliente agrega descargo (NUEVA FUNCIÓN)
+// Cliente agrega descargo
 exports.addClientResponse = async (req, res) => {
     try {
         const { dispute_id } = req.params;

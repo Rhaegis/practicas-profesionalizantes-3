@@ -61,10 +61,10 @@ exports.createRating = async (req, res) => {
             comment: comment || null
         });
 
-        // Obtener nombre del calificador (CORRECCIÓN: user_id en lugar de rater_id)
+        // Obtener nombre del calificador
         const rater = await User.findByPk(user_id);
 
-        // Notificar al calificado (CORRECCIÓN: rated_id y rating sin .rating)
+        // Notificar al calificado
         await notifyNewRating(rated_id, rater.full_name, rating);
 
         res.status(201).json({

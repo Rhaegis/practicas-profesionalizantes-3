@@ -212,7 +212,7 @@ function createDisputeCard(dispute) {
     `;
 }
 
-// Ver detalles de disputa (IMPLEMENTADO)
+// Ver detalles de disputa
 async function viewDisputeDetails(disputeId) {
     try {
         const token = localStorage.getItem('authToken');

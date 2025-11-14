@@ -249,13 +249,9 @@ echo   - Admin: admin@trabajapp.com / test123
 echo   - Cliente: juan@cliente.com / test123
 echo   - Trabajador: roberto@trabajador.com / test123
 echo.
-echo Guia de pruebas: release\TESTING-GUIDE.md
-echo.
 echo Comandos utiles:
 echo   - Ver logs: pm2 logs trabajapp-backend
 echo   - Ver estado: pm2 status
 echo   - Detener: pm2 stop trabajapp-backend
-echo.
-echo Todo listo para evaluar!
 echo.
 pause
